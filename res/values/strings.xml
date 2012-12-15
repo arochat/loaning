@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Loaning</string>
+    <string name="menu_settings">Settings</string>
+    
+    <!-- Insert loan -->
+    <string name="borrow_label">I borrowed...</string>
+    <string name="loan_label">I loaned...</string>
+    <string name="destination_label">To/From</string>
+    <string name="loan_object_label">What</string>
+    <string name="when_label">When</string>
+    <string name="add_button">add</string>
+
+    <!-- View loan list -->
+    <string name="loan_list_title">My loans</string>
+</resources>
