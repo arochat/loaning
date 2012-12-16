@@ -31,6 +31,7 @@ public class AddLoanActivity extends Activity {
 
 	// TODO : validate that form is completely filled
 	public void addLoan(View view) {
+
 		Transaction transaction = TransactionFactory.createTransaction(getLoanFromUI());
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(Event.SAVE_LOANING.name(), transaction);

@@ -11,10 +11,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.aurelia.loaning.db.entity.Loan;
+
 public class LoanDatabaseAccess {
 
-	private static final int VERSION_BDD = 1;
-	private static final String NOM_BDD = "loan.db";
+	private static final int DB_VERSION = 1;
+	private static final String DB_NAME = "loan.db";
 
 	private final DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD HH:MM:SS.SSS");
 
@@ -23,17 +25,15 @@ public class LoanDatabaseAccess {
 	private LoanDatabaseSQLite loanDb;
 
 	public LoanDatabaseAccess(Context context) {
-		// On créer la BDD et sa table
-		loanDb = new LoanDatabaseSQLite(context, NOM_BDD, null, VERSION_BDD);
+		loanDb = new LoanDatabaseSQLite(context, DB_NAME, null, DB_VERSION);
 	}
 
 	public void open() {
-		// on ouvre la BDD en écriture
 		db = loanDb.getWritableDatabase();
+		// initDb();
 	}
 
 	public void close() {
-		// on ferme l'accès à la BDD
 		db.close();
 	}
 
@@ -44,11 +44,11 @@ public class LoanDatabaseAccess {
 	public long insert(Loan loan) {
 
 		ContentValues values = new ContentValues();
-		values.put("source", loan.getSource());
-		values.put("destination", loan.getDestination());
-		values.put("start_date", loan.getStarteDate().toString(formatter));
-		values.put("end_date", loan.getEndDate().toString(formatter));
-		values.put("description", loan.getDescription());
+		values.put("source", loan.source);
+		values.put("destination", loan.destination);
+		values.put("start_date", loan.starteDate.toString(formatter));
+		values.put("end_date", loan.endDate.toString(formatter));
+		values.put("description", loan.description);
 		values.put("is_contact", false);
 
 		return db.insert("LOAN", null, values);

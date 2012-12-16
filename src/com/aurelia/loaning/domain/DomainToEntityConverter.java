@@ -1,6 +1,6 @@
 package com.aurelia.loaning.domain;
 
-import com.aurelia.loaning.db.Loan;
+import com.aurelia.loaning.db.entity.Loan;
 
 public class DomainToEntityConverter {
 

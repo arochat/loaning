@@ -6,8 +6,8 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.aurelia.loaning.db.Loan;
 import com.aurelia.loaning.db.LoanDatabaseAccess;
+import com.aurelia.loaning.db.entity.Loan;
 import com.aurelia.loaning.domain.DomainToEntityConverter;
 import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.event.Event;

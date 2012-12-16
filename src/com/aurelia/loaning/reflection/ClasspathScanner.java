@@ -1,51 +1,59 @@
 package com.aurelia.loaning.reflection;
 
-import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.aurelia.loaning.db.annotation.Table;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import dalvik.system.DexFile;
+import dalvik.system.PathClassLoader;
+
 public class ClasspathScanner {
 
-	public List<Class> findAnnotatedClasses(Class annotation, String rootPackage) throws IOException,
-			ClassNotFoundException {
+	public List<Class> findAnnotatedClasses(Context context, String applicationPackageName, String extendedPackageName,
+			Class annotation) throws IOException, URISyntaxException, ClassNotFoundException, NameNotFoundException {
 
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		String path = rootPackage.replace('.', '/');
-		Enumeration<URL> resources = classLoader.getResources(path);
-		List<File> dirs = new ArrayList<File>();
-		while (resources.hasMoreElements()) {
-			URL resource = resources.nextElement();
-			dirs.add(new File(resource.getFile()));
-		}
+		String apkName = context.getPackageManager().getApplicationInfo(applicationPackageName, 0).sourceDir;
+		DexFile dexFile = new DexFile(apkName);
+		PathClassLoader classLoader = new PathClassLoader(apkName, Thread.currentThread().getContextClassLoader());
+
 		List<Class> classes = new ArrayList<Class>();
-		for (File directory : dirs) {
-			if (!directory.getPath().contains("test")) {
-				classes.addAll(findClasses(directory, rootPackage));
+		Enumeration<String> entries = dexFile.entries();
+
+		while (entries.hasMoreElements()) {
+
+			String entry = entries.nextElement();
+			// only check items that exist in source package and not in
+			// libraries, etc.
+			if (entry.startsWith(extendedPackageName)) {
+
+				Class<?> entryClass = classLoader.loadClass(entry);
+				if (entryClass != null) {
+					Annotation declaredAnnotation = entryClass.getAnnotation(annotation);
+					if (declaredAnnotation instanceof Table) { // TODO : do not
+																// hardcode
+																// Table here
+						classes.add(entryClass);
+					}
+				}
 			}
 		}
 
-		Predicate<Class> isAnnotated = new Predicate<Class>() {
-			@Override
-			public boolean apply(Class clazz) {
-				return clazz.isAnnotationPresent(Table.class);
-			}
-		};
-		Iterable<Class> annotatedClasses = Iterables.filter(classes, isAnnotated);
-
-		return (List<Class>) annotatedClasses;
+		return classes;
 	}
 
-	public List<Field> findAnnotatedFields(final Class entity, final Class annotation) {
+	public Iterable<Field> findAnnotatedFields(final Class entity, final Class annotation) {
 		Field[] declaredFields = entity.getFields();
 		List<Field> fieldList = Arrays.asList(declaredFields);
 
@@ -57,26 +65,6 @@ public class ClasspathScanner {
 		};
 		Iterable<Field> annotatedFields = Iterables.filter(fieldList, isAnnotated);
 
-		return (List<Field>) annotatedFields;
+		return annotatedFields;
 	}
-
-	private List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
-		if (packageName.contains("test")) {
-			return Collections.EMPTY_LIST;
-		}
-		List<Class> classes = new ArrayList<Class>();
-		if (!directory.exists()) {
-			return classes;
-		}
-		File[] files = directory.listFiles();
-		for (File file : files) {
-			if (file.isDirectory()) {
-				classes.addAll(findClasses(file, packageName + "." + file.getName()));
-			} else if (file.getName().endsWith(".class")) {
-				classes.add(Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6)));
-			}
-		}
-		return classes;
-	}
-
 }
