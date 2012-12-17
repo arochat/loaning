@@ -19,9 +19,22 @@
         android:layout_marginTop="21dp" />
     
      <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+         android:id="@android:id/list"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_below="@+id/textView2" >
+
     </ListView>
+
+     <Button
+         android:id="@+id/addLoanButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginRight="21dp"
+         android:onClick="addLoan"
+         android:text="Add" />
 
 </RelativeLayout>

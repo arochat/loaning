@@ -1,13 +1,10 @@
 package com.aurelia.loaning.service;
 
-import java.util.List;
-
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.aurelia.loaning.db.LoanDatabaseAccess;
-import com.aurelia.loaning.db.entity.Loan;
 import com.aurelia.loaning.domain.DomainToEntityConverter;
 import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.event.Event;
@@ -35,13 +32,15 @@ public class LoanSaver extends IntentService {
 			converter = new DomainToEntityConverter();
 		}
 		databaseAccess.open();
-		databaseAccess.insert(converter.convert(transaction));
+		long dbId = databaseAccess.insert(converter.convert(transaction));
 
 		// TODO display toast message once loan saved
-		List<Loan> myLoans = databaseAccess.read();
-		myLoans.get(0);
 
 		databaseAccess.close();
+
+		if (dbId != -1) {
+			sendBroadcast(new Intent(Event.LOAN_SAVED.name()));
+		}
 	}
 
 	@Override

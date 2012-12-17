@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -58,11 +59,16 @@ public class LoansOverviewActivity extends ListActivity {
 		super.onStop();
 	}
 
+	public void addLoan(View view) {
+		Intent intent = new Intent(this, AddLoanActivity.class);
+		startActivity(intent);
+	}
+
 	private class LoanReceiver extends BroadcastReceiver {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent != null) {
+			if (intent != null && Event.SHOW_LOANINGS.name().equals(intent.getAction())) {
 				TransactionContainer transactionContainer = (TransactionContainer) intent.getExtras().getSerializable(
 						Event.SHOW_LOANINGS.name());
 

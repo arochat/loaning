@@ -56,7 +56,7 @@ public class LoanDatabaseAccess {
 
 	public List<Loan> read() {
 		Cursor cursor = db.query("LOAN", new String[] { "source", "destination", "start_date", "end_date",
-				"is_contact", "type", "description" }, null, null, null, null, null);
+				"is_contact", "type", "description" }, null, null, null, null, "end_date ASC");
 		return cursorToLoans(cursor);
 	}
 

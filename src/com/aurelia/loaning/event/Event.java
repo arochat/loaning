@@ -2,6 +2,6 @@ package com.aurelia.loaning.event;
 
 public enum Event {
 
-	SHOW_LOANINGS, SAVE_LOANING;
+	SHOW_LOANINGS, SAVE_LOANING, LOAN_SAVED;
 
 }
