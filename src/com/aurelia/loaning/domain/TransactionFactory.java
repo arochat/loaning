@@ -9,14 +9,18 @@ public class TransactionFactory {
 	public static Transaction createTransaction(LoanFromUI loanFromUI) {
 		Transaction transaction;
 
-		if (loanFromUI.getLoanRadio().isChecked()) {
+		int selectedRadioButtonID = loanFromUI.getRadioGroupFromUI().getCheckedRadioButtonId();
+
+		if (loanFromUI.getLoanRadio().getId() == selectedRadioButtonID) {
 			transaction = new LoanTransaction();
 			transaction.setSource(Transaction.ME);
 			transaction.setDestination(loanFromUI.getDestinationFromUI().getText().toString());
-		} else {
+		} else if (loanFromUI.getBorrowingRadio().getId() == selectedRadioButtonID) {
 			transaction = new BorrowingTransaction();
 			transaction.setSource(loanFromUI.getDestinationFromUI().getText().toString());
 			transaction.setDestination(Transaction.ME);
+		} else {
+			throw new IllegalStateException();
 		}
 
 		transaction.setDescription(loanFromUI.getDescriptionFromUI().getText().toString());

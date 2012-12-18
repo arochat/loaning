@@ -3,14 +3,20 @@ package com.aurelia.loaning.view;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class LoanFromUI {
 
+	private RadioGroup radioGroupFromUI;
 	private EditText descriptionFromUI;
 	private RadioButton loanRadio;
 	private RadioButton borrowingRadio;
 	private EditText destinationFromUI;
 	private DatePicker endDateFromUI;
+
+	public RadioGroup getRadioGroupFromUI() {
+		return radioGroupFromUI;
+	}
 
 	public EditText getDescriptionFromUI() {
 		return descriptionFromUI;
@@ -34,6 +40,10 @@ public class LoanFromUI {
 
 	public void setDescriptionFromUI(EditText descriptionFromUI) {
 		this.descriptionFromUI = descriptionFromUI;
+	}
+
+	public void setRadioGroupFromUI(RadioGroup radioGroup) {
+		this.radioGroupFromUI = radioGroup;
 	}
 
 	public void setLoanRadio(RadioButton loanRadio) {

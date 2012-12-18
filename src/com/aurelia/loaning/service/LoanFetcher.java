@@ -1,6 +1,7 @@
 package com.aurelia.loaning.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.IntentService;
@@ -48,15 +49,17 @@ public class LoanFetcher extends IntentService {
 		// send loans to the view
 		Bundle loadedLoansBundle = new Bundle();
 		List<Transaction> transactions = new ArrayList<Transaction>();
-
-		for (Loan loan : loans) {
-			transactions.add(converter.convert(loan));
-		}
-		TransactionContainer transactionContainer = new TransactionContainer();
-		transactionContainer.setTransactions(transactions);
-		loadedLoansBundle.putSerializable(Event.SHOW_LOANINGS.name(), transactionContainer);
-
 		Intent loadedLoansFeedback = new Intent(Event.SHOW_LOANINGS.name());
+
+		if (loans != null && !Collections.EMPTY_LIST.equals(loans)) {
+			for (Loan loan : loans) {
+				transactions.add(converter.convert(loan));
+			}
+			TransactionContainer transactionContainer = new TransactionContainer();
+			transactionContainer.setTransactions(transactions);
+			loadedLoansBundle.putSerializable(Event.SHOW_LOANINGS.name(), transactionContainer);
+		}
+
 		loadedLoansFeedback.putExtras(loadedLoansBundle);
 		sendBroadcast(loadedLoansFeedback);
 

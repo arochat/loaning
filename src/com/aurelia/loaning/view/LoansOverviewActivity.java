@@ -3,6 +3,7 @@
  */
 package com.aurelia.loaning.view;
 
+import java.util.Collections;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -72,16 +73,21 @@ public class LoansOverviewActivity extends ListActivity {
 				TransactionContainer transactionContainer = (TransactionContainer) intent.getExtras().getSerializable(
 						Event.SHOW_LOANINGS.name());
 
-				List<Transaction> transactions = transactionContainer.getTransactions();
-				String[] transactionString = new String[transactions.size()];
+				if (transactionContainer != null) {
+					List<Transaction> transactions = transactionContainer.getTransactions();
 
-				for (int i = 0; i < transactions.size(); i++) {
-					transactionString[i] = transactions.get(i).toString();
+					if (transactions != null & !Collections.EMPTY_LIST.equals(transactions)) {
+						String[] transactionString = new String[transactions.size()];
+
+						for (int i = 0; i < transactions.size(); i++) {
+							transactionString[i] = transactions.get(i).toString();
+						}
+
+						ListView listView = (ListView) findViewById(android.R.id.list);
+						listView.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,
+								transactionString));
+					}
 				}
-
-				ListView listView = (ListView) findViewById(android.R.id.list);
-				listView.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,
-						transactionString));
 
 				// for (Transaction transaction :
 				// transactionContainer.getTransactions()) {
