@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.aurelia.loaning.R;
@@ -32,18 +31,21 @@ public class LoansOverviewActivity extends ListActivity {
 
 	// private ArrayAdapter<Transaction> arrayAdapter;
 
+	private ListView loansListView;
+
+	// private List<Transaction> transactions;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loans_overview_activity);
+		// loansListView = (ListView) findViewById(R.id.list);
+		// loansListView.setAdapter(new LoansArrayAdapter(this,
+		// R.layout.loans_overview_activity));
 	}
 
 	@Override
 	protected void onStart() {
-		// arrayAdapter = new LoansArrayAdapter(this,
-		// R.layout.loans_overview_activity);
-		// setListAdapter(arrayAdapter);
-
 		if (loansReceiver == null) {
 			loansReceiver = new LoanReceiver();
 			IntentFilter intentFilter = new IntentFilter(Event.SHOW_LOANINGS.name());
@@ -83,16 +85,10 @@ public class LoansOverviewActivity extends ListActivity {
 							transactionString[i] = transactions.get(i).toString();
 						}
 
-						ListView listView = (ListView) findViewById(android.R.id.list);
-						listView.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,
-								transactionString));
+						loansListView = (ListView) findViewById(android.R.id.list);
+						loansListView.setAdapter(new LoansArrayAdapter(context, transactions));
 					}
 				}
-
-				// for (Transaction transaction :
-				// transactionContainer.getTransactions()) {
-				// arrayAdapter.add(transaction);
-				// }
 			}
 		}
 	}
