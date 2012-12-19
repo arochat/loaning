@@ -7,9 +7,10 @@
     <!-- Insert loan -->
     <string name="borrow_label">I borrowed...</string>
     <string name="loan_label">I loaned...</string>
+    <string name="i_owe_label">I owe...</string>
     <string name="destination_label">To/From</string>
     <string name="loan_object_label">What</string>
-    <string name="when_label">When</string>
+    <string name="when_label">Notify me on </string>
     <string name="add_button">add</string>
 
     <!-- View loan list -->

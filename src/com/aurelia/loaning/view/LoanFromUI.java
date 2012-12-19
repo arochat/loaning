@@ -11,6 +11,7 @@ public class LoanFromUI {
 	private EditText descriptionFromUI;
 	private RadioButton loanRadio;
 	private RadioButton borrowingRadio;
+	private RadioButton oweRadio;
 	private EditText destinationFromUI;
 	private DatePicker endDateFromUI;
 
@@ -24,6 +25,10 @@ public class LoanFromUI {
 
 	public RadioButton getLoanRadio() {
 		return loanRadio;
+	}
+
+	public RadioButton getOweRadio() {
+		return oweRadio;
 	}
 
 	public RadioButton getBorrowingRadio() {
@@ -60,6 +65,10 @@ public class LoanFromUI {
 
 	public void setEndDateFromUI(DatePicker endDateFromUI) {
 		this.endDateFromUI = endDateFromUI;
+	}
+
+	public void setOweRadio(RadioButton oweRadio) {
+		this.oweRadio = oweRadio;
 	}
 
 }
