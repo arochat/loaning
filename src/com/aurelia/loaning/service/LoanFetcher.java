@@ -15,6 +15,7 @@ import com.aurelia.loaning.domain.EntityToDomainConverter;
 import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.domain.TransactionContainer;
 import com.aurelia.loaning.event.Event;
+import com.aurelia.loaning.util.LoanUtil;
 
 public class LoanFetcher extends IntentService {
 
@@ -43,7 +44,7 @@ public class LoanFetcher extends IntentService {
 			databaseAccess = new LoanDatabaseAccess(this);
 		}
 		databaseAccess.open();
-		List<Loan> loans = databaseAccess.read();
+		List<Loan> loans = LoanUtil.convert(databaseAccess.selectAllLoans());
 		databaseAccess.close();
 
 		// send loans to the view

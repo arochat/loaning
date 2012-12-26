@@ -8,18 +8,18 @@ public class EntityToDomainConverter {
 
 		Transaction transaction;
 
-		if (Transaction.ME.equals(loan.destination)) {
+		if (Transaction.ME.equals(loan.getDestination())) {
 			transaction = new BorrowingTransaction();
 		} else {
 			transaction = new LoanTransaction();
 		}
-		transaction.setDestination(loan.destination);
-		transaction.setSource(loan.source);
-		transaction.setDescription(loan.description);
-		transaction.setType(loan.type);
-		transaction.setStarteDate(loan.starteDate);
-		transaction.setEndDate(loan.endDate);
-		transaction.setContact(loan.isContact);
+		transaction.setDestination(loan.getDestination());
+		transaction.setSource(loan.getSource());
+		transaction.setDescription(loan.getDescription());
+		transaction.setType(loan.getType());
+		transaction.setStarteDate(loan.getStartDate());
+		transaction.setEndDate(loan.getEndDate());
+		transaction.setContact(loan.getIsContact());
 
 		return transaction;
 	}

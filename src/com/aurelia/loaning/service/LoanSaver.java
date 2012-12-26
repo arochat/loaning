@@ -27,20 +27,22 @@ public class LoanSaver extends IntentService {
 
 		if (databaseAccess == null) {
 			databaseAccess = new LoanDatabaseAccess(this);
+			databaseAccess.open();
 		}
 		if (converter == null) {
 			converter = new DomainToEntityConverter();
 		}
-		databaseAccess.open();
+		// databaseAccess.open();
 		long dbId = databaseAccess.insert(converter.convert(transaction));
 
 		// TODO display toast message once loan saved
 
-		databaseAccess.close();
+		// databaseAccess.close();
 
 		if (dbId != -1) {
 			sendBroadcast(new Intent(Event.LOAN_SAVED.name()));
 		}
+		databaseAccess.close();
 	}
 
 	@Override

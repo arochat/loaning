@@ -1,17 +1,16 @@
 package com.aurelia.loaning.db;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.aurelia.loaning.db.entity.Loan;
+import com.aurelia.loaning.reflection.ClasspathScanner;
+import com.aurelia.loaning.reflection.TableDeclarationPreparator;
 
 public class LoanDatabaseAccess {
 
@@ -20,67 +19,33 @@ public class LoanDatabaseAccess {
 
 	private final DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD HH:MM:SS.SSS");
 
-	private SQLiteDatabase db;
-
 	private LoanDatabaseSQLite loanDb;
+
+	private DatabaseAccess databaseAccess;
 
 	public LoanDatabaseAccess(Context context) {
 		loanDb = new LoanDatabaseSQLite(context, DB_NAME, null, DB_VERSION);
+		databaseAccess = new DatabaseAccess(new TableDeclarationPreparator(new ClasspathScanner()), loanDb, formatter);
 	}
 
 	public void open() {
-		db = loanDb.getWritableDatabase();
-		// initDb();
+		databaseAccess.open();
 	}
 
 	public void close() {
-		db.close();
+		databaseAccess.close();
 	}
 
 	public SQLiteDatabase getDb() {
-		return db;
+		return databaseAccess.getDb();
 	}
 
 	public long insert(Loan loan) {
-
-		ContentValues values = new ContentValues();
-		values.put("source", loan.source);
-		values.put("destination", loan.destination);
-		values.put("start_date", loan.starteDate.toString(formatter));
-		values.put("end_date", loan.endDate.toString(formatter));
-		values.put("description", loan.description);
-		values.put("is_contact", false);
-
-		return db.insert("LOAN", null, values);
+		return databaseAccess.insert(loan, formatter);
 	}
 
-	public List<Loan> read() {
-		Cursor cursor = db.query("LOAN", new String[] { "source", "destination", "start_date", "end_date",
-				"is_contact", "type", "description" }, null, null, null, null, "end_date ASC");
-		return cursorToLoans(cursor);
+	public List<Object> selectAllLoans() {
+		return databaseAccess.read(Loan.class);
 	}
 
-	private List<Loan> cursorToLoans(Cursor c) {
-
-		List<Loan> loans = new ArrayList<Loan>(10);
-
-		if (c.getCount() == 0)
-			return null;
-
-		c.moveToFirst();
-		do {
-			Loan loan = new Loan(c.getString(c.getColumnIndex("source")),//
-					c.getString(c.getColumnIndex("destination")), //
-					formatter.parseDateTime(c.getString(c.getColumnIndex("start_date"))), //
-					formatter.parseDateTime(c.getString(c.getColumnIndex("end_date"))), //
-					c.getInt(c.getColumnIndex("is_contact")) == 1 ? true : false, //
-					c.getString(c.getColumnIndex("type")),//
-					c.getString(c.getColumnIndex("description")));
-			loans.add(loan);
-
-		} while (c.moveToNext());
-
-		c.close();
-		return loans;
-	}
 }

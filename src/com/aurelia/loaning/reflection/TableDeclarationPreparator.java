@@ -5,7 +5,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -24,12 +26,61 @@ public class TableDeclarationPreparator {
 		this.scanner = scanner;
 	}
 
+	public String getTableName(Class entity) {
+		Annotation annotation = entity.getAnnotation(Table.class);
+		return ((Table) annotation).name();
+	}
+
+	public String getIdColumnName(Class entity) {
+		String idColumnName = "";
+		Iterable<Field> annotatedFields = findAnnotatedFields(entity, Column.class);
+		for (Field field : annotatedFields) {
+			Annotation annotationOnField = field.getAnnotation(Column.class);
+			Column column = (Column) annotationOnField;
+			if (column.primaryKeyAutoIncrement()) {
+				idColumnName = column.name();
+			}
+		}
+		return idColumnName;
+	}
+
+	// public <T> Map<String, Object> getEntityContent(Class<T> entity, T
+	// filledObject) throws IllegalArgumentException,
+	// SecurityException, IllegalAccessException, NoSuchFieldException {
+	public <T> Map<String, Object> getEntityContent(Class entity, T filledObject) throws IllegalArgumentException,
+			SecurityException, IllegalAccessException, NoSuchFieldException {
+		Map<String, Object> objectContent = new HashMap<String, Object>();
+		Iterable<Field> annotatedFields = findAnnotatedFields(entity, Column.class);
+		for (Field field : annotatedFields) {
+			Annotation annotationOnField = field.getAnnotation(Column.class);
+			if (annotationOnField instanceof Column) {
+				objectContent.put(((Column) annotationOnField).name(), filledObject.getClass().getField(field.getName())
+						.get(filledObject));
+			}
+		}
+		return objectContent;
+	}
+
+	public List<String> getColumnNames(Class entity) {
+		List<String> columnNames = new ArrayList<String>();
+
+		Iterable<Field> annotatedFields = findAnnotatedFields(entity, Column.class);
+		for (Field field : annotatedFields) {
+			Annotation annotationOnField = field.getAnnotation(Column.class);
+			if (annotationOnField instanceof Column) {
+				Column column = (Column) annotationOnField;
+				columnNames.add(column.name());
+			}
+		}
+		return columnNames;
+	}
+
 	public List<String> createTablesDeclaration(Context context) throws IOException, ClassNotFoundException {
 		List<String> tableDeclarations = new ArrayList<String>(10);
 
 		Iterable<Class> entities = findEntities(context);
 		for (Class entity : entities) {
-			Iterable<Field> annotatedFields = scanner.findAnnotatedFields(entity, Column.class);
+			Iterable<Field> annotatedFields = findAnnotatedFields(entity, Column.class);
 
 			String tableDeclaration = "CREATE TABLE IF NOT EXISTS ";
 
@@ -75,5 +126,9 @@ public class TableDeclarationPreparator {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private Iterable<Field> findAnnotatedFields(Class entity, Class annotation) {
+		return scanner.findAnnotatedFields(entity, annotation);
 	}
 }

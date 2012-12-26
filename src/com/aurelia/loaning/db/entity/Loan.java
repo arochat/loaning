@@ -10,39 +10,74 @@ import com.aurelia.loaning.db.annotation.Table;
 @Table(name = "LOAN")
 public class Loan implements Serializable {
 
+	// TODO : try to get rid of the followin constraints
+
+	// public because of ClasspathScanner needs to access the fields in
+	// findAnnotatedFields
+	// not final because DatabaseAccess needs to invoke an empty constructor
+	// setters because DatabaseAccess needs to invoke the setters
+
 	@Column(name = "loan_id", type = "integer", primaryKeyAutoIncrement = true)
 	public Long id;
 
 	@Column(name = "source", type = "text")
-	public final String source; // owner
+	public String source; // owner
 
 	@Column(name = "destination", type = "text")
-	public final String destination; // beneficiary
+	public String destination; // beneficiary
 
 	@Column(name = "start_date", type = "text")
-	public final DateTime starteDate;
+	public DateTime startDate;
 
 	@Column(name = "end_date", type = "text")
-	public final DateTime endDate;
+	public DateTime endDate;
 
 	@Column(name = "is_contact", type = "integer")
-	public final boolean isContact;
+	public boolean isContact;
 
 	@Column(name = "type", type = "text", nullable = true)
 	public String type;
 
 	@Column(name = "description", type = "text")
-	public final String description;
+	public String description;
+
+	public Loan() {
+		super();
+	}
 
 	public Loan(String source, String destination, DateTime starteDate, DateTime endDate, boolean isContact,
 			String type, String description) {
 		super();
 		this.source = source;
 		this.destination = destination;
-		this.starteDate = starteDate;
+		this.startDate = starteDate;
 		this.endDate = endDate;
 		this.isContact = isContact;
 		this.type = type;
+		this.description = description;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public void setStartDate(DateTime startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(DateTime endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setIsContact(boolean isContact) {
+		this.isContact = isContact;
+	}
+
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -50,9 +85,41 @@ public class Loan implements Serializable {
 		this.type = type;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public DateTime getStartDate() {
+		return startDate;
+	}
+
+	public DateTime getEndDate() {
+		return endDate;
+	}
+
+	public boolean getIsContact() {
+		return isContact;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
 	@Override
 	public String toString() {
-		return "Loan [source=" + source + ", destination=" + destination + ", starteDate=" + starteDate + ", endDate="
+		return "Loan [source=" + source + ", destination=" + destination + ", starteDate=" + startDate + ", endDate="
 				+ endDate + ", isContact=" + isContact + ", type=" + type + ", description=" + description + "]";
 	}
 
