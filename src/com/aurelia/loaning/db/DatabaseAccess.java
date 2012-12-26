@@ -50,6 +50,11 @@ public class DatabaseAccess {
 		return db;
 	}
 
+	public void removeAll(Object o) {
+		String tableName = tablePreparator.getTableName(o.getClass());
+		db.delete(tableName, null, null);
+	}
+
 	public long insert(Object o, DateTimeFormatter formatter) {
 		try {
 			String tableName = tablePreparator.getTableName(o.getClass());

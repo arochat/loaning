@@ -27,7 +27,7 @@ public class AddLoanActivity extends Activity {
 
 		if (dbFeedbackReceiver == null) {
 			dbFeedbackReceiver = new DbFeedbackReceiver();
-			IntentFilter intentFilter = new IntentFilter(Event.LOAN_SAVED.name());
+			IntentFilter intentFilter = new IntentFilter(Event.LOAN_MODIFIED.name());
 			registerReceiver(dbFeedbackReceiver, intentFilter);
 		}
 		setContentView(R.layout.activity_main);
@@ -59,7 +59,7 @@ public class AddLoanActivity extends Activity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent != null && Event.LOAN_SAVED.name().equals(intent.getAction())) {
+			if (intent != null && Event.LOAN_MODIFIED.name().equals(intent.getAction())) {
 				Intent displayLoansIntent = new Intent(context, LoansOverviewActivity.class);
 				startActivity(displayLoansIntent);
 			}

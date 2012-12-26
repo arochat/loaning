@@ -48,4 +48,8 @@ public class LoanDatabaseAccess {
 		return databaseAccess.read(Loan.class);
 	}
 
+	public void removeAll() {
+		databaseAccess.removeAll(new Loan());
+	}
+
 }

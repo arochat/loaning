@@ -40,7 +40,7 @@ public class LoanSaver extends IntentService {
 		// databaseAccess.close();
 
 		if (dbId != -1) {
-			sendBroadcast(new Intent(Event.LOAN_SAVED.name()));
+			sendBroadcast(new Intent(Event.LOAN_MODIFIED.name()));
 		}
 		databaseAccess.close();
 	}

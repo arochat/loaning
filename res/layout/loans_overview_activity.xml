@@ -28,12 +28,22 @@
     </ListView>
 
      <Button
+         android:id="@+id/removeAllButton"
+         style="?android:attr/buttonStyleSmall"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/addLoanButton"
+         android:layout_alignBottom="@+id/addLoanButton"
+         android:layout_alignParentRight="true"
+         android:onClick="removeAll"
+         android:text="Remove all" />
+
+     <Button
          android:id="@+id/addLoanButton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignParentRight="true"
          android:layout_alignParentTop="true"
-         android:layout_marginRight="21dp"
+         android:layout_toLeftOf="@+id/removeAllButton"
          android:onClick="addLoan"
          android:text="Add" />
 

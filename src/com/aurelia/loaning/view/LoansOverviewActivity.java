@@ -3,6 +3,7 @@
  */
 package com.aurelia.loaning.view;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.domain.TransactionContainer;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanFetcher;
+import com.aurelia.loaning.service.LoanRemover;
 
 /**
  * @author aurelia
@@ -67,29 +69,39 @@ public class LoansOverviewActivity extends ListActivity {
 		startActivity(intent);
 	}
 
+	public void removeAll(View view) {
+		Intent intent = new Intent(this, LoanRemover.class);
+		startService(intent);
+	}
+
 	private class LoanReceiver extends BroadcastReceiver {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+
+			List<Transaction> transactions = new ArrayList<Transaction>();
 			if (intent != null && Event.SHOW_LOANINGS.name().equals(intent.getAction())) {
-				TransactionContainer transactionContainer = (TransactionContainer) intent.getExtras().getSerializable(
-						Event.SHOW_LOANINGS.name());
+				if (intent.getExtras() != null) {
 
-				if (transactionContainer != null) {
-					List<Transaction> transactions = transactionContainer.getTransactions();
+					TransactionContainer transactionContainer = (TransactionContainer) intent.getExtras()
+							.getSerializable(Event.SHOW_LOANINGS.name());
 
-					if (transactions != null & !Collections.EMPTY_LIST.equals(transactions)) {
-						String[] transactionString = new String[transactions.size()];
+					if (transactionContainer != null) {
+						transactions = transactionContainer.getTransactions();
 
-						for (int i = 0; i < transactions.size(); i++) {
-							transactionString[i] = transactions.get(i).toString();
+						if (transactions != null & !Collections.EMPTY_LIST.equals(transactions)) {
+							String[] transactionString = new String[transactions.size()];
+
+							for (int i = 0; i < transactions.size(); i++) {
+								transactionString[i] = transactions.get(i).toString();
+							}
+
 						}
-
-						loansListView = (ListView) findViewById(android.R.id.list);
-						loansListView.setAdapter(new LoansArrayAdapter(context, transactions));
 					}
 				}
 			}
+			loansListView = (ListView) findViewById(android.R.id.list);
+			loansListView.setAdapter(new LoansArrayAdapter(context, transactions));
 		}
 	}
 }

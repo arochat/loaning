@@ -36,7 +36,7 @@ public class LoansArrayAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.loan_item, null);
 
-			viewHolder.destination = (TextView) convertView.findViewById(R.id.item_destination);
+			viewHolder.sourceAndDestination = (TextView) convertView.findViewById(R.id.item_source_and_destination);
 			viewHolder.notificationDate = (TextView) convertView.findViewById(R.id.item_notification_date);
 			viewHolder.object = (TextView) convertView.findViewById(R.id.item_object);
 
@@ -46,7 +46,8 @@ public class LoansArrayAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.destination.setText(transactions.get(position).getDestination());
+		viewHolder.sourceAndDestination.setText(transactions.get(position).getSource() + "-->"
+				+ transactions.get(position).getDestination());
 		viewHolder.notificationDate.setText(format.print(transactions.get(position).getEndDate()));
 		viewHolder.object.setText(transactions.get(position).getDescription());
 		return convertView;
@@ -72,7 +73,7 @@ public class LoansArrayAdapter extends BaseAdapter {
 
 		TextView object;
 		TextView notificationDate;
-		TextView destination;
+		TextView sourceAndDestination;
 	}
 
 }
