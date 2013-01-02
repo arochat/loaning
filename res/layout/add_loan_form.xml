@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddLoanActivity" >
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
+        <RadioButton
+            android:id="@+id/oweRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/i_owe_label" />
+
+        <RadioButton
+            android:id="@+id/borrowRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/borrow_label" />
+
+        <RadioButton
+            android:id="@+id/loanRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loan_label" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/radioGroup1"
+        android:layout_marginLeft="19dp"
+        android:ems="10"
+        android:hint="@string/loan_object_label" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/addLoanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/chooseWhen"
+        android:onClick="addLoan"
+        android:text="@string/add_button" />
+
+    <EditText
+        android:id="@+id/destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/description"
+        android:layout_alignRight="@+id/description"
+        android:layout_below="@+id/description"
+        android:ems="10"
+        android:hint="@string/destination_label" />
+
+    <DatePicker
+        android:id="@+id/chooseWhen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addLoanButton"
+        android:layout_alignLeft="@+id/whenLabel"
+        android:layout_below="@+id/whenLabel" />
+
+    <CheckedTextView
+        android:id="@+id/whenLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/destination"
+        android:layout_below="@+id/destination"
+        android:text="@string/when_label" />
+
+</RelativeLayout>

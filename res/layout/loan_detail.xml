@@ -1,0 +1,73 @@
+<!-- loan detail. Will be editable in further version -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DisplayDetailActivity" >
+
+<TextView
+android:id="@+id/item_object"
+android:textStyle="bold"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+/>
+
+<!-- <Button -->
+<!--     android:id="@+id/button1" -->
+<!--     style="?android:attr/buttonStyleSmall" -->
+<!--     android:layout_width="wrap_content" -->
+<!--     android:layout_height="wrap_content" -->
+<!--     android:layout_alignParentBottom="true" -->
+<!--     android:layout_marginBottom="44dp" -->
+<!--     android:layout_toRightOf="@+id/textView4" -->
+<!--     android:text="@string/settle_button" /> -->
+
+<Button
+    android:id="@+id/button_delete_loan"
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="48dp"
+    android:layout_marginTop="20dp"
+    android:text="@string/delete_button"
+    android:onClick="deleteLoan"/>
+
+<TextView
+    android:id="@+id/loan_creation_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/object_of_loan"
+    android:layout_below="@+id/object_of_loan"
+    android:text="@string/date_label"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<TextView
+    android:id="@+id/object_of_loan"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/loan_source"
+    android:layout_below="@+id/button_delete_loan"
+    android:text="@string/object_of_loan_label"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<TextView
+    android:id="@+id/loan_reminder_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/loan_source"
+    android:layout_marginLeft="26dp"
+    android:text="@string/reminder_label"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<TextView
+    android:id="@+id/loan_source"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/loan_reminder_date"
+    android:layout_below="@+id/loan_creation_date"
+    android:text="@string/from_label"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
