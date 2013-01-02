@@ -6,8 +6,10 @@ public class DomainToEntityConverter {
 
 	public Loan convert(Transaction transaction) {
 
-		Loan loan = new Loan(transaction.getSource(), transaction.getDestination(), transaction.getStarteDate(),
+		Loan loan = new Loan(transaction.getSource(), transaction.getDestination(), transaction.getStartDate(),
 				transaction.getEndDate(), transaction.isContact(), transaction.getType(), transaction.getDescription());
+
+		loan.setId(transaction.getId());
 
 		return loan;
 	}

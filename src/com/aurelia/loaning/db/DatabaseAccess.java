@@ -55,6 +55,11 @@ public class DatabaseAccess {
 		db.delete(tableName, null, null);
 	}
 
+	public long delete(Object o, String whereClause, String... whereArgs) {
+		String tableName = tablePreparator.getTableName(o.getClass());
+		return db.delete(tableName, whereClause, whereArgs);
+	}
+
 	public long insert(Object o, DateTimeFormatter formatter) {
 		try {
 			String tableName = tablePreparator.getTableName(o.getClass());
@@ -164,7 +169,9 @@ public class DatabaseAccess {
 					} else if (field.getType().equals(DateTime.class)) {
 
 						method.invoke(myObject, formatter.parseDateTime(c.getString(c.getColumnIndex(columnName))));
+					} else if (field.getType().equals(Long.class)) {
 
+						method.invoke(myObject, c.getLong(c.getColumnIndex(columnName)));
 					} else {
 						// TODO error
 					}
@@ -177,4 +184,9 @@ public class DatabaseAccess {
 		c.close();
 		return objects;
 	}
+
+	public TableDeclarationPreparator getTablePreparator() {
+		return tablePreparator;
+	}
+
 }

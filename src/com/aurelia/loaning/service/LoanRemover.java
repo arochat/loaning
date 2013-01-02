@@ -11,7 +11,7 @@ public class LoanRemover extends IntentService {
 	private LoanDatabaseAccess databaseAccess;
 
 	public LoanRemover() {
-		super(LoanSaver.class.getName());
+		super(LoanRemover.class.getName());
 	}
 
 	@Override
@@ -24,7 +24,6 @@ public class LoanRemover extends IntentService {
 		databaseAccess.close();
 
 		sendBroadcast(new Intent(Event.SHOW_LOANINGS.name()));
-
 	}
 
 	@Override

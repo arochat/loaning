@@ -20,17 +20,28 @@ public class AddLoanActivity extends Activity {
 	public final static String ME = "ME";
 
 	private BroadcastReceiver dbFeedbackReceiver;
+	private IntentFilter intentFilter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.add_loan_form);
+	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
 		if (dbFeedbackReceiver == null) {
 			dbFeedbackReceiver = new DbFeedbackReceiver();
-			IntentFilter intentFilter = new IntentFilter(Event.LOAN_MODIFIED.name());
-			registerReceiver(dbFeedbackReceiver, intentFilter);
+			intentFilter = new IntentFilter(Event.LOAN_MODIFIED.name());
 		}
-		setContentView(R.layout.activity_main);
+		registerReceiver(dbFeedbackReceiver, intentFilter);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterReceiver(dbFeedbackReceiver);
 	}
 
 	@Override
@@ -47,6 +58,7 @@ public class AddLoanActivity extends Activity {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(Event.SAVE_LOANING.name(), transaction);
 		Intent intent = new Intent(this, LoanSaver.class);
+		intent.setAction(Event.SAVE_LOANING.name());
 		intent.putExtras(bundle);
 		startService(intent);
 	}

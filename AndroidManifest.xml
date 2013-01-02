@@ -14,8 +14,9 @@
             </intent-filter>
         </activity>
         
-        <!--created by aurelia at 2012-12-15 14:19:27-->
         <activity android:name=".view.AddLoanActivity"/>
+        
+        <activity android:name=".view.DisplayDetailActivity"/>
         
         <service android:name=".service.LoanFetcher"/>
         

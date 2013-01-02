@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.aurelia.loaning.R;
@@ -30,38 +32,36 @@ import com.aurelia.loaning.service.LoanRemover;
 public class LoansOverviewActivity extends ListActivity {
 
 	private BroadcastReceiver loansReceiver;
-
-	// private ArrayAdapter<Transaction> arrayAdapter;
-
+	private IntentFilter intentFilter;
 	private ListView loansListView;
 
-	// private List<Transaction> transactions;
-
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
 		setContentView(R.layout.loans_overview_activity);
-		// loansListView = (ListView) findViewById(R.id.list);
-		// loansListView.setAdapter(new LoansArrayAdapter(this,
-		// R.layout.loans_overview_activity));
 	}
 
 	@Override
 	protected void onStart() {
-		if (loansReceiver == null) {
-			loansReceiver = new LoanReceiver();
-			IntentFilter intentFilter = new IntentFilter(Event.SHOW_LOANINGS.name());
-			registerReceiver(loansReceiver, intentFilter);
-		}
+		super.onStart();
 		Intent intent = new Intent(this, LoanFetcher.class);
 		startService(intent);
-		super.onStart();
 	}
 
 	@Override
-	protected void onStop() {
+	protected void onResume() {
+		super.onResume();
+		if (loansReceiver == null) {
+			loansReceiver = new LoanReceiver();
+			intentFilter = new IntentFilter(Event.SHOW_LOANINGS.name());
+		}
+		registerReceiver(loansReceiver, intentFilter);
+	}
+
+	@Override
+	protected void onPause() {
 		unregisterReceiver(loansReceiver);
-		super.onStop();
+		super.onPause();
 	}
 
 	public void addLoan(View view) {
@@ -102,6 +102,21 @@ public class LoansOverviewActivity extends ListActivity {
 			}
 			loansListView = (ListView) findViewById(android.R.id.list);
 			loansListView.setAdapter(new LoansArrayAdapter(context, transactions));
+
+			OnItemClickListener listener = new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					Transaction transaction = (Transaction) parent.getItemAtPosition(position);
+					Bundle bundle = new Bundle();
+					bundle.putSerializable(Event.DISPLAY_LOAN_DETAIL.name(), transaction);
+					Intent intent = new Intent(LoansOverviewActivity.this, DisplayDetailActivity.class);
+					intent.setAction(Event.DISPLAY_LOAN_DETAIL.name());
+					intent.putExtras(bundle);
+					startActivity(intent);
+				}
+			};
+			loansListView.setOnItemClickListener(listener);
 		}
 	}
 }

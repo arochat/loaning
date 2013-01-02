@@ -33,7 +33,7 @@ public class TransactionFactory {
 		// from 0 to 11 whereas JodaTime months range from 1 to 12.
 		DateTime endDate = new DateTime(loanFromUI.getEndDateFromUI().getYear(), loanFromUI.getEndDateFromUI()
 				.getMonth() + 1, loanFromUI.getEndDateFromUI().getDayOfMonth(), 0, 0, 0);
-		transaction.setStarteDate(DateTime.now());
+		transaction.setStartDate(DateTime.now());
 		transaction.setEndDate(endDate);
 		transaction.setContact(false);
 		transaction.setType("noType");

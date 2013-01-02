@@ -52,4 +52,8 @@ public class LoanDatabaseAccess {
 		databaseAccess.removeAll(new Loan());
 	}
 
+	public long delete(Loan loan) {
+		String idName = databaseAccess.getTablePreparator().getIdColumnName(loan.getClass());
+		return databaseAccess.delete(loan, idName + "=?", new String[] { loan.getId().toString() });
+	}
 }

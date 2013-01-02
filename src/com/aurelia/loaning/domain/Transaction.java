@@ -12,9 +12,10 @@ public abstract class Transaction implements Serializable {
 
 	public final static String ME = "ME";
 
+	private long id;
 	private String source; // owner
 	private String destination; // beneficiary
-	private DateTime starteDate;
+	private DateTime startDate;
 	private DateTime endDate;
 	private boolean isContact;
 	private String type;
@@ -28,8 +29,8 @@ public abstract class Transaction implements Serializable {
 		return destination;
 	}
 
-	public DateTime getStarteDate() {
-		return starteDate;
+	public DateTime getStartDate() {
+		return startDate;
 	}
 
 	public DateTime getEndDate() {
@@ -48,6 +49,10 @@ public abstract class Transaction implements Serializable {
 		return description;
 	}
 
+	public long getId() {
+		return id;
+	}
+
 	public void setSource(String source) {
 		this.source = source;
 	}
@@ -56,8 +61,8 @@ public abstract class Transaction implements Serializable {
 		this.destination = destination;
 	}
 
-	public void setStarteDate(DateTime starteDate) {
-		this.starteDate = starteDate;
+	public void setStartDate(DateTime startDate) {
+		this.startDate = startDate;
 	}
 
 	public void setEndDate(DateTime endDate) {
@@ -76,9 +81,13 @@ public abstract class Transaction implements Serializable {
 		this.description = description;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "Transaction [source=" + source + ", destination=" + destination + ", starteDate=" + starteDate
+		return "Transaction [source=" + source + ", destination=" + destination + ", starteDate=" + startDate
 				+ ", endDate=" + endDate + ", isContact=" + isContact + ", type=" + type + ", description="
 				+ description + "]";
 	}

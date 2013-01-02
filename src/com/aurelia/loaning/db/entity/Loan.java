@@ -85,6 +85,10 @@ public class Loan implements Serializable {
 		this.type = type;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

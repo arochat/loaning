@@ -22,8 +22,7 @@ public class LoanSaver extends IntentService {
 	protected void onHandleIntent(final Intent intent) {
 
 		// LoanTransaction received in intent
-		Bundle loans = intent.getExtras();
-		Transaction transaction = (Transaction) loans.getSerializable(Event.SAVE_LOANING.name());
+		Bundle loan = intent.getExtras();
 
 		if (databaseAccess == null) {
 			databaseAccess = new LoanDatabaseAccess(this);
@@ -32,14 +31,16 @@ public class LoanSaver extends IntentService {
 		if (converter == null) {
 			converter = new DomainToEntityConverter();
 		}
-		// databaseAccess.open();
-		long dbId = databaseAccess.insert(converter.convert(transaction));
 
-		// TODO display toast message once loan saved
+		long dbResult = -1l;
 
-		// databaseAccess.close();
+		if (Event.SAVE_LOANING.name().equals(intent.getAction())) {
+			dbResult = saveLoan(loan);
+		} else if (Event.DELETE_LOAN.name().equals(intent.getAction())) {
+			dbResult = deleteLoan(loan);
+		}
 
-		if (dbId != -1) {
+		if (dbResult != -1) {
 			sendBroadcast(new Intent(Event.LOAN_MODIFIED.name()));
 		}
 		databaseAccess.close();
@@ -52,6 +53,16 @@ public class LoanSaver extends IntentService {
 		// stopped, so return sticky.
 		return START_STICKY;
 		// TODO : what do we need to return here?
+	}
+
+	private long saveLoan(Bundle loan) {
+		Transaction transaction = (Transaction) loan.getSerializable(Event.SAVE_LOANING.name());
+		return databaseAccess.insert(converter.convert(transaction));
+	}
+
+	private long deleteLoan(Bundle loan) {
+		Transaction transaction = (Transaction) loan.getSerializable(Event.DELETE_LOAN.name());
+		return databaseAccess.delete(converter.convert(transaction));
 	}
 
 }

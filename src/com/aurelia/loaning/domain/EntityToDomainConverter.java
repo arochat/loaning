@@ -13,11 +13,12 @@ public class EntityToDomainConverter {
 		} else {
 			transaction = new LoanTransaction();
 		}
+		transaction.setId(loan.getId());
 		transaction.setDestination(loan.getDestination());
 		transaction.setSource(loan.getSource());
 		transaction.setDescription(loan.getDescription());
 		transaction.setType(loan.getType());
-		transaction.setStarteDate(loan.getStartDate());
+		transaction.setStartDate(loan.getStartDate());
 		transaction.setEndDate(loan.getEndDate());
 		transaction.setContact(loan.getIsContact());
 

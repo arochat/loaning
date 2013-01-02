@@ -4,18 +4,11 @@
     android:layout_height="match_parent">
 <!--     tools:context=".view/LoansOverviewActivity" > -->
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loan_list_title" />
-
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
         android:layout_marginTop="21dp" />
     
      <ListView
@@ -42,6 +35,7 @@
          android:id="@+id/addLoanButton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_alignBottom="@+id/textView2"
          android:layout_alignParentTop="true"
          android:layout_toLeftOf="@+id/removeAllButton"
          android:onClick="addLoan"
