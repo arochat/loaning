@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="loan_choice">
+        <item>Money Loan</item>
+        <item>Money Borrowing</item>
+        <item>Stuff loan</item>
+        <item>Stuff borrowing</item>
+    </string-array>
+</resources>
