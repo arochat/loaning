@@ -62,20 +62,20 @@
         android:ems="10"
         android:hint="@string/destination_label" />
 
-    <DatePicker
-        android:id="@+id/chooseWhen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/addLoanButton"
-        android:layout_alignLeft="@+id/whenLabel"
-        android:layout_below="@+id/whenLabel" />
+<!--     <DatePicker -->
+<!--         android:id="@+id/chooseWhen" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_above="@+id/addLoanButton" -->
+<!--         android:layout_alignLeft="@+id/whenLabel" -->
+<!--         android:layout_below="@+id/whenLabel" /> -->
 
-    <CheckedTextView
-        android:id="@+id/whenLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/destination"
-        android:layout_below="@+id/destination"
-        android:text="@string/when_label" />
+<!--     <CheckedTextView -->
+<!--         android:id="@+id/whenLabel" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_alignLeft="@+id/destination" -->
+<!--         android:layout_below="@+id/destination" -->
+<!--         android:text="@string/when_label" /> -->
 
 </RelativeLayout>

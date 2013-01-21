@@ -3,21 +3,23 @@ package com.aurelia.loaning.view;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
 
-public class DisplayDetailActivity extends Activity {
+public class DisplayDetailActivity extends BaseActivity {
 
 	DateTimeFormatter format = DateTimeFormat.forPattern("dd/MM/yyyy");
 
@@ -95,6 +97,29 @@ public class DisplayDetailActivity extends Activity {
 		TextView creationDate;
 		TextView sourceAndDestination;
 	}
+
+	@Override
+	protected void setupActionBar() {
+		final ActionBar ab = super.createActionBar();
+
+		// set up tabs nav
+		ab.addTab(ab.newTab().setText("Copy").setTabListener(this), 0, true);
+		ab.addTab(ab.newTab().setText("Edit").setTabListener(this), 1, false);
+		ab.addTab(ab.newTab().setText("Delete").setTabListener(this), 2, false);
+
+		// default to tab navigation
+		showTabsNav();
+	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		if ("Overview".equals(tab.getText())) {
+			super.backToLoansOverview();
+		}
+
+	}
+
+	// ----------------------------------------------------------
 
 	private class DbFeedbackReceiver extends BroadcastReceiver {
 

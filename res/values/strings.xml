@@ -12,6 +12,7 @@
     <string name="loan_object_label">What</string>
     <string name="when_label">Notify me on </string>
     <string name="add_button">add</string>
+    <string name="add_loan_fragment_title">add</string>
 
     <!-- View loan list -->
     <string name="loan_list_title">My loans</string>
@@ -23,4 +24,10 @@
     <string name="reminder_label">Remind me on : </string>
     <string name="delete_button">Delete</string>
     <string name="settle_button">Settle</string>
+    
+    <!-- left nav menu -->
+    <string name="item_one">Loans overview</string>
+    <string name="item_two">Setting</string>
+    <string name="item_three">About</string>
+    
 </resources>

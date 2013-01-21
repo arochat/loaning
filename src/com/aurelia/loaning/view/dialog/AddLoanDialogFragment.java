@@ -27,6 +27,9 @@ public class AddLoanDialogFragment extends DialogFragment {
 					public void onClick(DialogInterface dialog, int which) {
 						// The 'which' argument contains the index position
 						// of the selected item
+
+						// TODO : customize the form depending on the kind of
+						// loan selected
 						Intent intent = new Intent(callingActivity, AddLoanActivity.class);
 						startActivity(intent);
 					}

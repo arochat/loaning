@@ -28,13 +28,17 @@ public class TransactionFactory {
 		}
 
 		transaction.setDescription(loanFromUI.getDescriptionFromUI().getText().toString());
+		transaction.setStartDate(DateTime.now());
 
 		// needs to add 1 to the month got from the UI. DatePicker months range
 		// from 0 to 11 whereas JodaTime months range from 1 to 12.
-		DateTime endDate = new DateTime(loanFromUI.getEndDateFromUI().getYear(), loanFromUI.getEndDateFromUI()
-				.getMonth() + 1, loanFromUI.getEndDateFromUI().getDayOfMonth(), 0, 0, 0);
-		transaction.setStartDate(DateTime.now());
-		transaction.setEndDate(endDate);
+		// DateTime endDate = new
+		// DateTime(loanFromUI.getEndDateFromUI().getYear(),
+		// loanFromUI.getEndDateFromUI()
+		// .getMonth() + 1, loanFromUI.getEndDateFromUI().getDayOfMonth(), 0, 0,
+		// 0);
+		// transaction.setEndDate(endDate);
+		transaction.setEndDate(DateTime.now());
 		transaction.setContact(false);
 		transaction.setType("noType");
 

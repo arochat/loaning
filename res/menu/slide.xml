@@ -16,10 +16,4 @@
         android:icon="@drawable/ic_launcher"
         android:title="@string/item_three">
     </item>
-    <item
-        android:id="@+id/item_four"
-        android:icon="@drawable/ic_launcher"
-        android:title="@string/item_four">
-    </item>
-
 </menu>

@@ -7,29 +7,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import android.app.ListActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.domain.TransactionContainer;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanFetcher;
 import com.aurelia.loaning.service.LoanRemover;
+import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
 
 /**
  * @author aurelia
  * 
  */
-public class LoansOverviewActivity extends ListActivity {
+public class LoansOverviewActivity extends BaseActivity {
 
 	private BroadcastReceiver loansReceiver;
 	private IntentFilter intentFilter;
@@ -44,8 +48,7 @@ public class LoansOverviewActivity extends ListActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		Intent intent = new Intent(this, LoanFetcher.class);
-		startService(intent);
+		loadLoansOverview();
 	}
 
 	@Override
@@ -64,15 +67,65 @@ public class LoansOverviewActivity extends ListActivity {
 		super.onPause();
 	}
 
-	public void addLoan(View view) {
+	// graphical components handling ------------------------------------------
+
+	@Override
+	protected void setupActionBar() {
+		final ActionBar ab = super.createActionBar();
+
+		// set up tabs nav
+		ab.addTab(ab.newTab().setText("Overview").setTabListener(this), 0, true);
+		ab.addTab(ab.newTab().setText("Add").setTabListener(this), 1, false);
+		ab.addTab(ab.newTab().setText("Filter").setTabListener(this), 2, false);
+
+		// default to tab navigation
+		showTabsNav();
+	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+
+		if ("Add".equals(tab.getText())) {
+
+			// TODO : completely handle fragments
+			// stack as in
+			// http://www.edumobile.org/android/android-development/fragment-example-in-android/
+
+			// DialogFragment.show() will take care of adding the fragment
+			// in a transaction. We also want to remove any currently showing
+			// dialog, so make our own transaction and take care of that here.
+			ft = getSupportFragmentManager().beginTransaction();
+			Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+			if (prev != null) {
+				ft.remove(prev);
+			}
+			ft.addToBackStack(null);
+
+			// Create and show the dialog.
+			AddLoanDialogFragment addLoanDialogFragment = new AddLoanDialogFragment(this);
+			addLoanDialogFragment.show(ft, "dialog");
+
+		}
+	}
+
+	// loans handling ----------------------------------------------------------
+
+	public void addLoan() {
 		Intent intent = new Intent(this, AddLoanActivity.class);
 		startActivity(intent);
 	}
 
-	public void removeAll(View view) {
+	public void removeAll() {
 		Intent intent = new Intent(this, LoanRemover.class);
 		startService(intent);
 	}
+
+	public void loadLoansOverview() {
+		Intent intent = new Intent(this, LoanFetcher.class);
+		startService(intent);
+	}
+
+	// -----------------------------------------------------------
 
 	private class LoanReceiver extends BroadcastReceiver {
 
@@ -119,4 +172,5 @@ public class LoansOverviewActivity extends ListActivity {
 			loansListView.setOnItemClickListener(listener);
 		}
 	}
+
 }

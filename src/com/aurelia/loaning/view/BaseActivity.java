@@ -2,7 +2,6 @@ package com.aurelia.loaning.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
@@ -11,8 +10,6 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.aurelia.loaning.R;
-import com.aurelia.loaning.service.LoanFetcher;
-import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
 import com.coboltforge.slidemenu.SlideMenu;
 import com.coboltforge.slidemenu.SlideMenuInterface.OnSlideMenuItemClickListener;
 
@@ -35,7 +32,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 		// TODO : real implementation
 		switch (itemId) {
 		case R.id.item_one:
-			Toast.makeText(this, "Item one selected", Toast.LENGTH_SHORT).show();
+			backToLoansOverview();
 			break;
 		case R.id.item_two:
 			Toast.makeText(this, "Item two selected", Toast.LENGTH_SHORT).show();
@@ -57,33 +54,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 	}
 
 	// action bar ----------------------------------------------------------
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		if ("Add".equals(tab.getText())) {
-
-			// TODO : completely handle fragments
-			// stack as in
-			// http://www.edumobile.org/android/android-development/fragment-example-in-android/
-
-			// DialogFragment.show() will take care of adding the fragment
-			// in a transaction. We also want to remove any currently showing
-			// dialog, so make our own transaction and take care of that here.
-			ft = getSupportFragmentManager().beginTransaction();
-			Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
-			if (prev != null) {
-				ft.remove(prev);
-			}
-			ft.addToBackStack(null);
-
-			// Create and show the dialog.
-			AddLoanDialogFragment addLoanDialogFragment = new AddLoanDialogFragment(this);
-			addLoanDialogFragment.show(ft, "dialog");
-
-		} else if ("Overview".equals(tab.getText())) {
-			displayListOverview();
-		}
-	}
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
@@ -118,9 +88,9 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 	// loans handling
 	// -------------------------------------------------------------
 
-	protected void displayListOverview() {
-		Intent intent = new Intent(this, LoanFetcher.class);
-		startService(intent);
+	protected void backToLoansOverview() {
+		Intent intent = new Intent(this, LoansOverviewActivity.class);
+		startActivity(intent);
 	}
 
 	private void setSlideMenu() {

@@ -167,11 +167,11 @@ public class DatabaseAccess {
 						method.invoke(myObject, c.getString(c.getColumnIndex(columnName)));
 
 					} else if (field.getType().equals(DateTime.class)) {
-
 						method.invoke(myObject, formatter.parseDateTime(c.getString(c.getColumnIndex(columnName))));
-					} else if (field.getType().equals(Long.class)) {
 
+					} else if (field.getType().equals(Long.class)) {
 						method.invoke(myObject, c.getLong(c.getColumnIndex(columnName)));
+
 					} else {
 						// TODO error
 					}

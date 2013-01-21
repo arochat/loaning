@@ -1,21 +1,22 @@
 package com.aurelia.loaning.view;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.Menu;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.domain.TransactionFactory;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
 
-public class AddLoanActivity extends Activity {
+public class AddLoanActivity extends BaseActivity {
 
 	public final static String ME = "ME";
 
@@ -44,12 +45,29 @@ public class AddLoanActivity extends Activity {
 		unregisterReceiver(dbFeedbackReceiver);
 	}
 
+	// graphical elements handling ----------------------------------------
+
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
+	protected void setupActionBar() {
+		final ActionBar ab = super.createActionBar();
+
+		// set up tabs nav
+		ab.addTab(ab.newTab().setText("Overview").setTabListener(this), 0, false);
+		ab.addTab(ab.newTab().setText("Add").setTabListener(this), 1, true);
+
+		// default to tab navigation
+		showTabsNav();
 	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+
+		if ("Overview".equals(tab.getText())) {
+			super.backToLoansOverview();
+		}
+	}
+
+	// --------------------------------------------
 
 	// TODO : validate that form is completely filled
 	public void addLoan(View view) {
