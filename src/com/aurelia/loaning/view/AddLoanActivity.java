@@ -5,16 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.domain.TransactionFactory;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
+import com.aurelia.loaning.view.actionBar.AddLoanActionBarDelegate;
 
 public class AddLoanActivity extends BaseActivity {
 
@@ -25,6 +23,7 @@ public class AddLoanActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		this.setActionBarDelegate(new AddLoanActionBarDelegate());
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_loan_form);
 	}
@@ -43,28 +42,6 @@ public class AddLoanActivity extends BaseActivity {
 	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(dbFeedbackReceiver);
-	}
-
-	// graphical elements handling ----------------------------------------
-
-	@Override
-	protected void setupActionBar() {
-		final ActionBar ab = super.createActionBar();
-
-		// set up tabs nav
-		ab.addTab(ab.newTab().setText("Overview").setTabListener(this), 0, false);
-		ab.addTab(ab.newTab().setText("Add").setTabListener(this), 1, true);
-
-		// default to tab navigation
-		showTabsNav();
-	}
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-
-		if ("Overview".equals(tab.getText())) {
-			super.backToLoansOverview();
-		}
 	}
 
 	// --------------------------------------------

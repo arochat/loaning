@@ -10,6 +10,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.aurelia.loaning.R;
+import com.aurelia.loaning.view.actionBar.AbstractActionBarDelegate;
 import com.coboltforge.slidemenu.SlideMenu;
 import com.coboltforge.slidemenu.SlideMenuInterface.OnSlideMenuItemClickListener;
 
@@ -17,6 +18,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 		OnSlideMenuItemClickListener {
 
 	private SlideMenu slideMenu;
+	protected AbstractActionBarDelegate actionBarDelegate;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -67,7 +69,20 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
 	}
 
-	abstract protected void setupActionBar();
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		actionBarDelegate.handleActions(tab, ft, this);
+	}
+
+	protected void setupActionBar() {
+
+		final ActionBar ab = createActionBar();
+		// setup tabs nav
+		actionBarDelegate.setupActionBar(ab, this);
+
+		// default to tab navigation
+		showTabsNav();
+	}
 
 	protected ActionBar createActionBar() {
 		final ActionBar actionBar = getSupportActionBar();
@@ -96,4 +111,9 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 	private void setSlideMenu() {
 		slideMenu = new SlideMenu(this, R.menu.slide, this, 333);
 	}
+
+	public void setActionBarDelegate(AbstractActionBarDelegate actionBarDelegate) {
+		this.actionBarDelegate = actionBarDelegate;
+	}
+
 }
