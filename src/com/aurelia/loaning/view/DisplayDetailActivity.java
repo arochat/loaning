@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aurelia.loaning.R;
-import com.aurelia.loaning.domain.Transaction;
+import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.actionBar.DisplayDetailActionBarDelegate;
@@ -21,7 +21,7 @@ public class DisplayDetailActivity extends BaseActivity {
 
 	DateTimeFormatter format = DateTimeFormat.forPattern("dd/MM/yyyy");
 
-	private Transaction displayedTransaction;
+	private AbstractLoan displayedLoan;
 	private BroadcastReceiver dbFeedbackReceiver;
 	private IntentFilter intentFilter;
 
@@ -57,19 +57,18 @@ public class DisplayDetailActivity extends BaseActivity {
 			viewHolder.creationDate = (TextView) findViewById(R.id.loan_creation_date);
 			viewHolder.object = (TextView) findViewById(R.id.object_of_loan);
 
-			Transaction transaction = (Transaction) intent.getExtras()
-					.getSerializable(Event.DISPLAY_LOAN_DETAIL.name());
+			AbstractLoan loan = (AbstractLoan) intent.getExtras().getSerializable(Event.DISPLAY_LOAN_DETAIL.name());
 
-			displayedTransaction = transaction;
+			displayedLoan = loan;
 
-			if (transaction != null) {
+			if (loan != null) {
 				viewHolder.sourceAndDestination.setText(viewHolder.sourceAndDestination.getText() + " "
-						+ transaction.getSource() + "-->" + transaction.getDestination());
+						+ loan.getSource() + "-->" + loan.getDestination());
 				viewHolder.notificationDate.setText(viewHolder.notificationDate.getText() + " "
-						+ format.print(transaction.getEndDate()));
+						+ format.print(loan.getEndDate()));
 				viewHolder.creationDate.setText(viewHolder.creationDate.getText() + " "
-						+ format.print(transaction.getStartDate()));
-				viewHolder.object.setText(viewHolder.object.getText() + " " + transaction.getDescription());
+						+ format.print(loan.getStartDate()));
+				viewHolder.object.setText(viewHolder.object.getText() + " " + loan.getDescription());
 			}
 		}
 	}
@@ -82,7 +81,7 @@ public class DisplayDetailActivity extends BaseActivity {
 
 	public void deleteLoan(View view) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(Event.DELETE_LOAN.name(), this.displayedTransaction);
+		bundle.putSerializable(Event.DELETE_LOAN.name(), this.displayedLoan);
 		Intent intent = new Intent(this, LoanSaver.class);
 		intent.setAction(Event.DELETE_LOAN.name());
 		intent.putExtras(bundle);

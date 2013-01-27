@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.aurelia.loaning.R;
-import com.aurelia.loaning.domain.Transaction;
-import com.aurelia.loaning.domain.TransactionFactory;
+import com.aurelia.loaning.domain.AbstractLoan;
+import com.aurelia.loaning.domain.LoanFactory;
+import com.aurelia.loaning.domain.LoanType;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.actionBar.AddLoanActionBarDelegate;
@@ -20,12 +21,18 @@ public class AddLoanActivity extends BaseActivity {
 
 	private BroadcastReceiver dbFeedbackReceiver;
 	private IntentFilter intentFilter;
+	private LoanType loanType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// TODO : set loanType here
 		this.setActionBarDelegate(new AddLoanActionBarDelegate());
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_loan_form);
+		if (LoanType.MONEY_BORROWING.equals(loanType) || LoanType.MONEY_LOAN.equals(loanType)) {
+			setContentView(R.layout.add_money_loan_form);
+		} else {
+			setContentView(R.layout.add_object_loan_form);
+		}
 	}
 
 	@Override
@@ -46,19 +53,23 @@ public class AddLoanActivity extends BaseActivity {
 
 	// --------------------------------------------
 
+	public LoanType getLoanType() {
+		return loanType;
+	}
+
 	// TODO : validate that form is completely filled
 	public void addLoan(View view) {
 
-		Transaction transaction = TransactionFactory.createTransaction(getLoanFromUI());
+		AbstractLoan loan = LoanFactory.createLoan(getLoanFromUI());
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(Event.SAVE_LOANING.name(), transaction);
+		bundle.putSerializable(Event.SAVE_LOANING.name(), loan);
 		Intent intent = new Intent(this, LoanSaver.class);
 		intent.setAction(Event.SAVE_LOANING.name());
 		intent.putExtras(bundle);
 		startService(intent);
 	}
 
-	public LoanFromUI getLoanFromUI() {
+	public AbstractLoanFromUI getLoanFromUI() {
 		return new LoanFromUIBuilder(this).getLoanFromUI();
 	}
 

@@ -13,6 +13,12 @@
     <string name="when_label">Notify me on </string>
     <string name="add_button">add</string>
     <string name="add_loan_fragment_title">add</string>
+    <string name="amount_label">Amount</string>
+    <string name="currency_label">Currency</string>
+    <string name="I_loaned_label">I loaned</string>
+    <string name="to_label">To</string>
+    <string name="for_label">For</string>
+    
 
     <!-- View loan list -->
     <string name="loan_list_title">My loans</string>

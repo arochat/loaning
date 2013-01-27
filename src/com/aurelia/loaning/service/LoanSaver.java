@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.aurelia.loaning.db.LoanDatabaseAccess;
+import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.DomainToEntityConverter;
-import com.aurelia.loaning.domain.Transaction;
 import com.aurelia.loaning.event.Event;
 
 public class LoanSaver extends IntentService {
@@ -55,14 +55,14 @@ public class LoanSaver extends IntentService {
 		// TODO : what do we need to return here?
 	}
 
-	private long saveLoan(Bundle loan) {
-		Transaction transaction = (Transaction) loan.getSerializable(Event.SAVE_LOANING.name());
-		return databaseAccess.insert(converter.convert(transaction));
+	private long saveLoan(Bundle loanToSave) {
+		AbstractLoan loan = (AbstractLoan) loanToSave.getSerializable(Event.SAVE_LOANING.name());
+		return databaseAccess.insert(converter.convert(loan));
 	}
 
-	private long deleteLoan(Bundle loan) {
-		Transaction transaction = (Transaction) loan.getSerializable(Event.DELETE_LOAN.name());
-		return databaseAccess.delete(converter.convert(transaction));
+	private long deleteLoan(Bundle loanToDelete) {
+		AbstractLoan loan = (AbstractLoan) loanToDelete.getSerializable(Event.DELETE_LOAN.name());
+		return databaseAccess.delete(converter.convert(loan));
 	}
 
 }

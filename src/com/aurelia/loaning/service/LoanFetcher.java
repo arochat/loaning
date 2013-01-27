@@ -11,9 +11,9 @@ import android.os.IBinder;
 
 import com.aurelia.loaning.db.LoanDatabaseAccess;
 import com.aurelia.loaning.db.entity.Loan;
+import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.EntityToDomainConverter;
-import com.aurelia.loaning.domain.Transaction;
-import com.aurelia.loaning.domain.TransactionContainer;
+import com.aurelia.loaning.domain.LoansContainer;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.util.LoanUtil;
 
@@ -44,20 +44,20 @@ public class LoanFetcher extends IntentService {
 			databaseAccess = new LoanDatabaseAccess(this);
 		}
 		databaseAccess.open();
-		List<Loan> loans = LoanUtil.convert(databaseAccess.selectAllLoans());
+		List<Loan> loansFromDB = LoanUtil.convert(databaseAccess.selectAllLoans());
 		databaseAccess.close();
 
 		// send loans to the view
 		Bundle loadedLoansBundle = new Bundle();
-		List<Transaction> transactions = new ArrayList<Transaction>();
+		List<AbstractLoan> loans = new ArrayList<AbstractLoan>();
 		Intent loadedLoansFeedback = new Intent(Event.SHOW_LOANINGS.name());
 
-		if (loans != null && !Collections.EMPTY_LIST.equals(loans)) {
-			for (Loan loan : loans) {
-				transactions.add(converter.convert(loan));
+		if (loansFromDB != null && !Collections.EMPTY_LIST.equals(loansFromDB)) {
+			for (Loan loanFromDB : loansFromDB) {
+				loans.add(converter.convert(loanFromDB));
 			}
-			TransactionContainer transactionContainer = new TransactionContainer();
-			transactionContainer.setTransactions(transactions);
+			LoansContainer transactionContainer = new LoansContainer();
+			transactionContainer.setLoans(loans);
 			loadedLoansBundle.putSerializable(Event.SHOW_LOANINGS.name(), transactionContainer);
 		}
 

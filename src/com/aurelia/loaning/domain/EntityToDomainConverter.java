@@ -4,25 +4,67 @@ import com.aurelia.loaning.db.entity.Loan;
 
 public class EntityToDomainConverter {
 
-	public Transaction convert(Loan loan) {
+	private final String amountCurrencySeparator = " ";
 
-		Transaction transaction;
+	public AbstractLoan convert(Loan loanEntity) {
 
-		if (Transaction.ME.equals(loan.getDestination())) {
-			transaction = new BorrowingTransaction();
-		} else {
-			transaction = new LoanTransaction();
+		LoanType loanType = LoanType.valueOf(loanEntity.getType());
+		MoneyLoan moneyLoan = null;
+		ObjectLoan objectLoan = null;
+
+		switch (loanType) {
+		case MONEY_LOAN:
+			moneyLoan = new MoneyLoan(loanEntity.getDestination(), loanEntity.getStartDate(), loanEntity.getEndDate(),
+					false, loanType);
+			setSpecificMoneyLoanData(moneyLoan, loanEntity);
+			return moneyLoan;
+
+		case MONEY_BORROWING:
+			moneyLoan = new MoneyLoan(loanEntity.getSource(), loanEntity.getStartDate(), loanEntity.getEndDate(),
+					false, loanType);
+			setSpecificMoneyLoanData(moneyLoan, loanEntity);
+			return moneyLoan;
+
+		case OBJECT_LOAN:
+			objectLoan = new ObjectLoan(loanEntity.getDestination(), loanEntity.getStartDate(),
+					loanEntity.getEndDate(), false, loanType);
+			setSpecificObjectLoanData(objectLoan, loanEntity);
+			return objectLoan;
+
+		case OBJECT_BORROWING:
+			objectLoan = new ObjectLoan(loanEntity.getSource(), loanEntity.getStartDate(), loanEntity.getEndDate(),
+					false, loanType);
+			setSpecificObjectLoanData(objectLoan, loanEntity);
+			return objectLoan;
+		default:
+			return null;
 		}
-		transaction.setId(loan.getId());
-		transaction.setDestination(loan.getDestination());
-		transaction.setSource(loan.getSource());
-		transaction.setDescription(loan.getDescription());
-		transaction.setType(loan.getType());
-		transaction.setStartDate(loan.getStartDate());
-		transaction.setEndDate(loan.getEndDate());
-		transaction.setContact(loan.getIsContact());
-
-		return transaction;
 	}
 
+	private MoneyLoan setSpecificMoneyLoanData(MoneyLoan moneyLoan, Loan loanEntity) {
+		moneyLoan.setAmount(computeAmountFromDescription(loanEntity));
+		moneyLoan.setCurrency(getCurrencyFromDescription(loanEntity));
+		return moneyLoan;
+	}
+
+	private ObjectLoan setSpecificObjectLoanData(ObjectLoan objectLoan, Loan loanEntity) {
+		objectLoan.setObjectDefinition(loanEntity.getDescription());
+		return objectLoan;
+	}
+
+	private double computeAmountFromDescription(Loan loan) {
+		if (!(LoanType.MONEY_BORROWING.name().equals(loan.getType()) || LoanType.MONEY_LOAN.name().equals(
+				loan.getType()))) {
+			// TODO : throw exception
+		}
+		return Double.valueOf(loan.getDescription().split(amountCurrencySeparator)[0]);
+	}
+
+	private String getCurrencyFromDescription(Loan loan) {
+		if (!(LoanType.MONEY_BORROWING.name().equals(loan.getType()) || LoanType.MONEY_LOAN.name().equals(
+				loan.getType()))) {
+			// TODO : throw exception
+		}
+		return loan.getDescription().split(amountCurrencySeparator)[1];
+	}
 }

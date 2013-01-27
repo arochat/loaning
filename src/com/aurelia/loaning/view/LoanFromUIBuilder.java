@@ -1,29 +1,44 @@
 package com.aurelia.loaning.view;
 
-import android.app.Activity;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.aurelia.loaning.R;
 
 public class LoanFromUIBuilder {
 
-	private LoanFromUI loanFromUI;
+	private AbstractLoanFromUI loanFromUI;
 
-	public LoanFromUIBuilder(Activity activity) {
-		this.loanFromUI = new LoanFromUI();
-		this.loanFromUI.setRadioGroupFromUI((RadioGroup) activity.findViewById(R.id.radioGroup1));
-		this.loanFromUI.setBorrowingRadio((RadioButton) activity.findViewById(R.id.borrowRadio));
-		this.loanFromUI.setLoanRadio((RadioButton) activity.findViewById(R.id.loanRadio));
-		this.loanFromUI.setOweRadio((RadioButton) activity.findViewById(R.id.oweRadio));
-		this.loanFromUI.setDestinationFromUI((EditText) activity.findViewById(R.id.destination));
-		this.loanFromUI.setDescriptionFromUI((EditText) activity.findViewById(R.id.description));
-		this.loanFromUI.setEndDateFromUI((DatePicker) activity.findViewById(R.id.chooseWhen));
+	public LoanFromUIBuilder(AddLoanActivity activity) {
+
+		switch (activity.getLoanType()) {
+		case MONEY_LOAN:
+			// fallthrough
+		case MONEY_BORROWING:
+			MoneyLoanFromUI moneyLoanFromUI = new MoneyLoanFromUI();
+			moneyLoanFromUI.setAmountFromUI((EditText) activity.findViewById(R.id.amount_field));
+			moneyLoanFromUI.setCurrencyFromUI((EditText) activity.findViewById(R.id.currency_field));
+			moneyLoanFromUI.setReasonFromUI((EditText) activity.findViewById(R.id.reason_field));
+			// moneyLoanFromUI.setEndDateFromUI(endDateFromUI);
+			moneyLoanFromUI.setPersonFromUI((EditText) activity.findViewById(R.id.person_field));
+			moneyLoanFromUI.setLoanType(activity.getLoanType());
+			loanFromUI = moneyLoanFromUI;
+
+		case OBJECT_LOAN:
+			// fallthrough
+		case OBJECT_BORROWING:
+			ObjectLoanFromUI objectLoanFromUI = new ObjectLoanFromUI();
+			objectLoanFromUI.setObjectDefinitionFromUI((EditText) activity.findViewById(R.id.description_field));
+			// objectLoanFromUI.setEndDateFromUI(endDateFromUI);
+			objectLoanFromUI.setPersonFromUI((EditText) activity.findViewById(R.id.person_field));
+			objectLoanFromUI.setLoanType(activity.getLoanType());
+			loanFromUI = objectLoanFromUI;
+
+		default:
+			// TODO : exception
+		}
 	}
 
-	public LoanFromUI getLoanFromUI() {
+	public AbstractLoanFromUI getLoanFromUI() {
 		return loanFromUI;
 	}
 

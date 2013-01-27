@@ -13,18 +13,18 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.aurelia.loaning.R;
-import com.aurelia.loaning.domain.Transaction;
+import com.aurelia.loaning.domain.AbstractLoan;
 
 public class LoansArrayAdapter extends BaseAdapter {
 
 	DateTimeFormatter format = DateTimeFormat.forPattern("dd/MM/yyyy");
 
-	private List<Transaction> transactions;
+	private List<AbstractLoan> loans;
 	private LayoutInflater inflater;
 
-	public LoansArrayAdapter(Context context, List<Transaction> transactions) {
+	public LoansArrayAdapter(Context context, List<AbstractLoan> loansToDisplay) {
 		this.inflater = LayoutInflater.from(context);
-		this.transactions = transactions;
+		this.loans = loansToDisplay;
 	}
 
 	@Override
@@ -46,10 +46,10 @@ public class LoansArrayAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.sourceAndDestination.setText(transactions.get(position).getSource() + "-->"
-				+ transactions.get(position).getDestination());
-		viewHolder.creationDate.setText(format.print(transactions.get(position).getStartDate()));
-		viewHolder.object.setText(transactions.get(position).getDescription());
+		viewHolder.sourceAndDestination.setText(loans.get(position).getSource() + "-->"
+				+ loans.get(position).getDestination());
+		viewHolder.creationDate.setText(format.print(loans.get(position).getStartDate()));
+		viewHolder.object.setText(loans.get(position).getDescription());
 
 		return convertView;
 
@@ -57,12 +57,12 @@ public class LoansArrayAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return transactions.size();
+		return loans.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return transactions.get(position);
+		return loans.get(position);
 	}
 
 	@Override

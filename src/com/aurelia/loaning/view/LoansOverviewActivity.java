@@ -18,8 +18,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.aurelia.loaning.R;
-import com.aurelia.loaning.domain.Transaction;
-import com.aurelia.loaning.domain.TransactionContainer;
+import com.aurelia.loaning.domain.AbstractLoan;
+import com.aurelia.loaning.domain.LoansContainer;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanFetcher;
 import com.aurelia.loaning.service.LoanRemover;
@@ -88,21 +88,21 @@ public class LoansOverviewActivity extends BaseActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 
-			List<Transaction> transactions = new ArrayList<Transaction>();
+			List<AbstractLoan> loans = new ArrayList<AbstractLoan>();
 			if (intent != null && Event.SHOW_LOANINGS.name().equals(intent.getAction())) {
 				if (intent.getExtras() != null) {
 
-					TransactionContainer transactionContainer = (TransactionContainer) intent.getExtras()
-							.getSerializable(Event.SHOW_LOANINGS.name());
+					LoansContainer transactionContainer = (LoansContainer) intent.getExtras().getSerializable(
+							Event.SHOW_LOANINGS.name());
 
 					if (transactionContainer != null) {
-						transactions = transactionContainer.getTransactions();
+						loans = transactionContainer.getLoans();
 
-						if (transactions != null & !Collections.EMPTY_LIST.equals(transactions)) {
-							String[] transactionString = new String[transactions.size()];
+						if (loans != null & !Collections.EMPTY_LIST.equals(loans)) {
+							String[] transactionString = new String[loans.size()];
 
-							for (int i = 0; i < transactions.size(); i++) {
-								transactionString[i] = transactions.get(i).toString();
+							for (int i = 0; i < loans.size(); i++) {
+								transactionString[i] = loans.get(i).toString();
 							}
 
 						}
@@ -110,15 +110,15 @@ public class LoansOverviewActivity extends BaseActivity {
 				}
 			}
 			loansListView = (ListView) findViewById(android.R.id.list);
-			loansListView.setAdapter(new LoansArrayAdapter(context, transactions));
+			loansListView.setAdapter(new LoansArrayAdapter(context, loans));
 
 			OnItemClickListener listener = new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					Transaction transaction = (Transaction) parent.getItemAtPosition(position);
+					AbstractLoan loan = (AbstractLoan) parent.getItemAtPosition(position);
 					Bundle bundle = new Bundle();
-					bundle.putSerializable(Event.DISPLAY_LOAN_DETAIL.name(), transaction);
+					bundle.putSerializable(Event.DISPLAY_LOAN_DETAIL.name(), loan);
 					Intent intent = new Intent(LoansOverviewActivity.this, DisplayDetailActivity.class);
 					intent.setAction(Event.DISPLAY_LOAN_DETAIL.name());
 					intent.putExtras(bundle);
