@@ -10,6 +10,11 @@ public class ObjectLoan extends AbstractLoan {
 
 	private String objectDefinition;
 
+	@Override
+	public String displayDescription() {
+		return this.objectDefinition;
+	}
+
 	public String getObjectDefinition() {
 		return objectDefinition;
 	}
@@ -17,4 +22,5 @@ public class ObjectLoan extends AbstractLoan {
 	public void setObjectDefinition(String objectDefinition) {
 		this.objectDefinition = objectDefinition;
 	}
+
 }

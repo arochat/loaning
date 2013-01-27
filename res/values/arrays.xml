@@ -4,7 +4,7 @@
     <string-array name="loan_choice">
         <item>Money Loan</item>
         <item>Money Borrowing</item>
-        <item>Stuff loan</item>
-        <item>Stuff borrowing</item>
+        <item>Object loan</item>
+        <item>Object borrowing</item>
     </string-array>
 </resources>

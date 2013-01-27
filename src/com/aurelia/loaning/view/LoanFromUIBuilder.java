@@ -22,7 +22,7 @@ public class LoanFromUIBuilder {
 			moneyLoanFromUI.setPersonFromUI((EditText) activity.findViewById(R.id.person_field));
 			moneyLoanFromUI.setLoanType(activity.getLoanType());
 			loanFromUI = moneyLoanFromUI;
-
+			break;
 		case OBJECT_LOAN:
 			// fallthrough
 		case OBJECT_BORROWING:
@@ -32,7 +32,7 @@ public class LoanFromUIBuilder {
 			objectLoanFromUI.setPersonFromUI((EditText) activity.findViewById(R.id.person_field));
 			objectLoanFromUI.setLoanType(activity.getLoanType());
 			loanFromUI = objectLoanFromUI;
-
+			break;
 		default:
 			// TODO : exception
 		}

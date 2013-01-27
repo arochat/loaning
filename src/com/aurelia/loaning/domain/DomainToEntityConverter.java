@@ -58,6 +58,7 @@ public class DomainToEntityConverter {
 
 	private String computeMoneyLoanDescription(MoneyLoan moneyLoan) {
 		return new StringBuilder().append(moneyLoan.getAmount()).append(amountCurrencySeparator)
-				.append(moneyLoan.getCurrency()).toString();
+				.append(moneyLoan.getCurrency()).append(amountCurrencySeparator).append(moneyLoan.getReason())
+				.toString();
 	}
 }

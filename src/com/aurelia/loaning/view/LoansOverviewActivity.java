@@ -92,17 +92,17 @@ public class LoansOverviewActivity extends BaseActivity {
 			if (intent != null && Event.SHOW_LOANINGS.name().equals(intent.getAction())) {
 				if (intent.getExtras() != null) {
 
-					LoansContainer transactionContainer = (LoansContainer) intent.getExtras().getSerializable(
+					LoansContainer loansContainer = (LoansContainer) intent.getExtras().getSerializable(
 							Event.SHOW_LOANINGS.name());
 
-					if (transactionContainer != null) {
-						loans = transactionContainer.getLoans();
+					if (loansContainer != null) {
+						loans = loansContainer.getLoans();
 
 						if (loans != null & !Collections.EMPTY_LIST.equals(loans)) {
-							String[] transactionString = new String[loans.size()];
+							String[] loanString = new String[loans.size()];
 
 							for (int i = 0; i < loans.size(); i++) {
-								transactionString[i] = loans.get(i).toString();
+								loanString[i] = loans.get(i).toString();
 							}
 
 						}

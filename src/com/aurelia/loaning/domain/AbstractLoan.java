@@ -72,6 +72,24 @@ public abstract class AbstractLoan implements Serializable {
 		this.type = type;
 	}
 
+	public String displayPerson() {
+		if (isBorrowing()) {
+			return new StringBuilder().append(this.getPerson()).append("-->").append("me").toString();
+		} else {
+			return new StringBuilder().append("me").append("-->").append(this.getPerson()).toString();
+		}
+	}
+
+	public abstract String displayDescription();
+
+	public boolean isMoneyLoan() {
+		return LoanType.MONEY_LOAN.equals(this.getType()) || LoanType.MONEY_BORROWING.equals(this.getType());
+	}
+
+	public boolean isBorrowing() {
+		return LoanType.OBJECT_BORROWING.equals(this.getType()) || LoanType.MONEY_BORROWING.equals(this.getType());
+	}
+
 	// needs to add 1 to the month got from the UI. DatePicker months range
 	// from 0 to 11 whereas JodaTime months range from 1 to 12.
 	// DateTime endDate = new

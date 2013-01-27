@@ -46,10 +46,9 @@ public class LoansArrayAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.sourceAndDestination.setText(loans.get(position).getSource() + "-->"
-				+ loans.get(position).getDestination());
+		viewHolder.sourceAndDestination.setText(loans.get(position).displayPerson());
 		viewHolder.creationDate.setText(format.print(loans.get(position).getStartDate()));
-		viewHolder.object.setText(loans.get(position).getDescription());
+		viewHolder.object.setText(loans.get(position).displayDescription());
 
 		return convertView;
 

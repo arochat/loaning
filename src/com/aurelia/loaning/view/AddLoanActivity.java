@@ -14,6 +14,7 @@ import com.aurelia.loaning.domain.LoanType;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.actionBar.AddLoanActionBarDelegate;
+import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
 
 public class AddLoanActivity extends BaseActivity {
 
@@ -25,13 +26,23 @@ public class AddLoanActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO : set loanType here
 		this.setActionBarDelegate(new AddLoanActionBarDelegate());
 		super.onCreate(savedInstanceState);
-		if (LoanType.MONEY_BORROWING.equals(loanType) || LoanType.MONEY_LOAN.equals(loanType)) {
+
+		loanType = (LoanType) getIntent().getExtras().get(AddLoanDialogFragment.LOAN_TYPE);
+
+		switch (loanType) {
+		case MONEY_LOAN:
+			// fallthrough
+		case MONEY_BORROWING:
 			setContentView(R.layout.add_money_loan_form);
-		} else {
+			break;
+		case OBJECT_LOAN:
+			// fallthrough
+		case OBJECT_BORROWING:
 			setContentView(R.layout.add_object_loan_form);
+			break;
+		default:
 		}
 	}
 

@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 import com.aurelia.loaning.R;
+import com.aurelia.loaning.domain.LoanType;
 import com.aurelia.loaning.view.AddLoanActivity;
 
 public class AddLoanDialogFragment extends DialogFragment {
+
+	public static final String LOAN_TYPE = "type";
 
 	private Activity callingActivity;
 
@@ -28,9 +31,19 @@ public class AddLoanDialogFragment extends DialogFragment {
 						// The 'which' argument contains the index position
 						// of the selected item
 
-						// TODO : customize the form depending on the kind of
-						// loan selected
+						// TODO : make it in a better way
 						Intent intent = new Intent(callingActivity, AddLoanActivity.class);
+						if (which == 0) {
+							intent.putExtra(LOAN_TYPE, LoanType.MONEY_LOAN);
+						} else if (which == 1) {
+							intent.putExtra(LOAN_TYPE, LoanType.MONEY_BORROWING);
+						} else if (which == 2) {
+							intent.putExtra(LOAN_TYPE, LoanType.OBJECT_LOAN);
+						} else if (which == 3) {
+							intent.putExtra(LOAN_TYPE, LoanType.OBJECT_BORROWING);
+						} else {
+							// TODO : throw exception here
+						}
 						startActivity(intent);
 					}
 				});

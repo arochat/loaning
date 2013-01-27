@@ -63,12 +63,12 @@ public class DisplayDetailActivity extends BaseActivity {
 
 			if (loan != null) {
 				viewHolder.sourceAndDestination.setText(viewHolder.sourceAndDestination.getText() + " "
-						+ loan.getSource() + "-->" + loan.getDestination());
+						+ loan.displayPerson());
 				viewHolder.notificationDate.setText(viewHolder.notificationDate.getText() + " "
-						+ format.print(loan.getEndDate()));
+						+ format.print(loan.getNotificationDate()));
 				viewHolder.creationDate.setText(viewHolder.creationDate.getText() + " "
 						+ format.print(loan.getStartDate()));
-				viewHolder.object.setText(viewHolder.object.getText() + " " + loan.getDescription());
+				viewHolder.object.setText(viewHolder.object.getText() + " " + loan.displayDescription());
 			}
 		}
 	}

@@ -60,6 +60,11 @@ public class DatabaseAccess {
 		return db.delete(tableName, whereClause, whereArgs);
 	}
 
+	public int update(Object o, ContentValues values, String whereClause, String... whereArgs) {
+		String tableName = tablePreparator.getTableName(o.getClass());
+		return db.update(tableName, values, whereClause, whereArgs);
+	}
+
 	public long insert(Object o, DateTimeFormatter formatter) {
 		try {
 			String tableName = tablePreparator.getTableName(o.getClass());

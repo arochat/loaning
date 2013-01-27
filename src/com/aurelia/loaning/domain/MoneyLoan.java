@@ -8,6 +8,12 @@ public class MoneyLoan extends AbstractLoan {
 	private String currency;
 	private String reason;
 
+	@Override
+	public String displayDescription() {
+		return new StringBuilder().append(this.amount).append(" ").append(this.currency).append(" for ")
+				.append(this.reason).toString();
+	}
+
 	public MoneyLoan(String person, DateTime startDate, DateTime notificationDate, boolean isContact, LoanType type) {
 		super(person, startDate, notificationDate, isContact, type);
 	}
