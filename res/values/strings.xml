@@ -23,6 +23,10 @@
     <!-- View loan list -->
     <string name="loan_list_title">My loans</string>
     
+    <!-- Filter loans fragment -->
+    <string name="filter_loans_fragment_title">Filter loans</string>
+    <string name="filter_loans_fragment_name_label">Name :</string>
+    
     <!-- Loan editable detail -->
     <string name="date_label">When : </string>
     <string name="object_of_loan_label">What : </string>

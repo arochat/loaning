@@ -34,6 +34,7 @@ public class LoansOverviewActivity extends BaseActivity {
 	private BroadcastReceiver loansReceiver;
 	private IntentFilter intentFilter;
 	private ListView loansListView;
+	private List<AbstractLoan> loans;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -81,6 +82,20 @@ public class LoansOverviewActivity extends BaseActivity {
 		startService(intent);
 	}
 
+	public void filterLoans() {
+		Intent intent = new Intent(this, FilteredLoansOverviewActivity.class);
+		Bundle bundle = new Bundle();
+		LoansContainer loansContainer = new LoansContainer();
+		loansContainer.setLoans(loans);
+		bundle.putSerializable("loans", loansContainer);
+		intent.putExtras(bundle);
+		startActivity(intent);
+	}
+
+	public List<AbstractLoan> getLoans() {
+		return loans;
+	}
+
 	// -----------------------------------------------------------
 
 	private class LoanReceiver extends BroadcastReceiver {
@@ -97,6 +112,7 @@ public class LoansOverviewActivity extends BaseActivity {
 
 					if (loansContainer != null) {
 						loans = loansContainer.getLoans();
+						LoansOverviewActivity.this.loans = loans;
 
 						if (loans != null & !Collections.EMPTY_LIST.equals(loans)) {
 							String[] loanString = new String[loans.size()];

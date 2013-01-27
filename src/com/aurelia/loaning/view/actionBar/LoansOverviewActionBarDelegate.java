@@ -8,6 +8,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
+import com.aurelia.loaning.view.dialog.FilterLoansDialogFragment;
 
 public class LoansOverviewActionBarDelegate extends AbstractActionBarDelegate {
 
@@ -40,6 +41,18 @@ public class LoansOverviewActionBarDelegate extends AbstractActionBarDelegate {
 			// Create and show the dialog.
 			AddLoanDialogFragment addLoanDialogFragment = new AddLoanDialogFragment(activity);
 			addLoanDialogFragment.show(ft, "dialog");
+		} else if ("Filter".equals(tab.getText())) {
+
+			ft = activity.getSupportFragmentManager().beginTransaction();
+			Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
+			if (prev != null) {
+				ft.remove(prev);
+			}
+			ft.addToBackStack(null);
+
+			// Create and show the dialog.
+			FilterLoansDialogFragment filterLoansDialogFragment = new FilterLoansDialogFragment(activity);
+			filterLoansDialogFragment.show(ft, "dialog");
 		}
 
 	}
