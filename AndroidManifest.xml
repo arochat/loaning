@@ -18,6 +18,8 @@
         
         <activity android:name=".view.DisplayDetailActivity"/>
         
+        <activity android:name=".view.FilteredLoansOverviewActivity"/>
+        
         <service android:name=".service.LoanFetcher"/>
         
         <service android:name=".service.LoanSaver"/>

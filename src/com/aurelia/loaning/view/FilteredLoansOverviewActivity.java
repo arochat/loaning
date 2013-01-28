@@ -11,7 +11,10 @@ import android.widget.ListView;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.LoansContainer;
-import com.aurelia.loaning.view.actionBar.LoansOverviewActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.FilteredLoansOverviewActionBarDelegate;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * @author aurelia
@@ -19,16 +22,23 @@ import com.aurelia.loaning.view.actionBar.LoansOverviewActionBarDelegate;
  */
 public class FilteredLoansOverviewActivity extends BaseActivity {
 
-	private String filter;
+	// TODO : make rows clickable, and allow to see the detail as in
+	// LoansOverviewActivity
+
+	private String filterString;
 	private ListView loansListView;
 	private List<AbstractLoan> loans;
+	private List<AbstractLoan> filteredLoans;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
-		this.setActionBarDelegate(new LoansOverviewActionBarDelegate());
+		this.setActionBarDelegate(new FilteredLoansOverviewActionBarDelegate());
 		super.onCreate(bundle);
 		LoansContainer loansContainer = (LoansContainer) getIntent().getExtras().getSerializable("loans");
 		loans = loansContainer.getLoans();
+		char[] filter = (char[]) getIntent().getExtras().getSerializable("filter");
+		filterString = new String(filter);
+		filteredLoans = filterLoans(filterString);
 		setContentView(R.layout.loans_overview_activity);
 	}
 
@@ -36,7 +46,7 @@ public class FilteredLoansOverviewActivity extends BaseActivity {
 	protected void onStart() {
 		super.onStart();
 		loansListView = (ListView) findViewById(android.R.id.list);
-		loansListView.setAdapter(new LoansArrayAdapter(this, loans));
+		loansListView.setAdapter(new LoansArrayAdapter(this, filteredLoans));
 	}
 
 	@Override
@@ -51,10 +61,24 @@ public class FilteredLoansOverviewActivity extends BaseActivity {
 
 	// loans handling ----------------------------------------------------------
 
-	public void computeBalance() {
-		// TODO
-		// Intent intent = new Intent(this, AddLoanActivity.class);
-		// startActivity(intent);
+	private List<AbstractLoan> filterLoans(final String filter) {
+
+		Predicate<AbstractLoan> shouldBeDisplayed = new Predicate<AbstractLoan>() {
+			@Override
+			public boolean apply(AbstractLoan loan) {
+				return loan.getPerson().toUpperCase().contains(filter.toUpperCase().trim());
+			}
+		};
+
+		return Lists.newArrayList(Iterables.filter(this.loans, shouldBeDisplayed));
+	}
+
+	public List<AbstractLoan> getFilteredLoans() {
+		return filteredLoans;
+	}
+
+	public String getFilterString() {
+		return filterString;
 	}
 
 }

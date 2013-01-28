@@ -82,15 +82,15 @@ public class LoansOverviewActivity extends BaseActivity {
 		startService(intent);
 	}
 
-	public void filterLoans() {
-		Intent intent = new Intent(this, FilteredLoansOverviewActivity.class);
-		Bundle bundle = new Bundle();
-		LoansContainer loansContainer = new LoansContainer();
-		loansContainer.setLoans(loans);
-		bundle.putSerializable("loans", loansContainer);
-		intent.putExtras(bundle);
-		startActivity(intent);
-	}
+	// public void filterLoans() {
+	// Intent intent = new Intent(this, FilteredLoansOverviewActivity.class);
+	// Bundle bundle = new Bundle();
+	// LoansContainer loansContainer = new LoansContainer();
+	// loansContainer.setLoans(loans);
+	// bundle.putSerializable("loans", loansContainer);
+	// intent.putExtras(bundle);
+	// startActivity(intent);
+	// }
 
 	public List<AbstractLoan> getLoans() {
 		return loans;

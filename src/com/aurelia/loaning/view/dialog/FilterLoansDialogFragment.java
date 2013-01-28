@@ -4,10 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.widget.EditText;
 
 import com.aurelia.loaning.R;
+import com.aurelia.loaning.domain.LoansContainer;
+import com.aurelia.loaning.view.FilteredLoansOverviewActivity;
+import com.aurelia.loaning.view.LoansOverviewActivity;
 
 public class FilterLoansDialogFragment extends DialogFragment {
 
@@ -22,36 +28,38 @@ public class FilterLoansDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		// LayoutInflater factory = LayoutInflater.from(this);
-		// final View textEntryView =
-		// factory.inflate(R.layout.alert_dialog_text_entry, null);
-
-		// final View textEntryView =
-		// callingActivity.findViewById(R.id.filter_field);
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.filter_loans_fragment_title)//
-				.setView(R.layout.filter_loans).//
-				setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		final EditText input = new EditText(callingActivity);
+		return new AlertDialog.Builder(callingActivity)//
+				.setTitle(R.string.filter_loans_fragment_title)//
+				.setMessage(R.string.filter_loans_fragment_name_label)//
+				.setView(input)//
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
+						Editable value = input.getText();
+						Intent intent = new Intent(callingActivity, FilteredLoansOverviewActivity.class);
 
-						/* User clicked OK so do some stuff */
+						Bundle bundle = new Bundle();
+						char[] filter = new char[value.length()];
+						value.getChars(0, value.length(), filter, 0);
+						bundle.putSerializable("filter", filter);
+
+						if (callingActivity instanceof LoansOverviewActivity) {
+
+							LoansOverviewActivity loansOverviewActivity = (LoansOverviewActivity) callingActivity;
+
+							LoansContainer loansContainer = new LoansContainer();
+							loansContainer.setLoans(loansOverviewActivity.getLoans());
+							bundle.putSerializable("loans", loansContainer);
+
+						}
+						intent.putExtras(bundle);
+						startActivity(intent);
+					}
+				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						// Do nothing.
 					}
 				}).create();
-		return builder.create();
-		//
-		// LayoutInflater factory = LayoutInflater.from(this);
-		// final View textEntryView =
-		// factory.inflate(R.layout.alert_dialog_text_entry, null);
-		// return new
-		// AlertDialog.Builder(AlertDialogSamples.this).setIcon(R.drawable.alert_dialog_icon)
-		// .setTitle(R.string.alert_dialog_text_entry).setView(textEntryView)
-		// .setPositiveButton(R.string.alert_dialog_ok, new
-		// DialogInterface.OnClickListener() {
-		// public void onClick(DialogInterface dialog, int whichButton) {
-		//
-		// /* User clicked OK so do some stuff */
-		// }
-		// }).create();
+
 	}
 }
