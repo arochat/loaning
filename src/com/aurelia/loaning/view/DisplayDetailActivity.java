@@ -16,6 +16,7 @@ import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.actionBar.DisplayDetailActionBarDelegate;
+import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 
 public class DisplayDetailActivity extends BaseActivity {
 
@@ -103,7 +104,7 @@ public class DisplayDetailActivity extends BaseActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent != null && Event.LOAN_MODIFIED.name().equals(intent.getAction())) {
-				Intent displayLoansIntent = new Intent(context, LoansOverviewActivity.class);
+				Intent displayLoansIntent = new Intent(context, StandardLoansOverviewActivity.class);
 				startActivity(displayLoansIntent);
 			}
 		}

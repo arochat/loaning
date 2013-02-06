@@ -11,6 +11,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.view.actionBar.AbstractActionBarDelegate;
+import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 import com.coboltforge.slidemenu.SlideMenu;
 import com.coboltforge.slidemenu.SlideMenuInterface.OnSlideMenuItemClickListener;
 
@@ -104,7 +105,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 	// -------------------------------------------------------------
 
 	protected void backToLoansOverview() {
-		Intent intent = new Intent(this, LoansOverviewActivity.class);
+		Intent intent = new Intent(this, StandardLoansOverviewActivity.class);
 		startActivity(intent);
 	}
 

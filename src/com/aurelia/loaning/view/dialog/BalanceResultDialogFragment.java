@@ -12,7 +12,7 @@ import android.support.v4.app.DialogFragment;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.LoanType;
 import com.aurelia.loaning.domain.MoneyLoan;
-import com.aurelia.loaning.view.FilteredLoansOverviewActivity;
+import com.aurelia.loaning.view.loansoverview.FilteredLoansOverviewActivity;
 
 public class BalanceResultDialogFragment extends DialogFragment {
 
@@ -32,7 +32,7 @@ public class BalanceResultDialogFragment extends DialogFragment {
 		// TODO
 		if (callingActivity instanceof FilteredLoansOverviewActivity) {
 			FilteredLoansOverviewActivity filteredLoansOverviewActivity = (FilteredLoansOverviewActivity) callingActivity;
-			List<AbstractLoan> loansToBalance = filteredLoansOverviewActivity.getFilteredLoans();
+			List<AbstractLoan> loansToBalance = filteredLoansOverviewActivity.getLoans();
 			String filter = filteredLoansOverviewActivity.getFilterString();
 			if (loansToBalance != null && !loansToBalance.isEmpty()) {
 				message = displayBalance(computeBalance(loansToBalance), "CHF", filter);

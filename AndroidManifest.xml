@@ -7,7 +7,7 @@
         android:label="@string/app_name"
         android:theme="@style/Sherlock.__Theme.DarkActionBar"
         android:debuggable="true">
-        <activity android:label="@string/app_name" android:name="com.aurelia.loaning.view.LoansOverviewActivity">
+        <activity android:label="@string/app_name" android:name="com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -18,7 +18,7 @@
         
         <activity android:name=".view.DisplayDetailActivity"/>
         
-        <activity android:name=".view.FilteredLoansOverviewActivity"/>
+        <activity android:name=".view.loansoverview.FilteredLoansOverviewActivity"/>
         
         <service android:name=".service.LoanFetcher"/>
         

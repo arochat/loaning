@@ -12,8 +12,8 @@ import android.widget.EditText;
 
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.LoansContainer;
-import com.aurelia.loaning.view.FilteredLoansOverviewActivity;
-import com.aurelia.loaning.view.LoansOverviewActivity;
+import com.aurelia.loaning.view.loansoverview.AbstractLoansOverviewActivity;
+import com.aurelia.loaning.view.loansoverview.FilteredLoansOverviewActivity;
 
 public class FilterLoansDialogFragment extends DialogFragment {
 
@@ -43,9 +43,9 @@ public class FilterLoansDialogFragment extends DialogFragment {
 						value.getChars(0, value.length(), filter, 0);
 						bundle.putSerializable("filter", filter);
 
-						if (callingActivity instanceof LoansOverviewActivity) {
+						if (callingActivity instanceof AbstractLoansOverviewActivity) {
 
-							LoansOverviewActivity loansOverviewActivity = (LoansOverviewActivity) callingActivity;
+							AbstractLoansOverviewActivity loansOverviewActivity = (AbstractLoansOverviewActivity) callingActivity;
 
 							LoansContainer loansContainer = new LoansContainer();
 							loansContainer.setLoans(loansOverviewActivity.getLoans());

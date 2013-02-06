@@ -1,14 +1,12 @@
 /**
  * 
  */
-package com.aurelia.loaning.view;
+package com.aurelia.loaning.view.loansoverview;
 
 import java.util.List;
 
 import android.os.Bundle;
-import android.widget.ListView;
 
-import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.LoansContainer;
 import com.aurelia.loaning.view.actionBar.FilteredLoansOverviewActionBarDelegate;
@@ -20,38 +18,22 @@ import com.google.common.collect.Lists;
  * @author aurelia
  * 
  */
-public class FilteredLoansOverviewActivity extends BaseActivity {
-
-	// TODO : make rows clickable, and allow to see the detail as in
-	// LoansOverviewActivity
+public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity {
 
 	private String filterString;
-	private ListView loansListView;
-	private List<AbstractLoan> loans;
-	private List<AbstractLoan> filteredLoans;
+	private List<AbstractLoan> allLoans;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
 		this.setActionBarDelegate(new FilteredLoansOverviewActionBarDelegate());
 		super.onCreate(bundle);
-		LoansContainer loansContainer = (LoansContainer) getIntent().getExtras().getSerializable("loans");
-		loans = loansContainer.getLoans();
-		char[] filter = (char[]) getIntent().getExtras().getSerializable("filter");
-		filterString = new String(filter);
-		filteredLoans = filterLoans(filterString);
-		setContentView(R.layout.loans_overview_activity);
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		loansListView = (ListView) findViewById(android.R.id.list);
-		loansListView.setAdapter(new LoansArrayAdapter(this, filteredLoans));
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		setUpDisplay();
+		handleClickEvent();
 	}
 
 	@Override
@@ -60,6 +42,16 @@ public class FilteredLoansOverviewActivity extends BaseActivity {
 	}
 
 	// loans handling ----------------------------------------------------------
+
+	@Override
+	public void setLoansToDisplay() {
+
+		LoansContainer loansContainer = (LoansContainer) getIntent().getExtras().getSerializable("loans");
+		allLoans = loansContainer.getLoans();
+		char[] filter = (char[]) getIntent().getExtras().getSerializable("filter");
+		filterString = new String(filter);
+		loans = filterLoans(filterString);
+	}
 
 	private List<AbstractLoan> filterLoans(final String filter) {
 
@@ -70,11 +62,7 @@ public class FilteredLoansOverviewActivity extends BaseActivity {
 			}
 		};
 
-		return Lists.newArrayList(Iterables.filter(this.loans, shouldBeDisplayed));
-	}
-
-	public List<AbstractLoan> getFilteredLoans() {
-		return filteredLoans;
+		return Lists.newArrayList(Iterables.filter(this.allLoans, shouldBeDisplayed));
 	}
 
 	public String getFilterString() {

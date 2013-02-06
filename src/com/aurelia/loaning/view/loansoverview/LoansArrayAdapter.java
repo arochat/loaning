@@ -1,4 +1,4 @@
-package com.aurelia.loaning.view;
+package com.aurelia.loaning.view.loansoverview;
 
 import java.util.List;
 
