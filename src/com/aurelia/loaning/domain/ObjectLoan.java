@@ -4,8 +4,11 @@ import org.joda.time.DateTime;
 
 public class ObjectLoan extends AbstractLoan {
 
-	public ObjectLoan(String person, DateTime startDate, DateTime notificationDate, boolean isContact, LoanType type) {
-		super(person, startDate, notificationDate, isContact, type);
+	private static final long serialVersionUID = -2604534372757109360L;
+
+	public ObjectLoan(String person, DateTime startDate, DateTime notificationDate, boolean isContact, LoanType type,
+			LoanStatus status) {
+		super(person, startDate, notificationDate, isContact, type, status);
 	}
 
 	private String objectDefinition;

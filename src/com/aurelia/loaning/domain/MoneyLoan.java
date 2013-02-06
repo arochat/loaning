@@ -14,8 +14,9 @@ public class MoneyLoan extends AbstractLoan {
 				.append(this.reason).toString();
 	}
 
-	public MoneyLoan(String person, DateTime startDate, DateTime notificationDate, boolean isContact, LoanType type) {
-		super(person, startDate, notificationDate, isContact, type);
+	public MoneyLoan(String person, DateTime startDate, DateTime notificationDate, boolean isContact, LoanType type,
+			LoanStatus status) {
+		super(person, startDate, notificationDate, isContact, type, status);
 	}
 
 	public double getAmount() {

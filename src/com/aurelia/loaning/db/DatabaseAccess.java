@@ -117,6 +117,21 @@ public class DatabaseAccess {
 		return Collections.EMPTY_LIST;
 	}
 
+	public List<Object> select(Class entity, String whereClause) {
+		List<String> columns = tablePreparator.getColumnNames(entity);
+		String tableName = tablePreparator.getTableName(entity);
+		String[] columnNames = new String[columns.size()];
+		Cursor cursor = db
+				.query(tableName, columns.toArray(columnNames), whereClause, null, null, null, "end_date ASC");
+		try {
+			return cursorToObjects(cursor, entity);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Collections.EMPTY_LIST;
+	}
+
 	private List<Object> cursorToObjects(Cursor c, Class entity) throws IllegalArgumentException,
 			InstantiationException, IllegalAccessException, InvocationTargetException, SecurityException,
 			NoSuchFieldException {
@@ -176,6 +191,9 @@ public class DatabaseAccess {
 
 					} else if (field.getType().equals(Long.class)) {
 						method.invoke(myObject, c.getLong(c.getColumnIndex(columnName)));
+
+					} else if (field.getType().equals(Integer.class)) {
+						method.invoke(myObject, c.getInt(c.getColumnIndex(columnName)));
 
 					} else {
 						// TODO error

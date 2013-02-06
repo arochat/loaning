@@ -22,6 +22,7 @@ public class LoanDatabaseSQLite extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+
 		TableDeclarationPreparator tablePreparator = new TableDeclarationPreparator(new ClasspathScanner());
 		List<String> tableDeclarations;
 		try {

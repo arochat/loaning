@@ -2,6 +2,7 @@ package com.aurelia.loaning.domain;
 
 import org.joda.time.DateTime;
 
+import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.view.AbstractLoanFromUI;
 import com.aurelia.loaning.view.MoneyLoanFromUI;
 import com.aurelia.loaning.view.ObjectLoanFromUI;
@@ -25,7 +26,7 @@ public class LoanFactory {
 			// fallthrough
 		case MONEY_BORROWING:
 			MoneyLoanFromUI moneyLoanFromUI = (MoneyLoanFromUI) loanFromUI;
-			moneyLoan = new MoneyLoan(person, startDate, notificationDate, isContact, loanType);
+			moneyLoan = new MoneyLoan(person, startDate, notificationDate, isContact, loanType, LoanStatus.ACTIVE);
 			moneyLoan.setAmount(Double.valueOf(moneyLoanFromUI.getAmountFromUI().getText().toString()));
 			moneyLoan.setCurrency(moneyLoanFromUI.getCurrencyFromUI().getText().toString());
 			moneyLoan.setReason(moneyLoanFromUI.getReasonFromUI().getText().toString());
@@ -35,7 +36,7 @@ public class LoanFactory {
 			// fallthrough
 		case OBJECT_BORROWING:
 			ObjectLoanFromUI objectLoanFromUI = (ObjectLoanFromUI) loanFromUI;
-			objectLoan = new ObjectLoan(person, startDate, notificationDate, isContact, loanType);
+			objectLoan = new ObjectLoan(person, startDate, notificationDate, isContact, loanType, LoanStatus.ACTIVE);
 			objectLoan.setObjectDefinition(objectLoanFromUI.getObjectDefinitionFromUI().getText().toString());
 			return objectLoan;
 

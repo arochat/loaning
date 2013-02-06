@@ -48,6 +48,10 @@ public class LoanDatabaseAccess {
 		return databaseAccess.read(Loan.class);
 	}
 
+	public List<Object> selectLoansWithStatus(int status) {
+		return databaseAccess.select(Loan.class, "status=" + status);
+	}
+
 	public void removeAll() {
 		databaseAccess.removeAll(new Loan());
 	}
@@ -56,4 +60,17 @@ public class LoanDatabaseAccess {
 		String idName = databaseAccess.getTablePreparator().getIdColumnName(loan.getClass());
 		return databaseAccess.delete(loan, idName + "=?", new String[] { loan.getId().toString() });
 	}
+
+	// tmp hack to update all status to ACTIVE
+	// public void update(Loan loan) {
+
+	// tmp hack to add column 'STATUS'
+	// String alterTable1 = "ALTER TABLE LOAN ADD status INTEGER;";
+	// getDb().execSQL(alterTable1);
+
+	// filling the new column
+	// ContentValues contentValues = new ContentValues();
+	// contentValues.put("STATUS", LoanStatus.ACTIVE.getValue());
+	// databaseAccess.update(loan, contentValues, null, null);
+	// }
 }

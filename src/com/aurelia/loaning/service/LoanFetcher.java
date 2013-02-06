@@ -12,6 +12,7 @@ import android.os.IBinder;
 import com.aurelia.loaning.db.LoanDatabaseAccess;
 import com.aurelia.loaning.db.entity.Loan;
 import com.aurelia.loaning.domain.AbstractLoan;
+import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.domain.EntityToDomainConverter;
 import com.aurelia.loaning.domain.LoansContainer;
 import com.aurelia.loaning.event.Event;
@@ -39,12 +40,13 @@ public class LoanFetcher extends IntentService {
 			converter = new EntityToDomainConverter();
 		}
 
-		// go fetch loans in database
+		// go fetch active loans in database
 		if (databaseAccess == null) {
 			databaseAccess = new LoanDatabaseAccess(this);
 		}
 		databaseAccess.open();
-		List<Loan> loansFromDB = LoanUtil.convert(databaseAccess.selectAllLoans());
+		List<Loan> loansFromDB = LoanUtil.convert(databaseAccess.selectLoansWithStatus(LoanStatus.ACTIVE.getValue()));
+
 		databaseAccess.close();
 
 		// send loans to the view

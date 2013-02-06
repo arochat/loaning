@@ -44,9 +44,6 @@ public class TableDeclarationPreparator {
 		return idColumnName;
 	}
 
-	// public <T> Map<String, Object> getEntityContent(Class<T> entity, T
-	// filledObject) throws IllegalArgumentException,
-	// SecurityException, IllegalAccessException, NoSuchFieldException {
 	public <T> Map<String, Object> getEntityContent(Class entity, T filledObject) throws IllegalArgumentException,
 			SecurityException, IllegalAccessException, NoSuchFieldException {
 		Map<String, Object> objectContent = new HashMap<String, Object>();
@@ -54,8 +51,8 @@ public class TableDeclarationPreparator {
 		for (Field field : annotatedFields) {
 			Annotation annotationOnField = field.getAnnotation(Column.class);
 			if (annotationOnField instanceof Column) {
-				objectContent.put(((Column) annotationOnField).name(), filledObject.getClass().getField(field.getName())
-						.get(filledObject));
+				objectContent.put(((Column) annotationOnField).name(), filledObject.getClass()
+						.getField(field.getName()).get(filledObject));
 			}
 		}
 		return objectContent;

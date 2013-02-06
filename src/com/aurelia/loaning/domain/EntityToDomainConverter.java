@@ -1,6 +1,7 @@
 package com.aurelia.loaning.domain;
 
 import com.aurelia.loaning.db.entity.Loan;
+import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 
 public class EntityToDomainConverter {
 
@@ -9,34 +10,35 @@ public class EntityToDomainConverter {
 	public AbstractLoan convert(Loan loanEntity) {
 
 		LoanType loanType = LoanType.valueOf(loanEntity.getType());
+		LoanStatus status = LoanStatus.getLoanStatus(loanEntity.getStatus());
 		MoneyLoan moneyLoan = null;
 		ObjectLoan objectLoan = null;
 
 		switch (loanType) {
 		case MONEY_LOAN:
 			moneyLoan = new MoneyLoan(loanEntity.getDestination(), loanEntity.getStartDate(), loanEntity.getEndDate(),
-					false, loanType);
+					false, loanType, status);
 			moneyLoan.setId(loanEntity.getId());
 			setSpecificMoneyLoanData(moneyLoan, loanEntity);
 			return moneyLoan;
 
 		case MONEY_BORROWING:
 			moneyLoan = new MoneyLoan(loanEntity.getSource(), loanEntity.getStartDate(), loanEntity.getEndDate(),
-					false, loanType);
+					false, loanType, status);
 			moneyLoan.setId(loanEntity.getId());
 			setSpecificMoneyLoanData(moneyLoan, loanEntity);
 			return moneyLoan;
 
 		case OBJECT_LOAN:
 			objectLoan = new ObjectLoan(loanEntity.getDestination(), loanEntity.getStartDate(),
-					loanEntity.getEndDate(), false, loanType);
+					loanEntity.getEndDate(), false, loanType, status);
 			objectLoan.setId(loanEntity.getId());
 			setSpecificObjectLoanData(objectLoan, loanEntity);
 			return objectLoan;
 
 		case OBJECT_BORROWING:
 			objectLoan = new ObjectLoan(loanEntity.getSource(), loanEntity.getStartDate(), loanEntity.getEndDate(),
-					false, loanType);
+					false, loanType, status);
 			objectLoan.setId(loanEntity.getId());
 			setSpecificObjectLoanData(objectLoan, loanEntity);
 			return objectLoan;

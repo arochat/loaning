@@ -10,7 +10,7 @@ import com.aurelia.loaning.db.annotation.Table;
 @Table(name = "LOAN")
 public class Loan implements Serializable {
 
-	// TODO : try to get rid of the followin constraints
+	// TODO : try to get rid of the following constraints
 
 	// public because of ClasspathScanner needs to access the fields in
 	// findAnnotatedFields
@@ -41,12 +41,15 @@ public class Loan implements Serializable {
 	@Column(name = "description", type = "text")
 	public String description;
 
+	@Column(name = "STATUS", type = "integer")
+	public Integer status;
+
 	public Loan() {
 		super();
 	}
 
 	public Loan(String source, String destination, DateTime starteDate, DateTime endDate, boolean isContact,
-			String type, String description) {
+			String type, String description, Integer status) {
 		super();
 		this.source = source;
 		this.destination = destination;
@@ -55,6 +58,7 @@ public class Loan implements Serializable {
 		this.isContact = isContact;
 		this.type = type;
 		this.description = description;
+		this.status = status;
 	}
 
 	public void setSource(String source) {
@@ -121,10 +125,19 @@ public class Loan implements Serializable {
 		return description;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "Loan [source=" + source + ", destination=" + destination + ", starteDate=" + startDate + ", endDate="
-				+ endDate + ", isContact=" + isContact + ", type=" + type + ", description=" + description + "]";
+				+ endDate + ", status" + status + ", isContact=" + isContact + ", type=" + type + ", description="
+				+ description + "]";
 	}
 
 }
