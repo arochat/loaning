@@ -89,6 +89,15 @@ public class DisplayDetailActivity extends BaseActivity {
 		startService(intent);
 	}
 
+	public void settleLoan(View view) {
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(Event.SETTLE_LOAN.name(), this.displayedLoan);
+		Intent intent = new Intent(this, LoanSaver.class);
+		intent.setAction(Event.SETTLE_LOAN.name());
+		intent.putExtras(bundle);
+		startService(intent);
+	}
+
 	private class ViewHolder {
 
 		TextView object;

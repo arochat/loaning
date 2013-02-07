@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -59,6 +60,12 @@ public class LoanDatabaseAccess {
 	public long delete(Loan loan) {
 		String idName = databaseAccess.getTablePreparator().getIdColumnName(loan.getClass());
 		return databaseAccess.delete(loan, idName + "=?", new String[] { loan.getId().toString() });
+	}
+
+	public int updateStatus(Loan loan, int newStatus) {
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("STATUS", newStatus);
+		return databaseAccess.update(loan, contentValues, "loan_id=" + loan.getId(), null);
 	}
 
 	// tmp hack to update all status to ACTIVE

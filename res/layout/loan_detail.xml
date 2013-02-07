@@ -12,27 +12,6 @@ android:layout_width="fill_parent"
 android:layout_height="wrap_content"
 />
 
-<!-- <Button -->
-<!--     android:id="@+id/button1" -->
-<!--     style="?android:attr/buttonStyleSmall" -->
-<!--     android:layout_width="wrap_content" -->
-<!--     android:layout_height="wrap_content" -->
-<!--     android:layout_alignParentBottom="true" -->
-<!--     android:layout_marginBottom="44dp" -->
-<!--     android:layout_toRightOf="@+id/textView4" -->
-<!--     android:text="@string/settle_button" /> -->
-
-<Button
-    android:id="@+id/button_delete_loan"
-    style="?android:attr/buttonStyleSmall"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_marginRight="48dp"
-    android:layout_marginTop="20dp"
-    android:text="@string/delete_button"
-    android:onClick="deleteLoan"/>
-
 <TextView
     android:id="@+id/loan_creation_date"
     android:layout_width="wrap_content"
@@ -69,5 +48,26 @@ android:layout_height="wrap_content"
     android:layout_below="@+id/loan_creation_date"
     android:text="@string/from_label"
     android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<Button
+    android:id="@+id/button_delete_loan"
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/item_object"
+    android:layout_marginRight="33dp"
+    android:onClick="deleteLoan"
+    android:text="@string/delete_button" />
+
+<Button
+    android:id="@+id/button_settle_loan"
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/object_of_loan"
+    android:layout_toLeftOf="@+id/button_delete_loan"
+    android:onClick="settleLoan"
+    android:text="@string/settle_button" />
 
 </RelativeLayout>

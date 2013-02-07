@@ -11,6 +11,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.view.actionBar.AbstractActionBarDelegate;
+import com.aurelia.loaning.view.loansoverview.LoansHistoryActivity;
 import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 import com.coboltforge.slidemenu.SlideMenu;
 import com.coboltforge.slidemenu.SlideMenuInterface.OnSlideMenuItemClickListener;
@@ -38,7 +39,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 			backToLoansOverview();
 			break;
 		case R.id.item_two:
-			Toast.makeText(this, "Item two selected", Toast.LENGTH_SHORT).show();
+			backToLoansHistory();
 			break;
 		case R.id.item_three:
 			Toast.makeText(this, "Item three selected", Toast.LENGTH_SHORT).show();
@@ -106,6 +107,11 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
 	protected void backToLoansOverview() {
 		Intent intent = new Intent(this, StandardLoansOverviewActivity.class);
+		startActivity(intent);
+	}
+
+	private void backToLoansHistory() {
+		Intent intent = new Intent(this, LoansHistoryActivity.class);
 		startActivity(intent);
 	}
 

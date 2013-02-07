@@ -44,15 +44,55 @@ public class LoanFetcher extends IntentService {
 		if (databaseAccess == null) {
 			databaseAccess = new LoanDatabaseAccess(this);
 		}
+		Intent intentToSend;
+		if (LoanStatus.SETTLED.name().equals(intent.getStringExtra("status"))) {
+			intentToSend = fetchLoans(LoanStatus.SETTLED, Event.SHOW_LOANINGS_HISTORY);
+		} else {
+			intentToSend = fetchLoans(LoanStatus.ACTIVE, Event.SHOW_LOANINGS);
+		}
+		sendBroadcast(intentToSend);
+
+		// databaseAccess.open();
+		// List<Loan> loansFromDB =
+		// LoanUtil.convert(databaseAccess.selectLoansWithStatus(LoanStatus.ACTIVE.getValue()));
+		//
+		// databaseAccess.close();
+		//
+		// // send loans to the view
+		// Bundle loadedLoansBundle = new Bundle();
+		// List<AbstractLoan> loans = new ArrayList<AbstractLoan>();
+		// Intent loadedLoansFeedback = new Intent(Event.SHOW_LOANINGS.name());
+		//
+		// if (loansFromDB != null &&
+		// !Collections.EMPTY_LIST.equals(loansFromDB)) {
+		// for (Loan loanFromDB : loansFromDB) {
+		// loans.add(converter.convert(loanFromDB));
+		// }
+		// LoansContainer transactionContainer = new LoansContainer();
+		// transactionContainer.setLoans(loans);
+		// loadedLoansBundle.putSerializable(Event.SHOW_LOANINGS.name(),
+		// transactionContainer);
+		// }
+		//
+		// loadedLoansFeedback.putExtras(loadedLoansBundle);
+		// sendBroadcast(loadedLoansFeedback);
+
+		// We want this service to continue running until it is explicitly
+		// stopped, so return sticky.
+		return START_STICKY;
+		// TODO : what do we need to return here?
+	}
+
+	private Intent fetchLoans(LoanStatus loanStatus, Event event) {
 		databaseAccess.open();
-		List<Loan> loansFromDB = LoanUtil.convert(databaseAccess.selectLoansWithStatus(LoanStatus.ACTIVE.getValue()));
+		List<Loan> loansFromDB = LoanUtil.convert(databaseAccess.selectLoansWithStatus(loanStatus.getValue()));
 
 		databaseAccess.close();
 
 		// send loans to the view
 		Bundle loadedLoansBundle = new Bundle();
 		List<AbstractLoan> loans = new ArrayList<AbstractLoan>();
-		Intent loadedLoansFeedback = new Intent(Event.SHOW_LOANINGS.name());
+		Intent loadedLoansFeedback = new Intent(event.name());
 
 		if (loansFromDB != null && !Collections.EMPTY_LIST.equals(loansFromDB)) {
 			for (Loan loanFromDB : loansFromDB) {
@@ -60,16 +100,11 @@ public class LoanFetcher extends IntentService {
 			}
 			LoansContainer transactionContainer = new LoansContainer();
 			transactionContainer.setLoans(loans);
-			loadedLoansBundle.putSerializable(Event.SHOW_LOANINGS.name(), transactionContainer);
+			loadedLoansBundle.putSerializable(event.name(), transactionContainer);
 		}
 
 		loadedLoansFeedback.putExtras(loadedLoansBundle);
-		sendBroadcast(loadedLoansFeedback);
-
-		// We want this service to continue running until it is explicitly
-		// stopped, so return sticky.
-		return START_STICKY;
-		// TODO : what do we need to return here?
+		return loadedLoansFeedback;
 	}
 
 	@Override

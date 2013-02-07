@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.aurelia.loaning.db.LoanDatabaseAccess;
 import com.aurelia.loaning.domain.AbstractLoan;
+import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.domain.DomainToEntityConverter;
 import com.aurelia.loaning.event.Event;
 
@@ -38,6 +39,8 @@ public class LoanSaver extends IntentService {
 			dbResult = saveLoan(loan);
 		} else if (Event.DELETE_LOAN.name().equals(intent.getAction())) {
 			dbResult = deleteLoan(loan);
+		} else if (Event.SETTLE_LOAN.name().equals(intent.getAction())) {
+			dbResult = settleLoan(loan);
 		}
 
 		if (dbResult != -1) {
@@ -63,6 +66,11 @@ public class LoanSaver extends IntentService {
 	private long deleteLoan(Bundle loanToDelete) {
 		AbstractLoan loan = (AbstractLoan) loanToDelete.getSerializable(Event.DELETE_LOAN.name());
 		return databaseAccess.delete(converter.convert(loan));
+	}
+
+	private int settleLoan(Bundle loanToSettle) {
+		AbstractLoan loan = (AbstractLoan) loanToSettle.getSerializable(Event.SETTLE_LOAN.name());
+		return databaseAccess.updateStatus(converter.convert(loan), LoanStatus.SETTLED.getValue());
 	}
 
 }

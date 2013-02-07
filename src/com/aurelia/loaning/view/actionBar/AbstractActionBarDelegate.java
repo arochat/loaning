@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.aurelia.loaning.view.loansoverview.AbstractLoansOverviewActivity;
+import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 
 public abstract class AbstractActionBarDelegate {
 
@@ -17,7 +17,7 @@ public abstract class AbstractActionBarDelegate {
 
 	// TODO : correct to have it here?
 	protected void backToLoansOverview(Activity activity) {
-		Intent intent = new Intent(activity, AbstractLoansOverviewActivity.class);
+		Intent intent = new Intent(activity, StandardLoansOverviewActivity.class);
 		activity.startActivity(intent);
 	}
 }

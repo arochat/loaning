@@ -20,6 +20,8 @@
         
         <activity android:name=".view.loansoverview.FilteredLoansOverviewActivity"/>
         
+        <activity android:name=".view.loansoverview.LoansHistoryActivity"/>
+        
         <service android:name=".service.LoanFetcher"/>
         
         <service android:name=".service.LoanSaver"/>
