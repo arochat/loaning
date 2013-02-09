@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.aurelia.loaning.R;
@@ -80,7 +79,7 @@ public class DisplayDetailActivity extends BaseActivity {
 		unregisterReceiver(dbFeedbackReceiver);
 	}
 
-	public void deleteLoan(View view) {
+	public void deleteLoan() {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(Event.DELETE_LOAN.name(), this.displayedLoan);
 		Intent intent = new Intent(this, LoanSaver.class);
@@ -89,7 +88,7 @@ public class DisplayDetailActivity extends BaseActivity {
 		startService(intent);
 	}
 
-	public void settleLoan(View view) {
+	public void settleLoan() {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(Event.SETTLE_LOAN.name(), this.displayedLoan);
 		Intent intent = new Intent(this, LoanSaver.class);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.LoansContainer;
+import com.aurelia.loaning.view.actionBar.FilteredLoansHistoryActionBarDelegate;
 import com.aurelia.loaning.view.actionBar.FilteredLoansOverviewActionBarDelegate;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -25,7 +26,12 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 
 	@Override
 	protected void onCreate(Bundle bundle) {
-		this.setActionBarDelegate(new FilteredLoansOverviewActionBarDelegate());
+
+		if (getIntent().getExtras().getSerializable("callingActivity").equals(LoansHistoryActivity.class.getName())) {
+			this.setActionBarDelegate(new FilteredLoansHistoryActionBarDelegate());
+		} else {
+			this.setActionBarDelegate(new FilteredLoansOverviewActionBarDelegate());
+		}
 		super.onCreate(bundle);
 	}
 

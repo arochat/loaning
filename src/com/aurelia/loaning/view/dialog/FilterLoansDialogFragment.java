@@ -50,6 +50,7 @@ public class FilterLoansDialogFragment extends DialogFragment {
 							LoansContainer loansContainer = new LoansContainer();
 							loansContainer.setLoans(loansOverviewActivity.getLoans());
 							bundle.putSerializable("loans", loansContainer);
+							bundle.putString("callingActivity", callingActivity.getClass().getName());
 
 						}
 						intent.putExtras(bundle);
