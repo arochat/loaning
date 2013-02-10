@@ -38,7 +38,8 @@
     <!-- left nav menu -->
     <string name="item_one">Loans overview</string>
     <string name="item_two">Loans history</string>
-    <string name="item_three">Common pot</string>
-    <string name="item_four">Settings</string>
+    <string name="item_three">Add loan</string>
+    <string name="item_four">Common pot</string>
+    <string name="item_five">Settings</string>
     
 </resources>

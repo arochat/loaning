@@ -13,7 +13,7 @@ import com.aurelia.loaning.domain.LoanFactory;
 import com.aurelia.loaning.domain.LoanType;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
-import com.aurelia.loaning.view.actionBar.AddLoanActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.delegate.AddLoanActionBarDelegate;
 import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
 import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 

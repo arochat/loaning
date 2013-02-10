@@ -17,7 +17,7 @@ import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.domain.LoansContainer;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanFetcher;
-import com.aurelia.loaning.view.actionBar.LoansHistoryActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.delegate.LoansHistoryActionBarDelegate;
 
 /**
  * @author aurelia

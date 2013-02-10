@@ -1,4 +1,4 @@
-package com.aurelia.loaning.view.actionBar;
+package com.aurelia.loaning.view.actionBar.delegate;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.TabListener;

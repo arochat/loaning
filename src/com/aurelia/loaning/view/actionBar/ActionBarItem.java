@@ -3,23 +3,28 @@ package com.aurelia.loaning.view.actionBar;
 import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.aurelia.loaning.view.actionBar.action.ActionBarAction;
 
-public abstract class ActionBarItem {
+public class ActionBarItem {
 
-	String label;
-	String title;
-	int icon;
-	boolean highlight;
+	private String label;
+	private String title;
+	private int icon;
+	private boolean highlight;
+	private ActionBarAction action;
 
-	public ActionBarItem(String label, String title, int icon, boolean highlight) {
+	public ActionBarItem(String label, String title, int icon, boolean highlight, ActionBarAction action) {
 		super();
 		this.label = label;
 		this.title = title;
 		this.icon = icon;
 		this.highlight = highlight;
+		this.action = action;
 	}
 
-	abstract public void action(FragmentTransaction ft, SherlockFragmentActivity activity);
+	public void action(FragmentTransaction ft, SherlockFragmentActivity activity) {
+		action.performAction(ft, activity);
+	}
 
 	public String getLabel() {
 		return label;
@@ -35,6 +40,10 @@ public abstract class ActionBarItem {
 
 	public boolean getHighlight() {
 		return highlight;
+	}
+
+	public ActionBarAction getAction() {
+		return action;
 	}
 
 }

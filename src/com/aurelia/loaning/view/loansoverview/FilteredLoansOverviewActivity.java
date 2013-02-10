@@ -9,8 +9,8 @@ import android.os.Bundle;
 
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.LoansContainer;
-import com.aurelia.loaning.view.actionBar.FilteredLoansHistoryActionBarDelegate;
-import com.aurelia.loaning.view.actionBar.FilteredLoansOverviewActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.delegate.FilteredLoansHistoryActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.delegate.FilteredLoansOverviewActionBarDelegate;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;

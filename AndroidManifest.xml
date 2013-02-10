@@ -7,20 +7,26 @@
         android:label="@string/app_name"
         android:theme="@style/Sherlock.__Theme.DarkActionBar"
         android:debuggable="true">
-        <activity android:label="@string/app_name" android:name="com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity">
+        <activity android:label="@string/app_name"
+            android:name="com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity"
+            android:icon="@drawable/icon_overview_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         
-        <activity android:name=".view.AddLoanActivity"/>
+        <activity android:name=".view.AddLoanActivity"
+                  android:icon="@drawable/icon_add"/>
         
-        <activity android:name=".view.DisplayDetailActivity"/>
+        <activity android:name=".view.DisplayDetailActivity"
+                  android:icon="@drawable/icon_overview_list"/>
         
-        <activity android:name=".view.loansoverview.FilteredLoansOverviewActivity"/>
+        <activity android:name=".view.loansoverview.FilteredLoansOverviewActivity"
+                  android:icon="@drawable/icon_overview_list"/>
         
-        <activity android:name=".view.loansoverview.LoansHistoryActivity"/>
+        <activity android:name=".view.loansoverview.LoansHistoryActivity"
+                  android:icon="@drawable/icon_history"/>
         
         <service android:name=".service.LoanFetcher"/>
         

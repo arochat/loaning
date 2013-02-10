@@ -3,23 +3,28 @@
 
     <item
         android:id="@+id/item_one"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon_overview_list"
         android:title="@string/item_one">
     </item>
     <item
         android:id="@+id/item_two"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon_history"
         android:title="@string/item_two">
     </item>
     <item
         android:id="@+id/item_three"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon_add"
         android:title="@string/item_three">
     </item>
     <item
         android:id="@+id/item_four"
         android:icon="@drawable/ic_launcher"
         android:title="@string/item_four">
+    </item>
+     <item
+        android:id="@+id/item_five"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/item_five">
     </item>
     
 </menu>

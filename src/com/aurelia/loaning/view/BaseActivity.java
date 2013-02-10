@@ -10,7 +10,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.aurelia.loaning.R;
-import com.aurelia.loaning.view.actionBar.AbstractActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.delegate.AbstractActionBarDelegate;
 import com.aurelia.loaning.view.loansoverview.LoansHistoryActivity;
 import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 import com.coboltforge.slidemenu.SlideMenu;
