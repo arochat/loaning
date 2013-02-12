@@ -9,8 +9,8 @@ import com.aurelia.loaning.view.dialog.FilterLoansDialogFragment;
 public class FilterLoansAction implements ActionBarAction {
 
 	@Override
-	public void performAction(FragmentTransaction ft, SherlockFragmentActivity activity) {
-		ft = activity.getSupportFragmentManager().beginTransaction();
+	public void performAction(/* FragmentTransaction ft, */SherlockFragmentActivity activity) {
+		FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
 		Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
 		if (prev != null) {
 			ft.remove(prev);

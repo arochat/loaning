@@ -9,9 +9,9 @@ import com.aurelia.loaning.view.dialog.BalanceResultDialogFragment;
 public class ComputeBalanceAction implements ActionBarAction {
 
 	@Override
-	public void performAction(FragmentTransaction ft, SherlockFragmentActivity activity) {
+	public void performAction(/* FragmentTransaction ft, */SherlockFragmentActivity activity) {
 
-		ft = activity.getSupportFragmentManager().beginTransaction();
+		FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
 		Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
 		if (prev != null) {
 			ft.remove(prev);

@@ -4,9 +4,11 @@ import java.util.HashMap;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.view.Menu;
 import com.aurelia.loaning.R;
-import com.aurelia.loaning.view.actionBar.ActionBarBuilder;
 import com.aurelia.loaning.view.actionBar.ActionBarItem;
+import com.aurelia.loaning.view.actionBar.OptionsMenuActionBarBuilder;
+import com.aurelia.loaning.view.actionBar.TabsActionBarBuilder;
 import com.aurelia.loaning.view.actionBar.action.CopyLoanAction;
 import com.aurelia.loaning.view.actionBar.action.DeleteLoanAction;
 import com.aurelia.loaning.view.actionBar.action.EditLoanAction;
@@ -26,6 +28,22 @@ public class DisplayDetailActionBarDelegate extends AbstractActionBarDelegate {
 		actionBarDefinition.put(3, new ActionBarItem("DELETE", "", R.drawable.icon_delete, false,
 				new DeleteLoanAction()));
 
-		return new ActionBarBuilder(actionBarDefinition, tabListener, actionBar).build();
+		return new TabsActionBarBuilder(actionBarDefinition, tabListener, actionBar).build();
+	}
+
+	@Override
+	public Menu setupActionBar(Menu menu) {
+
+		actionBarDefinition = new HashMap<Integer, ActionBarItem>();
+
+		actionBarDefinition.put(0, new ActionBarItem("COPY", "", R.drawable.icon_copy, false, new CopyLoanAction()));
+		actionBarDefinition.put(1, new ActionBarItem("EDIT", "", R.drawable.icon_edit, false, new EditLoanAction()));
+		actionBarDefinition.put(2, new ActionBarItem("SETTLE", "", R.drawable.icon_settle, false,
+				new SettleLoanAction()));
+		actionBarDefinition.put(3, new ActionBarItem("DELETE", "", R.drawable.icon_delete, false,
+				new DeleteLoanAction()));
+
+		return new OptionsMenuActionBarBuilder().withActionBarDefinition(actionBarDefinition).withMenu(menu).build();
+
 	}
 }

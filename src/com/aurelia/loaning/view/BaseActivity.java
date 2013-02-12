@@ -8,6 +8,8 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.view.actionBar.delegate.AbstractActionBarDelegate;
@@ -25,8 +27,16 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		setupActionBar();
+		// setupActionBar();
 		setSlideMenu();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		setupActionBarMenu(menu);
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.activity_main, menu);
+		return true;
 	}
 
 	// slide menu ----------------------------------------------
@@ -53,6 +63,8 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 		case android.R.id.home: // this is the app icon of the actionbar
 			slideMenu.show();
 			break;
+		default:
+			actionBarDelegate.handleActions(item, this);
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -76,11 +88,25 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 		actionBarDelegate.handleActions(tab, ft, this);
 	}
 
-	protected void setupActionBar() {
+	// ------------------------------------------------------------------------
+
+	protected void setupActionBarMenu(Menu menu) {
 
 		final ActionBar ab = createActionBar();
+
 		// setup tabs nav
-		actionBarDelegate.setupActionBar(ab, this);
+		actionBarDelegate.setupActionBar(menu);
+
+		// default to tab navigation
+		// showTabsNav();
+	}
+
+	protected void setupActionBar() {
+
+		final ActionBar actionBar = createActionBar();
+
+		// setup tabs nav
+		actionBarDelegate.setupActionBar(actionBar, this);
 
 		// default to tab navigation
 		showTabsNav();

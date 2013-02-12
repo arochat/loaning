@@ -9,7 +9,7 @@ import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
 public class AddLoanAction implements ActionBarAction {
 
 	@Override
-	public void performAction(FragmentTransaction ft, SherlockFragmentActivity activity) {
+	public void performAction(/* FragmentTransaction ft, */SherlockFragmentActivity activity) {
 		// TODO : completely handle fragments
 		// stack as in
 		// http://www.edumobile.org/android/android-development/fragment-example-in-android/
@@ -19,7 +19,7 @@ public class AddLoanAction implements ActionBarAction {
 		// showing
 		// dialog, so make our own transaction and take care of that
 		// here.
-		ft = activity.getSupportFragmentManager().beginTransaction();
+		FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
 		Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
 		if (prev != null) {
 			ft.remove(prev);
