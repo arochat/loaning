@@ -13,7 +13,7 @@ import com.aurelia.loaning.view.actionBar.ActionBarItem;
 
 public abstract class AbstractActionBarDelegate {
 
-	protected Map<Integer, ActionBarItem> actionBarDefinition;
+	protected Map<String, ActionBarItem> actionBarDefinition;
 
 	abstract public ActionBar setupActionBar(ActionBar actionBar, ActionBar.TabListener tabListener);
 
@@ -25,7 +25,9 @@ public abstract class AbstractActionBarDelegate {
 	}
 
 	public void handleActions(MenuItem menuItem, SherlockFragmentActivity activity) {
-		ActionBarItem actionBarItem = (ActionBarItem) actionBarDefinition.get(menuItem.getItemId());
+		// ActionBarItem actionBarItem = (ActionBarItem)
+		// actionBarDefinition.get(menuItem.getItemId());
+		ActionBarItem actionBarItem = (ActionBarItem) actionBarDefinition.get(menuItem.getTitle());
 		actionBarItem.action(activity);
 	}
 }

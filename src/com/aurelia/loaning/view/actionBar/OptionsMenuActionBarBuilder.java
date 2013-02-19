@@ -11,7 +11,8 @@ import com.actionbarsherlock.view.MenuItem;
 public class OptionsMenuActionBarBuilder implements ActionBarBuilder {
 
 	private Menu menu;
-	private Map<Integer, ActionBarItem> actionBarDefinition;
+	private Map<String, ActionBarItem> actionBarDefinition;
+	private final int groupId = 1;
 
 	public OptionsMenuActionBarBuilder() {
 	}
@@ -21,7 +22,7 @@ public class OptionsMenuActionBarBuilder implements ActionBarBuilder {
 		return this;
 	}
 
-	public OptionsMenuActionBarBuilder withActionBarDefinition(Map<Integer, ActionBarItem> actionBarDefinition) {
+	public OptionsMenuActionBarBuilder withActionBarDefinition(Map<String, ActionBarItem> actionBarDefinition) {
 		this.actionBarDefinition = actionBarDefinition;
 		return this;
 	}
@@ -29,28 +30,25 @@ public class OptionsMenuActionBarBuilder implements ActionBarBuilder {
 	public Menu build() {
 		Assert.assertNotNull(menu);
 		Assert.assertNotNull(actionBarDefinition);
-		// menu.add("Save").setIcon(R.drawable.ic_compose).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 		ActionBarItem item;
 
-		for (Entry<Integer, ActionBarItem> entry : actionBarDefinition.entrySet()) {
+		for (Entry<String, ActionBarItem> entry : actionBarDefinition.entrySet()) {
 
 			item = entry.getValue();
-
 			if (item.getIcon() != 0) {
-				menu.add(item.getTitle()).setIcon(item.getIcon()).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
-				// actionBar
-				// .addTab(actionBar.newTab().setText(item.getTitle()).setIcon(item.getIcon())
-				// .setTabListener(tabListener), entry.getKey(),
-				// item.getHighlight());
+				// menuItem = menu.add(groupId, entry.getKey(), entry.getKey(),
+				// item.getTitle());
+				// menuItem.setIcon(item.getIcon());
+				menu.add(item.getTitle()).setIcon(item.getIcon()).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 			} else {
+				// menuItem = menu.add(groupId, entry.getKey(), entry.getKey(),
+				// item.getTitle());
 				menu.add(item.getTitle()).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-				// actionBar.addTab(actionBar.newTab().setText(item.getTitle()).setTabListener(tabListener),
-				// entry.getKey(), item.getHighlight());
 			}
 		}
-
+		menu.setGroupVisible(groupId, true);
 		return menu;
 	}
 

@@ -80,7 +80,9 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 				startActivity(intent);
 			}
 		};
-		loansListView.setOnItemClickListener(listener);
+		if (loansListView != null) {
+			loansListView.setOnItemClickListener(listener);
+		}
 	}
 
 }
