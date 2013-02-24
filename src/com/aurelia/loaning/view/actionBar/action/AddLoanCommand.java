@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
 
-public class AddLoanAction implements ActionBarAction {
+public class AddLoanCommand implements ActionBarCommand {
 
 	@Override
 	public void performAction(/* FragmentTransaction ft, */SherlockFragmentActivity activity) {

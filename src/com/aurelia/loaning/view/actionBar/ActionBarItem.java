@@ -1,7 +1,7 @@
 package com.aurelia.loaning.view.actionBar;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.aurelia.loaning.view.actionBar.action.ActionBarAction;
+import com.aurelia.loaning.view.actionBar.action.ActionBarCommand;
 
 public class ActionBarItem {
 
@@ -9,9 +9,9 @@ public class ActionBarItem {
 	private String title;
 	private int icon;
 	private boolean highlight;
-	private ActionBarAction action;
+	private ActionBarCommand action;
 
-	public ActionBarItem(String label, String title, int icon, boolean highlight, ActionBarAction action) {
+	public ActionBarItem(String label, String title, int icon, boolean highlight, ActionBarCommand action) {
 		super();
 		this.label = label;
 		this.title = title;
@@ -40,7 +40,7 @@ public class ActionBarItem {
 		return highlight;
 	}
 
-	public ActionBarAction getAction() {
+	public ActionBarCommand getAction() {
 		return action;
 	}
 

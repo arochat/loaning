@@ -29,7 +29,6 @@ public class BalanceResultDialogFragment extends DialogFragment {
 
 		String message = "";
 
-		// TODO
 		if (callingActivity instanceof FilteredLoansOverviewActivity) {
 			FilteredLoansOverviewActivity filteredLoansOverviewActivity = (FilteredLoansOverviewActivity) callingActivity;
 			List<AbstractLoan> loansToBalance = filteredLoansOverviewActivity.getLoans();

@@ -7,7 +7,7 @@ import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.view.Menu;
 import com.aurelia.loaning.view.actionBar.ActionBarItem;
 import com.aurelia.loaning.view.actionBar.OptionsMenuActionBarBuilder;
-import com.aurelia.loaning.view.actionBar.action.FilterLoansAction;
+import com.aurelia.loaning.view.actionBar.action.FilterLoansCommand;
 
 public class LoansHistoryActionBarDelegate extends AbstractActionBarDelegate {
 
@@ -26,7 +26,7 @@ public class LoansHistoryActionBarDelegate extends AbstractActionBarDelegate {
 	@Override
 	public Menu setupActionBar(Menu menu) {
 		actionBarDefinition = new HashMap<String, ActionBarItem>();
-		actionBarDefinition.put("FILTER", new ActionBarItem("FILTER", "FILTER", 0, false, new FilterLoansAction()));
+		actionBarDefinition.put("FILTER", new ActionBarItem("FILTER", "FILTER", 0, false, new FilterLoansCommand()));
 
 		return new OptionsMenuActionBarBuilder().withActionBarDefinition(actionBarDefinition).withMenu(menu).build();
 	}

@@ -8,8 +8,8 @@ import com.actionbarsherlock.view.Menu;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.view.actionBar.ActionBarItem;
 import com.aurelia.loaning.view.actionBar.OptionsMenuActionBarBuilder;
-import com.aurelia.loaning.view.actionBar.action.AddLoanAction;
-import com.aurelia.loaning.view.actionBar.action.FilterLoansAction;
+import com.aurelia.loaning.view.actionBar.action.AddLoanCommand;
+import com.aurelia.loaning.view.actionBar.action.FilterLoansCommand;
 
 public class LoansOverviewActionBarDelegate extends AbstractActionBarDelegate {
 
@@ -17,8 +17,9 @@ public class LoansOverviewActionBarDelegate extends AbstractActionBarDelegate {
 	public Menu setupActionBar(Menu menu) {
 
 		actionBarDefinition = new HashMap<String, ActionBarItem>();
-		actionBarDefinition.put("ADD", new ActionBarItem("ADD", "", R.drawable.icon_add, false, new AddLoanAction()));
-		actionBarDefinition.put("FILTER", new ActionBarItem("FILTER", "FILTER", 0, false, new FilterLoansAction()));
+		actionBarDefinition.put("ADD",
+				new ActionBarItem("ADD", "ADD", R.drawable.icon_add, false, new AddLoanCommand()));
+		actionBarDefinition.put("FILTER", new ActionBarItem("FILTER", "FILTER", 0, false, new FilterLoansCommand()));
 
 		return new OptionsMenuActionBarBuilder().withActionBarDefinition(actionBarDefinition).withMenu(menu).build();
 	}

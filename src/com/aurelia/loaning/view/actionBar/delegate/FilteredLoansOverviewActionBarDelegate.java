@@ -8,10 +8,10 @@ import com.actionbarsherlock.view.Menu;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.view.actionBar.ActionBarItem;
 import com.aurelia.loaning.view.actionBar.OptionsMenuActionBarBuilder;
-import com.aurelia.loaning.view.actionBar.action.AddLoanAction;
-import com.aurelia.loaning.view.actionBar.action.ComputeBalanceAction;
-import com.aurelia.loaning.view.actionBar.action.DeleteAllAction;
-import com.aurelia.loaning.view.actionBar.action.SettleAllAction;
+import com.aurelia.loaning.view.actionBar.action.AddLoanCommand;
+import com.aurelia.loaning.view.actionBar.action.ComputeBalanceCommand;
+import com.aurelia.loaning.view.actionBar.action.DeleteAllCommand;
+import com.aurelia.loaning.view.actionBar.action.SettleAllCommand;
 
 public class FilteredLoansOverviewActionBarDelegate extends AbstractActionBarDelegate {
 
@@ -43,13 +43,13 @@ public class FilteredLoansOverviewActionBarDelegate extends AbstractActionBarDel
 		actionBarDefinition = new HashMap<String, ActionBarItem>();
 
 		actionBarDefinition
-				.put("ADD", new ActionBarItem("ADD", "ADD", R.drawable.icon_add, false, new AddLoanAction()));
+				.put("ADD", new ActionBarItem("ADD", "ADD", R.drawable.icon_add, false, new AddLoanCommand()));
 		actionBarDefinition.put("BALANCE", new ActionBarItem("COMPUTE_BALANCE", "BALANCE", 0, false,
-				new ComputeBalanceAction()));
+				new ComputeBalanceCommand()));
 		actionBarDefinition.put("SETTLE_ALL", new ActionBarItem("SETTLE_ALL", "SETTLE_ALL", R.drawable.icon_settle,
-				false, new SettleAllAction()));
+				false, new SettleAllCommand()));
 		actionBarDefinition.put("DELETE_ALL", new ActionBarItem("DELETE_ALL", "DELETE_ALL", R.drawable.icon_delete,
-				false, new DeleteAllAction()));
+				false, new DeleteAllCommand()));
 
 		return new OptionsMenuActionBarBuilder().withActionBarDefinition(actionBarDefinition).withMenu(menu).build();
 	}

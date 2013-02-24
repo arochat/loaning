@@ -6,11 +6,22 @@
     tools:context=".DisplayDetailActivity" >
 
 <TextView
-android:id="@+id/item_object"
-android:textStyle="bold"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content"
-/>
+    android:id="@+id/item_object"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/loan_creation_date"
+    android:textStyle="bold" />
+
+<TextView
+    android:id="@+id/object_of_loan"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/loan_source"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="29dp"
+    android:text="@string/object_of_loan_label"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <TextView
     android:id="@+id/loan_creation_date"
@@ -22,12 +33,12 @@ android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <TextView
-    android:id="@+id/object_of_loan"
+    android:id="@+id/loan_source"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/loan_source"
-    android:layout_below="@+id/button_delete_loan"
-    android:text="@string/object_of_loan_label"
+    android:layout_alignLeft="@+id/loan_reminder_date"
+    android:layout_below="@+id/loan_creation_date"
+    android:text="@string/from_label"
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <TextView
@@ -38,15 +49,6 @@ android:layout_height="wrap_content"
     android:layout_below="@+id/loan_source"
     android:layout_marginLeft="26dp"
     android:text="@string/reminder_label"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-<TextView
-    android:id="@+id/loan_source"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/loan_reminder_date"
-    android:layout_below="@+id/loan_creation_date"
-    android:text="@string/from_label"
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

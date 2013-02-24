@@ -12,7 +12,8 @@ public class OptionsMenuActionBarBuilder implements ActionBarBuilder {
 
 	private Menu menu;
 	private Map<String, ActionBarItem> actionBarDefinition;
-	private final int groupId = 1;
+
+	// private final int groupId = 1;
 
 	public OptionsMenuActionBarBuilder() {
 	}
@@ -48,7 +49,7 @@ public class OptionsMenuActionBarBuilder implements ActionBarBuilder {
 				menu.add(item.getTitle()).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 			}
 		}
-		menu.setGroupVisible(groupId, true);
+		// menu.setGroupVisible(groupId, true);
 		return menu;
 	}
 

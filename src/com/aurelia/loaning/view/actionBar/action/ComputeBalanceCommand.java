@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.aurelia.loaning.view.dialog.BalanceResultDialogFragment;
 
-public class ComputeBalanceAction implements ActionBarAction {
+public class ComputeBalanceCommand implements ActionBarCommand {
 
 	@Override
 	public void performAction(/* FragmentTransaction ft, */SherlockFragmentActivity activity) {

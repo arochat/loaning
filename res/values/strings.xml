@@ -42,4 +42,9 @@
     <string name="item_four">Common pot</string>
     <string name="item_five">Settings</string>
     
+    <!-- confirmation dialgos -->
+    <string name="confirmation_settle">Are you sure you want to settle this loan ?</string>
+    <string name="confirmation_delete">Are you sure you want to delete this loan ?</string>
+        <string name="confirmation_settle_all">Are you sure you want to settle all these loans ?</string>
+    
 </resources>
