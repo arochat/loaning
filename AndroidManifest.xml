@@ -4,9 +4,10 @@
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17"/>
     <application android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+		android:label=""
         android:theme="@style/Sherlock.__Theme.DarkActionBar"
         android:debuggable="true">
+        <!--         android:label="@string/app_name" -->
         <activity android:label="@string/app_name"
             android:name="com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity"
             android:icon="@drawable/icon_overview_list">

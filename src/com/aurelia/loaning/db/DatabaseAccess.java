@@ -66,6 +66,7 @@ public class DatabaseAccess {
 	}
 
 	public long insert(Object o, DateTimeFormatter formatter) {
+
 		try {
 			String tableName = tablePreparator.getTableName(o.getClass());
 
@@ -104,6 +105,7 @@ public class DatabaseAccess {
 	}
 
 	public List<Object> read(Class entity) {
+
 		List<String> columns = tablePreparator.getColumnNames(entity);
 		String tableName = tablePreparator.getTableName(entity);
 		String[] columnNames = new String[columns.size()];
@@ -113,6 +115,8 @@ public class DatabaseAccess {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			cursor.close();
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -125,9 +129,12 @@ public class DatabaseAccess {
 				.query(tableName, columns.toArray(columnNames), whereClause, null, null, null, "end_date ASC");
 		try {
 			return cursorToObjects(cursor, entity);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			cursor.close();
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -204,7 +211,6 @@ public class DatabaseAccess {
 
 		} while (c.moveToNext());
 
-		c.close();
 		return objects;
 	}
 

@@ -42,7 +42,7 @@ public class OptionsMenuActionBarBuilder implements ActionBarBuilder {
 				// menuItem = menu.add(groupId, entry.getKey(), entry.getKey(),
 				// item.getTitle());
 				// menuItem.setIcon(item.getIcon());
-				menu.add(item.getTitle()).setIcon(item.getIcon()).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				menu.add(item.getTitle()).setIcon(item.getIcon()).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			} else {
 				// menuItem = menu.add(groupId, entry.getKey(), entry.getKey(),
 				// item.getTitle());

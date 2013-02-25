@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.aurelia.loaning.db.entity.Loan;
+import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.reflection.ClasspathScanner;
 import com.aurelia.loaning.reflection.TableDeclarationPreparator;
 
@@ -69,15 +70,15 @@ public class LoanDatabaseAccess {
 	}
 
 	// tmp hack to update all status to ACTIVE
-	// public void update(Loan loan) {
+	public void update(Loan loan) {
 
-	// tmp hack to add column 'STATUS'
-	// String alterTable1 = "ALTER TABLE LOAN ADD status INTEGER;";
-	// getDb().execSQL(alterTable1);
+		// tmp hack to add column 'STATUS'
+		String alterTable1 = "ALTER TABLE LOAN ADD STATUS INTEGER;";
+		getDb().execSQL(alterTable1);
 
-	// filling the new column
-	// ContentValues contentValues = new ContentValues();
-	// contentValues.put("STATUS", LoanStatus.ACTIVE.getValue());
-	// databaseAccess.update(loan, contentValues, null, null);
-	// }
+		// filling the new column
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("STATUS", LoanStatus.ACTIVE.getValue());
+		databaseAccess.update(loan, contentValues, null, null);
+	}
 }
