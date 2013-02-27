@@ -70,7 +70,7 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 		}
 	}
 
-	protected void handleClickEvent() {
+	protected void handleClickEvent(final String callingActivity) {
 		OnItemClickListener listener = new OnItemClickListener() {
 
 			@Override
@@ -78,6 +78,7 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 				AbstractLoan loan = (AbstractLoan) parent.getItemAtPosition(position);
 				Bundle bundle = new Bundle();
 				bundle.putSerializable(Event.DISPLAY_LOAN_DETAIL.name(), loan);
+				bundle.putSerializable("CALLING_ACTIVITY", callingActivity);
 				Intent intent = new Intent(AbstractLoansOverviewActivity.this, DisplayDetailActivity.class);
 				intent.setAction(Event.DISPLAY_LOAN_DETAIL.name());
 				intent.putExtras(bundle);

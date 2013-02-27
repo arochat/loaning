@@ -15,6 +15,8 @@ import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.actionBar.delegate.DisplayDetailActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.delegate.DisplayHistoryDetailActionBarDelegate;
+import com.aurelia.loaning.view.loansoverview.LoansHistoryActivity;
 import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 
 public class DisplayDetailActivity extends BaseActivity {
@@ -70,6 +72,10 @@ public class DisplayDetailActivity extends BaseActivity {
 						+ format.print(loan.getStartDate()));
 				viewHolder.object.setText(viewHolder.object.getText() + " " + loan.displayDescription());
 			}
+		}
+
+		if (LoansHistoryActivity.class.getName().equals(intent.getExtras().getSerializable("CALLING_ACTIVITY"))) {
+			this.setActionBarDelegate(new DisplayHistoryDetailActionBarDelegate());
 		}
 	}
 

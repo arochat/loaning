@@ -23,11 +23,14 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 
 	private String filterString;
 	private List<AbstractLoan> allLoans;
+	private String callingActivity;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
 
-		if (getIntent().getExtras().getSerializable("callingActivity").equals(LoansHistoryActivity.class.getName())) {
+		callingActivity = (String) getIntent().getExtras().getSerializable("callingActivity");
+
+		if (LoansHistoryActivity.class.getName().equals(callingActivity)) {
 			this.setActionBarDelegate(new FilteredLoansHistoryActionBarDelegate());
 		} else {
 			this.setActionBarDelegate(new FilteredLoansOverviewActionBarDelegate());
@@ -39,7 +42,7 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 	protected void onResume() {
 		super.onResume();
 		setUpDisplay();
-		handleClickEvent();
+		handleClickEvent(callingActivity);
 	}
 
 	@Override

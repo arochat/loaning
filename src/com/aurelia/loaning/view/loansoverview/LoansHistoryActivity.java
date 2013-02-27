@@ -79,7 +79,7 @@ public class LoansHistoryActivity extends AbstractLoansOverviewActivity {
 						LoansHistoryActivity.super.loans = loans;
 
 						setUpDisplay();
-						// handleClickEvent();
+						handleClickEvent(LoansHistoryActivity.this.getClass().getName());
 					}
 				}
 			}

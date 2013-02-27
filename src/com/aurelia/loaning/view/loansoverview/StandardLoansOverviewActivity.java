@@ -83,7 +83,7 @@ public class StandardLoansOverviewActivity extends AbstractLoansOverviewActivity
 						StandardLoansOverviewActivity.super.loans = loans;
 
 						setUpDisplay();
-						handleClickEvent();
+						handleClickEvent(StandardLoansOverviewActivity.this.getClass().getName());
 					}
 				}
 			}
