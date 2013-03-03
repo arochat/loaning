@@ -8,7 +8,7 @@ public class LoanFromUIBuilder {
 
 	private AbstractLoanFromUI loanFromUI;
 
-	public LoanFromUIBuilder(AddLoanActivity activity) {
+	public LoanFromUIBuilder(LoanFormActivity activity) {
 
 		switch (activity.getLoanType()) {
 		case MONEY_LOAN:

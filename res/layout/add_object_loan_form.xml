@@ -55,7 +55,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/I_loaned_label"
         android:layout_marginBottom="26dp"
-        android:onClick="addLoan"
+        android:onClick="saveLoan"
         android:text="@string/add_button" />
 
 </RelativeLayout>

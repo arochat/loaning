@@ -41,6 +41,8 @@ public class LoanSaver extends IntentService {
 			dbResult = deleteLoan(loan);
 		} else if (Event.SETTLE_LOAN.name().equals(intent.getAction())) {
 			dbResult = settleLoan(loan);
+		} else if (Event.UPDATE_LOAN.name().equals(intent.getAction())) {
+			dbResult = updateLoan(loan);
 		}
 
 		if (dbResult != -1) {
@@ -56,6 +58,11 @@ public class LoanSaver extends IntentService {
 		// stopped, so return sticky.
 		return START_STICKY;
 		// TODO : what do we need to return here?
+	}
+
+	private long updateLoan(Bundle loanToUpdate) {
+		AbstractLoan loan = (AbstractLoan) loanToUpdate.getSerializable(Event.UPDATE_LOAN.name());
+		return databaseAccess.updateLoan(converter.convert(loan));
 	}
 
 	private long saveLoan(Bundle loanToSave) {

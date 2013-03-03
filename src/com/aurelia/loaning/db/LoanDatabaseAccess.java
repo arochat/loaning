@@ -69,6 +69,25 @@ public class LoanDatabaseAccess {
 		return databaseAccess.update(loan, contentValues, "loan_id=" + loan.getId(), null);
 	}
 
+	public int updateLoan(Loan loan) {
+		try {
+			return databaseAccess.update(loan);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	// tmp hack to update all status to ACTIVE
 	public void update(Loan loan) {
 

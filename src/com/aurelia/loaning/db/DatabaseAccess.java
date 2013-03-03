@@ -104,6 +104,39 @@ public class DatabaseAccess {
 		return -1l;
 	}
 
+	public int update(Object entity) throws IllegalArgumentException, SecurityException, IllegalAccessException,
+			NoSuchFieldException {
+		ContentValues contentValues = new ContentValues();
+
+		String tableName = tablePreparator.getTableName(entity.getClass());
+		List<String> columnNames = getTablePreparator().getColumnNames(entity.getClass());
+		String idColumnName = getTablePreparator().getIdColumnName(entity.getClass());
+		Map<String, Object> entityContent = getTablePreparator().getEntityContent(entity.getClass(), entity);
+		Long entityId = (Long) entityContent.get(idColumnName);
+
+		Field columnField;
+
+		for (String column : columnNames) {
+			if (!column.equals(idColumnName)) {
+				columnField = tablePreparator.findColumnField(entity.getClass(), column);
+				if (columnField.getType().equals(Boolean.class)) {
+					contentValues.put(column, (Boolean) entityContent.get(column));
+				} else if (columnField.getType().equals(String.class)) {
+					contentValues.put(column, (String) entityContent.get(column));
+				} else if (columnField.getType().equals(DateTime.class)) {
+					contentValues.put(column, ((DateTime) entityContent.get(column)).toString(formatter));
+				} else if (columnField.getType().equals(Long.class)) {
+					contentValues.put(column, (Long) entityContent.get(column));
+				} else if (columnField.getType().equals(Integer.class)) {
+					contentValues.put(column, (Integer) entityContent.get(column));
+				} else {
+					// TODO error
+				}
+			}
+		}
+		return db.update(tableName, contentValues, idColumnName + "=" + entityId, null);
+	}
+
 	public List<Object> read(Class entity) {
 
 		List<String> columns = tablePreparator.getColumnNames(entity);

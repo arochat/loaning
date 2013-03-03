@@ -20,6 +20,12 @@
         <activity android:name=".view.AddLoanActivity"
                   android:icon="@drawable/icon_add"/>
         
+        <activity android:name=".view.EditLoanActivity"
+                  android:icon="@drawable/icon_add"/>
+         
+        <activity android:name=".view.LoanFormActivity"
+                  android:icon="@drawable/icon_add"/>
+        
         <activity android:name=".view.DisplayDetailActivity"
                   android:icon="@drawable/icon_overview_list"/>
         

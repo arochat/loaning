@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignParentBottom="true"
-        android:onClick="addLoan"
+        android:onClick="saveLoan"
         android:text="@string/add_button" />
 
     <EditText

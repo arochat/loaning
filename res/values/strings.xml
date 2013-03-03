@@ -11,7 +11,7 @@
     <string name="destination_label">To/From</string>
     <string name="loan_object_label">What</string>
     <string name="when_label">Notify me on </string>
-    <string name="add_button">add</string>
+    <string name="add_button">save</string>
     <string name="add_loan_fragment_title">add</string>
     <string name="amount_label">Amount</string>
     <string name="currency_label">Currency</string>

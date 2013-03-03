@@ -111,6 +111,20 @@ public class TableDeclarationPreparator {
 		return tableDeclarations;
 	}
 
+	public Field findColumnField(Class entity, String columnName) {
+		Iterable<Field> annotatedFields = findAnnotatedFields(entity, Column.class);
+		for (Field field : annotatedFields) {
+			Annotation annotationOnField = field.getAnnotation(Column.class);
+			if (annotationOnField instanceof Column) {
+				Column column = (Column) annotationOnField;
+				if (column.name().equals(columnName)) {
+					return field;
+				}
+			}
+		}
+		return null;
+	}
+
 	private Iterable<Class> findEntities(Context context) throws IOException, ClassNotFoundException {
 		try {
 			return scanner.findAnnotatedClasses(context, APPLICATION_ROOT_PACKAGE, EXTENDED_LOOKUP_PACKAGE_NAME,

@@ -103,6 +103,10 @@ public class DisplayDetailActivity extends BaseActivity {
 		startService(intent);
 	}
 
+	public AbstractLoan getDisplayedLoan() {
+		return displayedLoan;
+	}
+
 	private class ViewHolder {
 
 		TextView object;
