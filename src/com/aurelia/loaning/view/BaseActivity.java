@@ -2,11 +2,9 @@ package com.aurelia.loaning.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -18,8 +16,7 @@ import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 import com.coboltforge.slidemenu.SlideMenu;
 import com.coboltforge.slidemenu.SlideMenuInterface.OnSlideMenuItemClickListener;
 
-public abstract class BaseActivity extends SherlockFragmentActivity implements ActionBar.TabListener,
-		OnSlideMenuItemClickListener {
+public abstract class BaseActivity extends SherlockFragmentActivity implements OnSlideMenuItemClickListener {
 
 	private SlideMenu slideMenu;
 	protected AbstractActionBarDelegate actionBarDelegate;
@@ -27,7 +24,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		// setupActionBar();
 		setSlideMenu();
 	}
 
@@ -69,26 +65,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 		return super.onOptionsItemSelected(item);
 	}
 
-	// action bar ----------------------------------------------------------
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		actionBarDelegate.handleActions(tab, ft, this);
-	}
-
-	// ------------------------------------------------------------------------
+	// action bar-----------------------------------------------------
 
 	protected void setupActionBarMenu(Menu menu) {
 
@@ -96,20 +73,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 
 		// setup tabs nav
 		actionBarDelegate.setupActionBar(menu);
-
-		// default to tab navigation
-		// showTabsNav();
-	}
-
-	protected void setupActionBar() {
-
-		final ActionBar actionBar = createActionBar();
-
-		// setup tabs nav
-		actionBarDelegate.setupActionBar(actionBar, this);
-
-		// default to tab navigation
-		showTabsNav();
 	}
 
 	protected ActionBar createActionBar() {
@@ -120,16 +83,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements A
 		return actionBar;
 	}
 
-	protected void showTabsNav() {
-		ActionBar ab = getSupportActionBar();
-		if (ab.getNavigationMode() != ActionBar.NAVIGATION_MODE_TABS) {
-			ab.setDisplayShowTitleEnabled(false);
-			ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		}
-	}
-
-	// loans handling
-	// -------------------------------------------------------------
+	// loans handling---------------------------------------
 
 	protected void backToLoansOverview() {
 		Intent intent = new Intent(this, StandardLoansOverviewActivity.class);

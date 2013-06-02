@@ -117,7 +117,7 @@ public class DatabaseAccess {
 		Field columnField;
 
 		for (String column : columnNames) {
-			if (!column.equals(idColumnName)) {
+			if (!column.equals(idColumnName) && entityContent.get(column) != null) {
 				columnField = tablePreparator.findColumnField(entity.getClass(), column);
 				if (columnField.getType().equals(Boolean.class)) {
 					contentValues.put(column, (Boolean) entityContent.get(column));

@@ -7,6 +7,7 @@ import com.aurelia.loaning.domain.LoanType;
 
 public class AbstractLoanFromUI {
 
+	private DatePicker notificaitonDateFromUI;
 	private EditText personFromUI;
 	private DatePicker endDateFromUI;
 	private LoanType loanType;
@@ -35,4 +36,11 @@ public class AbstractLoanFromUI {
 		this.loanType = loanType;
 	}
 
+	public DatePicker getNotificaitonDateFromUI() {
+		return notificaitonDateFromUI;
+	}
+
+	public void setNotificaitonDateFromUI(DatePicker notificaitonDateFromUI) {
+		this.notificaitonDateFromUI = notificaitonDateFromUI;
+	}
 }

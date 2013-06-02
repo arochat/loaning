@@ -3,12 +3,16 @@
  */
 package com.aurelia.loaning.view.loansoverview;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.LoansContainer;
+import com.aurelia.loaning.event.Event;
+import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.actionBar.delegate.FilteredLoansHistoryActionBarDelegate;
 import com.aurelia.loaning.view.actionBar.delegate.FilteredLoansOverviewActionBarDelegate;
 import com.google.common.base.Predicate;
@@ -60,6 +64,17 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 		char[] filter = (char[]) getIntent().getExtras().getSerializable("filter");
 		filterString = new String(filter);
 		loans = filterLoans(filterString);
+	}
+
+	public void settleAllLoans() {
+		Bundle bundle = new Bundle();
+		ArrayList<AbstractLoan> parcelableList = new ArrayList<AbstractLoan>();
+		parcelableList.addAll(this.loans);
+		bundle.putParcelableArrayList(Event.SETTLE_ALL_FILTERED_LOANS.name(), parcelableList);
+		Intent intent = new Intent(this, LoanSaver.class);
+		intent.setAction(Event.SETTLE_ALL_FILTERED_LOANS.name());
+		intent.putExtras(bundle);
+		startService(intent);
 	}
 
 	private List<AbstractLoan> filterLoans(final String filter) {

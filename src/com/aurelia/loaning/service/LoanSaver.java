@@ -1,10 +1,14 @@
 package com.aurelia.loaning.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.aurelia.loaning.db.LoanDatabaseAccess;
+import com.aurelia.loaning.db.entity.Loan;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.domain.DomainToEntityConverter;
@@ -22,8 +26,8 @@ public class LoanSaver extends IntentService {
 	@Override
 	protected void onHandleIntent(final Intent intent) {
 
-		// LoanTransaction received in intent
-		Bundle loan = intent.getExtras();
+		// Loan or List<Loan> received in intent
+		Bundle bundle = intent.getExtras();
 
 		if (databaseAccess == null) {
 			databaseAccess = new LoanDatabaseAccess(this);
@@ -36,13 +40,15 @@ public class LoanSaver extends IntentService {
 		long dbResult = -1l;
 
 		if (Event.SAVE_LOANING.name().equals(intent.getAction())) {
-			dbResult = saveLoan(loan);
+			dbResult = saveLoan(bundle);
 		} else if (Event.DELETE_LOAN.name().equals(intent.getAction())) {
-			dbResult = deleteLoan(loan);
+			dbResult = deleteLoan(bundle);
 		} else if (Event.SETTLE_LOAN.name().equals(intent.getAction())) {
-			dbResult = settleLoan(loan);
+			dbResult = settleLoan(bundle);
 		} else if (Event.UPDATE_LOAN.name().equals(intent.getAction())) {
-			dbResult = updateLoan(loan);
+			dbResult = updateLoan(bundle);
+		} else if (Event.SETTLE_ALL_FILTERED_LOANS.name().equals(intent.getAction())) {
+			dbResult = settleAllLoans(bundle);
 		}
 
 		if (dbResult != -1) {
@@ -78,6 +84,16 @@ public class LoanSaver extends IntentService {
 	private int settleLoan(Bundle loanToSettle) {
 		AbstractLoan loan = (AbstractLoan) loanToSettle.getSerializable(Event.SETTLE_LOAN.name());
 		return databaseAccess.updateStatus(converter.convert(loan), LoanStatus.SETTLED.getValue());
+	}
+
+	private long settleAllLoans(Bundle loansToSettle) {
+		List<AbstractLoan> loans = (List<AbstractLoan>) loansToSettle.getSerializable(Event.SETTLE_ALL_FILTERED_LOANS
+				.name());
+		List<Loan> entities = new ArrayList<Loan>(loans.size());
+		for (AbstractLoan loan : loans) {
+			entities.add(converter.convert(loan));
+		}
+		return databaseAccess.updateStatus(entities, LoanStatus.SETTLED.getValue());
 	}
 
 }

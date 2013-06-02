@@ -10,7 +10,7 @@ import com.aurelia.loaning.view.EditLoanActivity;
 public class EditLoanCommand implements ActionBarCommand {
 
 	@Override
-	public void performAction(/* FragmentTransaction ft, */SherlockFragmentActivity callingActivity) {
+	public void performAction(SherlockFragmentActivity callingActivity) {
 
 		if (callingActivity instanceof DisplayDetailActivity) {
 			DisplayDetailActivity detailActivity = (DisplayDetailActivity) callingActivity;

@@ -61,16 +61,18 @@ public class DisplayDetailActivity extends BaseActivity {
 
 			AbstractLoan loan = (AbstractLoan) intent.getExtras().getSerializable(Event.DISPLAY_LOAN_DETAIL.name());
 
-			displayedLoan = loan;
+			if (displayedLoan == null) {
+				displayedLoan = loan;
 
-			if (loan != null) {
-				viewHolder.sourceAndDestination.setText(viewHolder.sourceAndDestination.getText() + " "
-						+ loan.displayPerson());
-				viewHolder.notificationDate.setText(viewHolder.notificationDate.getText() + " "
-						+ format.print(loan.getNotificationDate()));
-				viewHolder.creationDate.setText(viewHolder.creationDate.getText() + " "
-						+ format.print(loan.getStartDate()));
-				viewHolder.object.setText(viewHolder.object.getText() + " " + loan.displayDescription());
+				if (loan != null) {
+					viewHolder.sourceAndDestination.setText(viewHolder.sourceAndDestination.getText() + " "
+							+ loan.displayPerson());
+					viewHolder.notificationDate.setText(viewHolder.notificationDate.getText() + " "
+							+ format.print(loan.getNotificationDate()));
+					viewHolder.creationDate.setText(viewHolder.creationDate.getText() + " "
+							+ format.print(loan.getStartDate()));
+					viewHolder.object.setText(viewHolder.object.getText() + " " + loan.displayDescription());
+				}
 			}
 		}
 

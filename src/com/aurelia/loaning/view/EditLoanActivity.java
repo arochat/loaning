@@ -65,7 +65,7 @@ public class EditLoanActivity extends LoanFormActivity {
 
 	public void saveLoan(View view) {
 
-		AbstractLoan loan = LoanFactory.createLoan(getLoanFromUI());
+		AbstractLoan loan = LoanFactory.createLoan(getLoanFromUI(), false);
 		loan.setId(loanId);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(Event.UPDATE_LOAN.name(), loan);

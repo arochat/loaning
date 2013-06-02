@@ -5,7 +5,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 public class CopyLoanCommand implements ActionBarCommand {
 
 	@Override
-	public void performAction(/* FragmentTransaction ft, */SherlockFragmentActivity activity) {
+	public void performAction(SherlockFragmentActivity activity) {
 		// TODO Auto-generated method stub
 
 	}

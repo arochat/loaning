@@ -69,6 +69,18 @@ public class LoanDatabaseAccess {
 		return databaseAccess.update(loan, contentValues, "loan_id=" + loan.getId(), null);
 	}
 
+	public int updateStatus(List<Loan> loans, int newStatus) {
+		// TODO : use StringUtils here
+		String loanIds = "";
+		for (Loan loan : loans) {
+			loanIds.concat(loan.getId().toString()).concat(",");
+		}
+		loanIds = loanIds.substring(0, loanIds.length() - 1);
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("STATUS", newStatus);
+		return databaseAccess.update(loans, contentValues, "loan_id in(" + loanIds + ")", null);
+	}
+
 	public int updateLoan(Loan loan) {
 		try {
 			return databaseAccess.update(loan);

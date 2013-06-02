@@ -40,7 +40,7 @@ public class AddLoanActivity extends LoanFormActivity {
 	// TODO : validate that form is completely filled
 	public void saveLoan(View view) {
 
-		AbstractLoan loan = LoanFactory.createLoan(getLoanFromUI());
+		AbstractLoan loan = LoanFactory.createLoan(getLoanFromUI(), true);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(Event.SAVE_LOANING.name(), loan);
 		Intent intent = new Intent(this, LoanSaver.class);

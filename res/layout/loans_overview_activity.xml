@@ -2,20 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!--     tools:context=".view/LoansOverviewActivity" > -->
-
-<!-- 	<com.coboltforge.slidemenu.SlideMenu -->
-<!--         android:id="@+id/slideMenu" -->
-<!--         android:layout_width="match_parent" -->
-<!--         android:layout_height="match_parent" /> -->
-	
-<!-- 	<Button -->
-<!--         android:id="@+id/buttonMenu" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_centerHorizontal="true" -->
-<!--         android:layout_centerVertical="true" -->
-<!--         android:text="@string/menubutton" /> -->
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,29 +15,8 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_alignParentBottom="true"
-         android:layout_below="@+id/textView2" >
-
-    </ListView>
-
-<!--      <Button -->
-<!--          android:id="@+id/removeAllButton" -->
-<!--          style="?android:attr/buttonStyleSmall" -->
-<!--          android:layout_width="wrap_content" -->
-<!--          android:layout_height="wrap_content" -->
-<!--          android:layout_alignBaseline="@+id/addLoanButton" -->
-<!--          android:layout_alignBottom="@+id/addLoanButton" -->
-<!--          android:layout_alignParentRight="true" -->
-<!--          android:onClick="removeAll" -->
-<!--          android:text="Remove all" /> -->
-
-<!--      <Button -->
-<!--          android:id="@+id/addLoanButton" -->
-<!--          android:layout_width="wrap_content" -->
-<!--          android:layout_height="wrap_content" -->
-<!--          android:layout_alignBottom="@+id/textView2" -->
-<!--          android:layout_alignParentTop="true" -->
-<!--          android:layout_toLeftOf="@+id/removeAllButton" -->
-<!--          android:onClick="addLoan" -->
-<!--          android:text="Add" /> -->
+         android:layout_below="@+id/textView2"
+         android:layout_marginLeft="7sp"
+         android:layout_marginRight="7sp" />
 
 </RelativeLayout>

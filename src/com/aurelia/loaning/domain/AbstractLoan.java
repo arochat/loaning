@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
-public abstract class AbstractLoan implements Serializable {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public abstract class AbstractLoan implements Serializable, Parcelable {
 
 	private static final long serialVersionUID = -2002043834197778429L;
 
@@ -29,9 +32,9 @@ public abstract class AbstractLoan implements Serializable {
 
 	public String displayPerson() {
 		if (isBorrowing()) {
-			return new StringBuilder().append(this.getPerson()).append("-->").append("me").toString();
+			return new StringBuilder().append("I borrowed from ").append(this.getPerson()).toString();
 		} else {
-			return new StringBuilder().append("me").append("-->").append(this.getPerson()).toString();
+			return new StringBuilder().append("I loaned to ").append(this.getPerson()).toString();
 		}
 	}
 
@@ -76,6 +79,17 @@ public abstract class AbstractLoan implements Serializable {
 			}
 			return UNKNOWN;
 		}
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
 	}
 
 	public long getId() {

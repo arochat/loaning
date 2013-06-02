@@ -9,7 +9,7 @@ import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
 public class AddLoanCommand implements ActionBarCommand {
 
 	@Override
-	public void performAction(/* FragmentTransaction ft, */SherlockFragmentActivity activity) {
+	public void performAction(SherlockFragmentActivity activity) {
 		// TODO : completely handle fragments
 		// stack as in
 		// http://www.edumobile.org/android/android-development/fragment-example-in-android/

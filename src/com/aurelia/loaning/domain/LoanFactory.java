@@ -9,15 +9,23 @@ import com.aurelia.loaning.view.ObjectLoanFromUI;
 
 public class LoanFactory {
 
-	public static AbstractLoan createLoan(AbstractLoanFromUI loanFromUI) {
+	public static AbstractLoan createLoan(AbstractLoanFromUI loanFromUI, boolean newLoan) {
 
 		LoanType loanType = loanFromUI.getLoanType();
 
 		MoneyLoan moneyLoan = null;
 		ObjectLoan objectLoan = null;
+		DateTime startDate = null;
+		DateTime notificationDate = null;
 
-		DateTime startDate = DateTime.now();
-		DateTime notificationDate = DateTime.now();
+		// TODO : bad design, risk of NPE!!
+		if (newLoan) {
+			startDate = DateTime.now();
+			// TODO : when implementing notification, notificationDate could be
+			// modified in the UI
+			notificationDate = DateTime.now();
+		}
+
 		boolean isContact = false;
 		String person = loanFromUI.getPersonFromUI().getText().toString();
 

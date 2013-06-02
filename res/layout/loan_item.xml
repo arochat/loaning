@@ -6,6 +6,12 @@ android:layout_width="fill_parent"
 android:layout_height="wrap_content">
 
 <TextView
+android:id="@+id/item_source_and_destination"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+/>
+    
+<TextView
 android:id="@+id/item_object"
 android:textStyle="bold"
 android:layout_width="fill_parent"
@@ -13,15 +19,8 @@ android:layout_height="wrap_content"
 />
 
 <TextView
-android:id="@+id/item_notification_date"
+android:id="@+id/item_creation_date"
 android:layout_width="fill_parent"
 android:layout_height="wrap_content"
 />
-
-<TextView
-android:id="@+id/item_source_and_destination"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content"
-/>
-
 </LinearLayout>
