@@ -4,10 +4,7 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public abstract class AbstractLoan implements Serializable, Parcelable {
+public abstract class AbstractLoan implements Serializable {
 
 	private static final long serialVersionUID = -2002043834197778429L;
 
@@ -79,17 +76,6 @@ public abstract class AbstractLoan implements Serializable, Parcelable {
 			}
 			return UNKNOWN;
 		}
-	}
-
-	@Override
-	public int describeContents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
 	}
 
 	public long getId() {

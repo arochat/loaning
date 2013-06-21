@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.aurelia.loaning.db.LoanDatabaseAccess;
-import com.aurelia.loaning.db.entity.Loan;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.domain.DomainToEntityConverter;
@@ -87,13 +86,9 @@ public class LoanSaver extends IntentService {
 	}
 
 	private long settleAllLoans(Bundle loansToSettle) {
-		List<AbstractLoan> loans = (List<AbstractLoan>) loansToSettle.getSerializable(Event.SETTLE_ALL_FILTERED_LOANS
-				.name());
-		List<Loan> entities = new ArrayList<Loan>(loans.size());
-		for (AbstractLoan loan : loans) {
-			entities.add(converter.convert(loan));
-		}
-		return databaseAccess.updateStatus(entities, LoanStatus.SETTLED.getValue());
+		List<Long> loanIdsToSettle = new ArrayList<Long>();
+		List<Long> loanIds = (List<Long>) loansToSettle.getSerializable(Event.SETTLE_ALL_FILTERED_LOANS.name());
+		loanIdsToSettle.addAll(loanIds);
+		return databaseAccess.updateStatusByIds(loanIdsToSettle, LoanStatus.SETTLED.getValue());
 	}
-
 }

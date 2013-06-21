@@ -6,6 +6,8 @@ package com.aurelia.loaning.view.loansoverview;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -67,10 +69,14 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 	}
 
 	public void settleAllLoans() {
+		// need to pass an implementation to putSerializable
+		ArrayList<Long> loanIds = new ArrayList<Long>();
+		for (AbstractLoan loan : loans) {
+			loanIds.add(loan.getId());
+		}
+
 		Bundle bundle = new Bundle();
-		ArrayList<AbstractLoan> parcelableList = new ArrayList<AbstractLoan>();
-		parcelableList.addAll(this.loans);
-		bundle.putParcelableArrayList(Event.SETTLE_ALL_FILTERED_LOANS.name(), parcelableList);
+		bundle.putSerializable(Event.SETTLE_ALL_FILTERED_LOANS.name(), loanIds);
 		Intent intent = new Intent(this, LoanSaver.class);
 		intent.setAction(Event.SETTLE_ALL_FILTERED_LOANS.name());
 		intent.putExtras(bundle);
@@ -91,6 +97,19 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 
 	public String getFilterString() {
 		return filterString;
+	}
+
+	// ----------------------------------------------------------
+
+	private class DbFeedbackReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent != null && Event.LOAN_MODIFIED.name().equals(intent.getAction())) {
+				Intent displayLoansIntent = new Intent(context, StandardLoansOverviewActivity.class);
+				startActivity(displayLoansIntent);
+			}
+		}
 	}
 
 }
