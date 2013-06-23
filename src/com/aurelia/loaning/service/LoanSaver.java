@@ -51,6 +51,9 @@ public class LoanSaver extends IntentService {
 		}
 
 		if (dbResult != -1) {
+			// Intent displayLoansIntent = new Intent(this,
+			// StandardLoansOverviewActivity.class);
+			// startActivity(displayLoansIntent);
 			sendBroadcast(new Intent(Event.LOAN_MODIFIED.name()));
 		}
 		databaseAccess.close();

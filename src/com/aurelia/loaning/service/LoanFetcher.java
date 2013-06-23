@@ -52,31 +52,6 @@ public class LoanFetcher extends IntentService {
 		}
 		sendBroadcast(intentToSend);
 
-		// databaseAccess.open();
-		// List<Loan> loansFromDB =
-		// LoanUtil.convert(databaseAccess.selectLoansWithStatus(LoanStatus.ACTIVE.getValue()));
-		//
-		// databaseAccess.close();
-		//
-		// // send loans to the view
-		// Bundle loadedLoansBundle = new Bundle();
-		// List<AbstractLoan> loans = new ArrayList<AbstractLoan>();
-		// Intent loadedLoansFeedback = new Intent(Event.SHOW_LOANINGS.name());
-		//
-		// if (loansFromDB != null &&
-		// !Collections.EMPTY_LIST.equals(loansFromDB)) {
-		// for (Loan loanFromDB : loansFromDB) {
-		// loans.add(converter.convert(loanFromDB));
-		// }
-		// LoansContainer transactionContainer = new LoansContainer();
-		// transactionContainer.setLoans(loans);
-		// loadedLoansBundle.putSerializable(Event.SHOW_LOANINGS.name(),
-		// transactionContainer);
-		// }
-		//
-		// loadedLoansFeedback.putExtras(loadedLoansBundle);
-		// sendBroadcast(loadedLoansFeedback);
-
 		// We want this service to continue running until it is explicitly
 		// stopped, so return sticky.
 		return START_STICKY;

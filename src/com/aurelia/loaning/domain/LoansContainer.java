@@ -1,6 +1,7 @@
 package com.aurelia.loaning.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,7 +12,10 @@ public class LoansContainer implements Serializable {
 	private List<AbstractLoan> loans;
 
 	public List<AbstractLoan> getLoans() {
-		return Collections.unmodifiableList(this.loans);
+		if (loans != null && !loans.isEmpty()) {
+			return Collections.unmodifiableList(this.loans);
+		}
+		return new ArrayList<AbstractLoan>();
 	}
 
 	public void setLoans(List<AbstractLoan> loans) {

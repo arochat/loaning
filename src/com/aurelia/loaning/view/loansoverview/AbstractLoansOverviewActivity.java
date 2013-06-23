@@ -63,10 +63,6 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 			}
 			loansListView = (ListView) findViewById(android.R.id.list);
 			loansListView.setAdapter(new LoansArrayAdapter(this, loans));
-			// MarginLayoutParams marginParams = new
-			// ViewGroup.MarginLayoutParams(5, 5);
-			// marginParams.setMargins(5, 5, 5, 5);
-			// loansListView.setLayoutParams(marginParams);
 		}
 	}
 

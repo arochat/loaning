@@ -9,6 +9,7 @@ import java.util.List;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import com.aurelia.loaning.domain.AbstractLoan;
@@ -30,6 +31,8 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 	private String filterString;
 	private List<AbstractLoan> allLoans;
 	private String callingActivity;
+	private BroadcastReceiver dbFeedbackReceiver;
+	private IntentFilter intentFilter;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -47,6 +50,13 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+		if (dbFeedbackReceiver == null) {
+			dbFeedbackReceiver = new DbFeedbackReceiver();
+			intentFilter = new IntentFilter(Event.LOAN_MODIFIED.name());
+		}
+		registerReceiver(dbFeedbackReceiver, intentFilter);
+
 		setUpDisplay();
 		handleClickEvent(callingActivity);
 	}
