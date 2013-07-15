@@ -24,7 +24,7 @@ public class LoanUtil {
 		return loans;
 	}
 
-	public static Intent createIntentWithBundledLoan(BaseActivity from, Class to, AbstractLoan loan) {
+	public static Intent createIntentWithBundledLoan(BaseActivity from, Class<?> to, AbstractLoan loan) {
 		Intent intent = new Intent(from, to);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("loan", loan);

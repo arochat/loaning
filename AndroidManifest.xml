@@ -24,7 +24,7 @@
         <activity android:name=".view.EditLoanActivity"
                   android:icon="@drawable/icon_add"/>
         
-                <activity android:name="com.aurelia.loaning.view.CopyOrEditLoanActivity"
+                <activity android:name="com.aurelia.loaning.view.CopyLoanActivity"
                   android:icon="@drawable/icon_add"/>
          
         <activity android:name=".view.LoanFormActivity"
