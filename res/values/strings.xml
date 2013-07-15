@@ -47,5 +47,6 @@
     <string name="confirmation_settle">Are you sure you want to settle this loan ?</string>
     <string name="confirmation_delete">Are you sure you want to delete this loan ?</string>
     <string name="confirmation_settle_all">Are you sure you want to settle all these loans ?</string>
+    <string name="confirmation_delete_all">Are you sure you want to delete all these loans ?</string>
     
 </resources>

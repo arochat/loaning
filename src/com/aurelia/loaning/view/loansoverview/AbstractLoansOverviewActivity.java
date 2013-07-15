@@ -3,6 +3,7 @@
  */
 package com.aurelia.loaning.view.loansoverview;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.event.Event;
+import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.AddLoanActivity;
 import com.aurelia.loaning.view.BaseActivity;
 import com.aurelia.loaning.view.DisplayDetailActivity;
@@ -54,6 +56,14 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 
 	public List<AbstractLoan> getLoans() {
 		return loans;
+	}
+
+	public void deleteAllLoans(boolean deleteFromHistory) {
+		updateAllLoans(Event.DELETE_ALL_FILTERED_LOANS.name(), deleteFromHistory);
+	}
+
+	public void settleAllLoans() {
+		updateAllLoans(Event.SETTLE_ALL_FILTERED_LOANS.name(), false);
 	}
 
 	protected void setUpDisplay() {
@@ -93,6 +103,22 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 		if (loansListView != null) {
 			loansListView.setOnItemClickListener(listener);
 		}
+	}
+
+	private void updateAllLoans(String action, boolean deleteFromHistory) {
+		// need to pass an implementation to putSerializable
+		ArrayList<Long> loanIds = new ArrayList<Long>();
+		for (AbstractLoan loan : loans) {
+			loanIds.add(loan.getId());
+		}
+
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(action, loanIds);
+		bundle.putBoolean("delete_from_history", deleteFromHistory);
+		Intent intent = new Intent(this, LoanSaver.class);
+		intent.setAction(action);
+		intent.putExtras(bundle);
+		startService(intent);
 	}
 
 }

@@ -37,6 +37,7 @@ public class LoanSaver extends IntentService {
 		}
 
 		long dbResult = -1l;
+		boolean skipBroadcast = false;
 
 		if (Event.SAVE_LOANING.name().equals(intent.getAction())) {
 			dbResult = saveLoan(bundle);
@@ -48,9 +49,20 @@ public class LoanSaver extends IntentService {
 			dbResult = updateLoan(bundle);
 		} else if (Event.SETTLE_ALL_FILTERED_LOANS.name().equals(intent.getAction())) {
 			dbResult = settleAllLoans(bundle);
+		} else if (Event.DELETE_ALL_FILTERED_LOANS.name().equals(intent.getAction())) {
+			dbResult = deleteAllLoans(bundle);
 		}
 
-		if (dbResult != -1) {
+		if (bundle.getBoolean("delete_from_history")) {
+			// Intent displayLoansIntent = new Intent(this,
+			// LoansHistoryActivity.class);
+			// intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			// startActivity(displayLoansIntent);
+			sendBroadcast(new Intent(Event.SHOW_LOANINGS_HISTORY.name()));// ???
+			skipBroadcast = true;
+		}
+
+		if (dbResult != -1 && !skipBroadcast) {
 			// Intent displayLoansIntent = new Intent(this,
 			// StandardLoansOverviewActivity.class);
 			// startActivity(displayLoansIntent);
@@ -81,6 +93,13 @@ public class LoanSaver extends IntentService {
 	private long deleteLoan(Bundle loanToDelete) {
 		AbstractLoan loan = (AbstractLoan) loanToDelete.getSerializable(Event.DELETE_LOAN.name());
 		return databaseAccess.delete(converter.convert(loan));
+	}
+
+	private long deleteAllLoans(Bundle loansToDelete) {
+		List<Long> loanIdsToDelete = new ArrayList<Long>();
+		List<Long> loanIds = (List<Long>) loansToDelete.getSerializable(Event.DELETE_ALL_FILTERED_LOANS.name());
+		loanIdsToDelete.addAll(loanIds);
+		return databaseAccess.deleteAllLoans(loanIds);
 	}
 
 	private int settleLoan(Bundle loanToSettle) {

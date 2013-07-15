@@ -63,6 +63,16 @@ public class LoanDatabaseAccess {
 		return databaseAccess.delete(loan, idName + "=?", new String[] { loan.getId().toString() });
 	}
 
+	public long deleteAllLoans(List<Long> loanIds) {
+		// TODO : use StringUtils here
+		String loanIdsStr = "";
+		for (Long id : loanIds) {
+			loanIdsStr = loanIdsStr.concat(id.toString()).concat(",");
+		}
+		loanIdsStr = loanIdsStr.substring(0, loanIdsStr.length() - 1);
+		return databaseAccess.delete(Loan.class, "loan_id in(" + loanIdsStr + ")", null);
+	}
+
 	public int updateStatus(Loan loan, int newStatus) {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put("STATUS", newStatus);

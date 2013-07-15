@@ -81,6 +81,9 @@ public class LoansHistoryActivity extends AbstractLoansOverviewActivity {
 						setUpDisplay();
 						handleClickEvent(LoansHistoryActivity.this.getClass().getName());
 					}
+				} else {
+					Intent displayLoansIntent = new Intent(context, LoansHistoryActivity.class);
+					startActivity(displayLoansIntent);
 				}
 			}
 		}

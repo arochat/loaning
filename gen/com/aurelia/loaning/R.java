@@ -1114,6 +1114,7 @@ containing a value of this type.
          */
         public static final int borrow_label=0x7f090011;
         public static final int confirmation_delete=0x7f09002e;
+        public static final int confirmation_delete_all=0x7f090030;
         /**  confirmation dialogs 
          */
         public static final int confirmation_settle=0x7f09002d;
