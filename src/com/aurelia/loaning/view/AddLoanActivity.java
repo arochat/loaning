@@ -24,14 +24,16 @@ public class AddLoanActivity extends LoanFormActivity {
 
 		switch (loanType) {
 		case MONEY_LOAN:
-			// fallthrough
-		case MONEY_BORROWING:
 			setContentView(R.layout.add_money_loan_form);
 			break;
+		case MONEY_BORROWING:
+			setContentView(R.layout.add_money_borrowing_form);
+			break;
 		case OBJECT_LOAN:
-			// fallthrough
-		case OBJECT_BORROWING:
 			setContentView(R.layout.add_object_loan_form);
+			break;
+		case OBJECT_BORROWING:
+			setContentView(R.layout.add_object_borrowing_form);
 			break;
 		default:
 		}

@@ -23,6 +23,9 @@
         
         <activity android:name=".view.EditLoanActivity"
                   android:icon="@drawable/icon_add"/>
+        
+                <activity android:name="com.aurelia.loaning.view.CopyOrEditLoanActivity"
+                  android:icon="@drawable/icon_add"/>
          
         <activity android:name=".view.LoanFormActivity"
                   android:icon="@drawable/icon_add"/>

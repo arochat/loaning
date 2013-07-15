@@ -8,10 +8,12 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.AbstractLoan;
@@ -63,6 +65,13 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 			}
 			loansListView = (ListView) findViewById(android.R.id.list);
 			loansListView.setAdapter(new LoansArrayAdapter(this, loans));
+		} else {
+			CharSequence text = "No loans found";
+			int duration = Toast.LENGTH_LONG;
+
+			Toast toast = Toast.makeText(this, text, duration);
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+			toast.show();
 		}
 	}
 

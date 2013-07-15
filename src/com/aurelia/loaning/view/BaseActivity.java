@@ -1,8 +1,9 @@
 package com.aurelia.loaning.view;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -10,6 +11,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.aurelia.loaning.R;
+import com.aurelia.loaning.view.actionBar.action.AddLoanCommand;
 import com.aurelia.loaning.view.actionBar.delegate.AbstractActionBarDelegate;
 import com.aurelia.loaning.view.loansoverview.LoansHistoryActivity;
 import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
@@ -39,7 +41,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements O
 
 	@Override
 	public void onSlideMenuItemClick(int itemId) {
-		// TODO : real implementation
 		switch (itemId) {
 		case R.id.item_one:
 			backToLoansOverview();
@@ -48,7 +49,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements O
 			backToLoansHistory();
 			break;
 		case R.id.item_three:
-			Toast.makeText(this, "Item three selected", Toast.LENGTH_SHORT).show();
+			backToAddLoanForm();
 			break;
 		}
 	}
@@ -80,6 +81,9 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements O
 		// set defaults for logo & home up
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayUseLogoEnabled(false);
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#5C93F0")));
+		// actionBar.setBackgroundDrawable(new
+		// ColorDrawable(Color.parseColor("#3258A3")));
 		return actionBar;
 	}
 
@@ -93,6 +97,13 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements O
 	private void backToLoansHistory() {
 		Intent intent = new Intent(this, LoansHistoryActivity.class);
 		startActivity(intent);
+	}
+
+	private void backToAddLoanForm() {
+		AddLoanCommand command = new AddLoanCommand();
+		command.performAction(this);
+		// Intent intent = new Intent(this, AddLoanActivity.class);
+		// startActivity(intent);
 	}
 
 	private void setSlideMenu() {

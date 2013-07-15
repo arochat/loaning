@@ -16,15 +16,15 @@
         android:icon="@drawable/icon_add"
         android:title="@string/item_three">
     </item>
-    <item
-        android:id="@+id/item_four"
-        android:icon="@drawable/ic_launcher"
-        android:title="@string/item_four">
-    </item>
-     <item
-        android:id="@+id/item_five"
-        android:icon="@drawable/ic_launcher"
-        android:title="@string/item_five">
-    </item>
+<!--     <item -->
+<!--         android:id="@+id/item_four" -->
+<!--         android:icon="@drawable/ic_launcher" -->
+<!--         android:title="@string/item_four"> -->
+<!--     </item> -->
+<!--      <item -->
+<!--         android:id="@+id/item_five" -->
+<!--         android:icon="@drawable/ic_launcher" -->
+<!--         android:title="@string/item_five"> -->
+<!--     </item> -->
     
 </menu>

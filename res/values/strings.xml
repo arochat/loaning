@@ -16,6 +16,7 @@
     <string name="amount_label">Amount</string>
     <string name="currency_label">Currency</string>
     <string name="I_loaned_label">I loaned</string>
+    <string name="I_borrowed_label">I borrowed</string>
     <string name="to_label">To</string>
     <string name="for_label">For</string>
     
