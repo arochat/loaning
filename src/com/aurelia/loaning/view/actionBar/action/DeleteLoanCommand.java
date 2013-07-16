@@ -9,6 +9,12 @@ import com.aurelia.loaning.view.dialog.ConfirmationDialogFragment;
 
 public class DeleteLoanCommand extends ActionBarCommandWithConfirmation {
 
+	private boolean deleteFromHistory = false;
+
+	public DeleteLoanCommand(boolean deleteFromHistory) {
+		this.deleteFromHistory = deleteFromHistory;
+	}
+
 	@Override
 	public void performAction(SherlockFragmentActivity activity) {
 		super.setConfirmationMessage(activity.getResources().getString(R.string.confirmation_delete));
@@ -19,7 +25,7 @@ public class DeleteLoanCommand extends ActionBarCommandWithConfirmation {
 	public void performActionCallback(Activity activity) {
 		if (activity instanceof DisplayDetailActivity) {
 			DisplayDetailActivity displayDetailActivity = (DisplayDetailActivity) activity;
-			displayDetailActivity.deleteLoan();
+			displayDetailActivity.deleteLoan(deleteFromHistory);
 		}
 	}
 }

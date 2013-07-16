@@ -16,7 +16,7 @@ public class DisplayHistoryDetailActionBarDelegate extends AbstractActionBarDele
 		actionBarDefinition = new HashMap<String, ActionBarItem>();
 
 		actionBarDefinition.put("DELETE", new ActionBarItem("DELETE", "DELETE", R.drawable.icon_delete, false,
-				new DeleteLoanCommand()));
+				new DeleteLoanCommand(true)));
 
 		return new OptionsMenuActionBarBuilder().withActionBarDefinition(actionBarDefinition).withMenu(menu).build();
 

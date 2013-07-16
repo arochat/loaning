@@ -31,6 +31,7 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 	private String callingActivity;
 	private BroadcastReceiver dbFeedbackReceiver;
 	private IntentFilter intentFilter;
+	private IntentFilter intentFilterForHistory;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -52,8 +53,10 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 		if (dbFeedbackReceiver == null) {
 			dbFeedbackReceiver = new DbFeedbackReceiver();
 			intentFilter = new IntentFilter(Event.LOAN_MODIFIED.name());
+			intentFilterForHistory = new IntentFilter(Event.DELETE_LOAN.name());
 		}
 		registerReceiver(dbFeedbackReceiver, intentFilter);
+		registerReceiver(dbFeedbackReceiver, intentFilterForHistory);
 
 		setUpDisplay();
 		handleClickEvent(callingActivity);
@@ -100,6 +103,9 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 		public void onReceive(Context context, Intent intent) {
 			if (intent != null && Event.LOAN_MODIFIED.name().equals(intent.getAction())) {
 				Intent displayLoansIntent = new Intent(context, StandardLoansOverviewActivity.class);
+				startActivity(displayLoansIntent);
+			} else if (intent != null && Event.DELETE_LOAN.name().equals(intent.getAction())) {
+				Intent displayLoansIntent = new Intent(context, LoansHistoryActivity.class);
 				startActivity(displayLoansIntent);
 			}
 		}

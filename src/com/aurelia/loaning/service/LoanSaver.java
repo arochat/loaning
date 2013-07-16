@@ -58,7 +58,7 @@ public class LoanSaver extends IntentService {
 			// LoansHistoryActivity.class);
 			// intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			// startActivity(displayLoansIntent);
-			sendBroadcast(new Intent(Event.SHOW_LOANINGS_HISTORY.name()));// ???
+			sendBroadcast(new Intent(Event.DELETE_LOAN.name()));// ???
 			skipBroadcast = true;
 		}
 

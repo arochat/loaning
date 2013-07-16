@@ -26,6 +26,7 @@ public class DisplayDetailActivity extends BaseActivity {
 	private AbstractLoan displayedLoan;
 	private BroadcastReceiver dbFeedbackReceiver;
 	private IntentFilter intentFilter;
+	private IntentFilter intentFilterForHistory;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -41,8 +42,10 @@ public class DisplayDetailActivity extends BaseActivity {
 		if (dbFeedbackReceiver == null) {
 			dbFeedbackReceiver = new DbFeedbackReceiver();
 			intentFilter = new IntentFilter(Event.LOAN_MODIFIED.name());
+			intentFilterForHistory = new IntentFilter(Event.DELETE_LOAN.name());
 		}
 		registerReceiver(dbFeedbackReceiver, intentFilter);
+		registerReceiver(dbFeedbackReceiver, intentFilterForHistory);
 
 		// To get the intent that is sent to the activity. The bundled passed as
 		// parameter to onCreate() is the bundle
@@ -87,9 +90,10 @@ public class DisplayDetailActivity extends BaseActivity {
 		unregisterReceiver(dbFeedbackReceiver);
 	}
 
-	public void deleteLoan() {
+	public void deleteLoan(boolean deleteFromHistory) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(Event.DELETE_LOAN.name(), this.displayedLoan);
+		bundle.putBoolean("delete_from_history", deleteFromHistory);
 		Intent intent = new Intent(this, LoanSaver.class);
 		intent.setAction(Event.DELETE_LOAN.name());
 		intent.putExtras(bundle);
@@ -125,6 +129,9 @@ public class DisplayDetailActivity extends BaseActivity {
 		public void onReceive(Context context, Intent intent) {
 			if (intent != null && Event.LOAN_MODIFIED.name().equals(intent.getAction())) {
 				Intent displayLoansIntent = new Intent(context, StandardLoansOverviewActivity.class);
+				startActivity(displayLoansIntent);
+			} else if (intent != null && Event.DELETE_LOAN.name().equals(intent.getAction())) {
+				Intent displayLoansIntent = new Intent(context, LoansHistoryActivity.class);
 				startActivity(displayLoansIntent);
 			}
 		}
