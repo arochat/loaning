@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aurelia.loaning.R;
@@ -39,6 +40,7 @@ public class LoansArrayAdapter extends BaseAdapter {
 			viewHolder.sourceAndDestination = (TextView) convertView.findViewById(R.id.item_source_and_destination);
 			viewHolder.creationDate = (TextView) convertView.findViewById(R.id.item_creation_date);
 			viewHolder.object = (TextView) convertView.findViewById(R.id.item_object);
+			viewHolder.loanIcon = (ImageView) convertView.findViewById(R.id.loan_icon);
 
 			convertView.setTag(viewHolder);
 
@@ -49,6 +51,7 @@ public class LoansArrayAdapter extends BaseAdapter {
 		viewHolder.sourceAndDestination.setText(loans.get(position).displayPerson());
 		viewHolder.creationDate.setText(format.print(loans.get(position).getStartDate()));
 		viewHolder.object.setText(loans.get(position).displayDescription());
+		viewHolder.loanIcon.setImageResource(loans.get(position).getType().getIcon());
 
 		return convertView;
 
@@ -74,6 +77,7 @@ public class LoansArrayAdapter extends BaseAdapter {
 		TextView object;
 		TextView creationDate;
 		TextView sourceAndDestination;
+		ImageView loanIcon;
 	}
 
 }

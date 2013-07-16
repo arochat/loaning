@@ -54,18 +54,11 @@ public class LoanSaver extends IntentService {
 		}
 
 		if (bundle.getBoolean("delete_from_history")) {
-			// Intent displayLoansIntent = new Intent(this,
-			// LoansHistoryActivity.class);
-			// intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			// startActivity(displayLoansIntent);
 			sendBroadcast(new Intent(Event.DELETE_LOAN.name()));// ???
 			skipBroadcast = true;
 		}
 
 		if (dbResult != -1 && !skipBroadcast) {
-			// Intent displayLoansIntent = new Intent(this,
-			// StandardLoansOverviewActivity.class);
-			// startActivity(displayLoansIntent);
 			sendBroadcast(new Intent(Event.LOAN_MODIFIED.name()));
 		}
 		databaseAccess.close();

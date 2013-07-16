@@ -67,7 +67,7 @@
         android:layout_alignLeft="@+id/currency_field"
         android:layout_below="@+id/currency_field"
         android:ems="10"
-        android:hint="@string/to_label" />
+        android:hint="@string/from_label" />
 
     <EditText
         android:id="@+id/reason_field"
