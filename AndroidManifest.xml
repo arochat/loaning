@@ -4,14 +4,14 @@
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17"/>
    
     <application android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-		android:label=""
+        android:icon="@drawable/icon_overview_list"
         android:theme="@style/Sherlock.__Theme.DarkActionBar"
+        android:label="@string/app_name"
         android:debuggable="true">
-        <!--         android:label="@string/app_name" -->
+
         <activity android:label="@string/app_name"
             android:name="com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity"
-            android:icon="@drawable/icon_overview_list">
+            android:icon="@drawable/icon_cash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -22,19 +22,22 @@
                   android:icon="@drawable/icon_add"/>
         
         <activity android:name=".view.EditLoanActivity"
-                  android:icon="@drawable/icon_add"/>
+                  android:icon="@drawable/icon_edit"/>
         
                 <activity android:name="com.aurelia.loaning.view.CopyLoanActivity"
-                  android:icon="@drawable/icon_add"/>
+                  android:icon="@drawable/icon_copy"/>
          
         <activity android:name=".view.LoanFormActivity"
                   android:icon="@drawable/icon_add"/>
         
         <activity android:name=".view.DisplayDetailActivity"
-                  android:icon="@drawable/icon_overview_list"/>
+                  android:icon="@drawable/icon_filter"/>
         
         <activity android:name=".view.loansoverview.FilteredLoansOverviewActivity"
-                  android:icon="@drawable/icon_overview_list"/>
+                  android:icon="@drawable/icon_filter"/>
+        
+        <activity android:name=".view.loansoverview.Filtered"
+                  android:icon="@drawable/icon_filter"/>
         
         <activity android:name=".view.loansoverview.LoansHistoryActivity"
                   android:icon="@drawable/icon_history"/>

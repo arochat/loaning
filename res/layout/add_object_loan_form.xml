@@ -37,6 +37,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="19dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
         android:text="@string/I_loaned_label" />
 
     <EditText
@@ -52,9 +54,9 @@
         android:id="@+id/addLoanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/person_field"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/I_loaned_label"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="24dp"
         android:onClick="saveLoan"
         android:text="@string/add_button" />
 

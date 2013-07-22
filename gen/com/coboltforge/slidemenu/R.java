@@ -15,7 +15,7 @@ public final class R {
 		public static final int menu_icon = 0x7f040049;
 	}
 	public static final class layout {
-		public static final int slidemenu_listitem = 0x7f030022;
-		public static final int slidemenu = 0x7f030021;
+		public static final int slidemenu_listitem = 0x7f030023;
+		public static final int slidemenu = 0x7f030022;
 	}
 }

@@ -81,6 +81,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements O
 		// set defaults for logo & home up
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayUseLogoEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#5C93F0")));
 		// actionBar.setBackgroundDrawable(new
 		// ColorDrawable(Color.parseColor("#3258A3")));

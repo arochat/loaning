@@ -25,6 +25,7 @@ public class AddLoanDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		// builder.setView(view);
 		builder.setTitle(R.string.add_loan_fragment_title).setItems(R.array.loan_choice,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {

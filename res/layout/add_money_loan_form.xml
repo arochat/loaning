@@ -20,15 +20,6 @@
 <!--         android:layout_below="@+id/destination" -->
 <!--         android:text="@string/when_label" /> -->
 
-    <Button
-        android:id="@+id/addLoanButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignParentBottom="true"
-        android:onClick="saveLoan"
-        android:text="@string/add_button" />
-
     <EditText
         android:id="@+id/amount_field"
         android:layout_width="wrap_content"
@@ -64,6 +55,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="19dp"
+        android:textStyle="bold"
+         android:layout_marginBottom="10dp"
         android:text="@string/I_loaned_label" />
 
     <EditText
@@ -77,5 +70,15 @@
 
         <requestFocus />
     </EditText>
+
+    <Button
+        android:id="@+id/addLoanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/reason_field"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:onClick="saveLoan"
+        android:text="@string/add_button" />
 
 </RelativeLayout>

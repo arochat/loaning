@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
 
 import com.aurelia.loaning.view.actionBar.action.ActionBarCommandWithConfirmation;
 
@@ -22,7 +23,11 @@ public class ConfirmationDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+		LayoutInflater inflater = callingActivity.getLayoutInflater();
+
 		return new AlertDialog.Builder(callingActivity)//
+				// .setView(inflater.inflate(R.layout.delete_loan_dialog,
+				// null))//
 				.setMessage(command.getConfirmationMessage())//
 				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {

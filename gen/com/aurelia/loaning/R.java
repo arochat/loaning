@@ -923,18 +923,19 @@ containing a value of this type.
         public static final int ic_launcher=0x7f02006f;
         public static final int icon_add=0x7f020070;
         public static final int icon_balance=0x7f020071;
-        public static final int icon_cash=0x7f020072;
-        public static final int icon_copy=0x7f020073;
-        public static final int icon_delete=0x7f020074;
-        public static final int icon_edit=0x7f020075;
-        public static final int icon_filter=0x7f020076;
-        public static final int icon_history=0x7f020077;
-        public static final int icon_overview_list=0x7f020078;
-        public static final int icon_settle=0x7f020079;
+        public static final int icon_books=0x7f020072;
+        public static final int icon_cash=0x7f020073;
+        public static final int icon_copy=0x7f020074;
+        public static final int icon_delete=0x7f020075;
+        public static final int icon_edit=0x7f020076;
+        public static final int icon_filter=0x7f020077;
+        public static final int icon_history=0x7f020078;
+        public static final int icon_overview_list=0x7f020079;
+        public static final int icon_settle=0x7f02007a;
     }
     public static final class id {
-        public static final int I_borrowed_label=0x7f040035;
-        public static final int I_loaned_label=0x7f04003a;
+        public static final int I_borrowed_label=0x7f040033;
+        public static final int I_loaned_label=0x7f040039;
         public static final int abs__action_bar=0x7f040022;
         public static final int abs__action_bar_container=0x7f040021;
         public static final int abs__action_bar_subtitle=0x7f040011;
@@ -975,41 +976,41 @@ containing a value of this type.
         public static final int abs__title=0x7f04001b;
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
-        public static final int addLoanButton=0x7f040033;
-        public static final int amount_field=0x7f040036;
-        public static final int currency_field=0x7f040037;
-        public static final int description_field=0x7f04003b;
+        public static final int addLoanButton=0x7f040038;
+        public static final int amount_field=0x7f040034;
+        public static final int currency_field=0x7f040035;
+        public static final int description_field=0x7f04003a;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
         public static final int filter_field=0x7f04003d;
         public static final int filter_label=0x7f04003c;
         public static final int homeAsUp=0x7f040006;
-        public static final int item_creation_date=0x7f040045;
+        public static final int item_creation_date=0x7f040044;
         public static final int item_object=0x7f04003e;
         public static final int item_one=0x7f04004c;
-        public static final int item_source_and_destination=0x7f040044;
+        public static final int item_source_and_destination=0x7f040043;
         public static final int item_three=0x7f04004e;
         public static final int item_two=0x7f04004d;
         public static final int listMode=0x7f040002;
         public static final int loan_creation_date=0x7f04003f;
-        public static final int loan_icon=0x7f040043;
-        public static final int loan_reminder_date=0x7f040040;
-        public static final int loan_source=0x7f040041;
+        public static final int loan_icon=0x7f040042;
+        public static final int loan_source=0x7f040040;
         public static final int menu_copy=0x7f04004b;
         public static final int menu_header=0x7f040046;
         public static final int menu_icon=0x7f040049;
         public static final int menu_label=0x7f04004a;
         public static final int menu_listview=0x7f040047;
         public static final int normal=0x7f040001;
-        public static final int object_of_loan=0x7f040042;
+        public static final int object_of_loan=0x7f040041;
         public static final int overlay=0x7f040048;
-        public static final int person_field=0x7f040038;
-        public static final int reason_field=0x7f040039;
+        public static final int person_field=0x7f040036;
+        public static final int reason_field=0x7f040037;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
         public static final int tabMode=0x7f040003;
-        public static final int textView2=0x7f040034;
+        public static final int text=0x7f04003b;
+        public static final int textView2=0x7f040045;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
     }
@@ -1044,14 +1045,15 @@ containing a value of this type.
         public static final int add_money_loan_form=0x7f030018;
         public static final int add_object_borrowing_form=0x7f030019;
         public static final int add_object_loan_form=0x7f03001a;
-        public static final int filter_loans=0x7f03001b;
-        public static final int loan_detail=0x7f03001c;
-        public static final int loan_item=0x7f03001d;
-        public static final int loans_overview_activity=0x7f03001e;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001f;
-        public static final int sherlock_spinner_item=0x7f030020;
-        public static final int slidemenu=0x7f030021;
-        public static final int slidemenu_listitem=0x7f030022;
+        public static final int delete_loan_dialog=0x7f03001b;
+        public static final int filter_loans=0x7f03001c;
+        public static final int loan_detail=0x7f03001d;
+        public static final int loan_item=0x7f03001e;
+        public static final int loans_overview_activity=0x7f03001f;
+        public static final int sherlock_spinner_dropdown_item=0x7f030020;
+        public static final int sherlock_spinner_item=0x7f030021;
+        public static final int slidemenu=0x7f030022;
+        public static final int slidemenu_listitem=0x7f030023;
     }
     public static final class menu {
         public static final int activity_main=0x7f0c0000;
@@ -1111,7 +1113,6 @@ containing a value of this type.
         public static final int amount_label=0x7f090019;
         public static final int app_name=0x7f09000f;
         /**  Insert loan 
- Insert loan 
          */
         public static final int borrow_label=0x7f090011;
         public static final int confirmation_delete=0x7f09002e;
@@ -1122,7 +1123,6 @@ containing a value of this type.
         public static final int confirmation_settle_all=0x7f09002f;
         public static final int currency_label=0x7f09001a;
         /**  Loan editable detail 
- Loan editable detail 
          */
         public static final int date_label=0x7f090023;
         public static final int delete_button=0x7f090026;
@@ -1143,7 +1143,6 @@ containing a value of this type.
         public static final int item_two=0x7f090029;
         public static final int loan_label=0x7f090012;
         /**  View loan list 
- View loan list 
          */
         public static final int loan_list_title=0x7f090020;
         public static final int loan_object_label=0x7f090015;

@@ -5,8 +5,8 @@ import com.aurelia.loaning.R;
 public enum LoanType {
 
 	// TODO : put correct icons here
-	MONEY_LOAN(R.drawable.icon_cash), MONEY_BORROWING(R.drawable.icon_cash), OBJECT_LOAN(R.drawable.icon_balance), OBJECT_BORROWING(
-			R.drawable.icon_balance);
+	MONEY_LOAN(R.drawable.icon_cash), MONEY_BORROWING(R.drawable.icon_cash), OBJECT_LOAN(R.drawable.icon_books), OBJECT_BORROWING(
+			R.drawable.icon_books);
 
 	private int icon;
 

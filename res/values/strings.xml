@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name"></string>
+    <string name="app_name">Loaning</string>
     <string name="menu_settings">Settings</string>
     
     <!-- Insert loan -->
@@ -32,7 +32,6 @@
     <!-- Loan editable detail -->
     <string name="date_label">When : </string>
     <string name="object_of_loan_label">What : </string>
-    <string name="from_label">From -> To : </string>
     <string name="reminder_label">Remind me on : </string>
     <string name="delete_button">Delete</string>
     <string name="settle_button">Settle</string>
