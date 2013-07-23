@@ -12,6 +12,7 @@ import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.actionBar.delegate.AddLoanActionBarDelegate;
 import com.aurelia.loaning.view.dialog.AddLoanDialogFragment;
+import com.aurelia.loaning.view.validation.LoanFormValidator;
 
 public class AddLoanActivity extends LoanFormActivity {
 
@@ -42,7 +43,34 @@ public class AddLoanActivity extends LoanFormActivity {
 	// TODO : validate that form is completely filled
 	public void saveLoan(View view) {
 
-		AbstractLoan loan = LoanFactory.createLoan(getLoanFromUI(), true);
+		LoanType loanType = getLoanFromUI().getLoanType();
+
+		switch (loanType) {
+		case MONEY_LOAN:
+			// fallthrough
+		case MONEY_BORROWING:
+			if (LoanFormValidator.getInstance().moneyLoanIsValid(this)) {
+				AbstractLoan loan = LoanFactory.createLoan(getLoanFromUI(), true);
+				saveLoan(loan);
+			}
+			break;
+
+		case OBJECT_LOAN:
+			// fallthrough
+		case OBJECT_BORROWING:
+			if (LoanFormValidator.getInstance().objectLoanIsValid(this)) {
+				AbstractLoan loan = LoanFactory.createLoan(getLoanFromUI(), true);
+				saveLoan(loan);
+			}
+			break;
+
+		default:
+			// TODO : throw Exception
+		}
+
+	}
+
+	private void saveLoan(AbstractLoan loan) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(Event.SAVE_LOANING.name(), loan);
 		Intent intent = new Intent(this, LoanSaver.class);
