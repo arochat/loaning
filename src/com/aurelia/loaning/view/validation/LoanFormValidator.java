@@ -1,5 +1,7 @@
 package com.aurelia.loaning.view.validation;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.widget.EditText;
 
@@ -16,6 +18,13 @@ public class LoanFormValidator {
 	public boolean moneyLoanIsValid(Activity callinActivity) {
 		EditText amount = (EditText) callinActivity.findViewById(R.id.amount_field);
 		if (!checkNotNull(amount, "Amount is required!")) {
+			return false;
+		}
+		try {
+			Double.valueOf(amount.getText().toString());
+		} catch (NumberFormatException e) {
+			amount.requestFocus();
+			amount.setError("Invalid format");
 			return false;
 		}
 
@@ -47,7 +56,7 @@ public class LoanFormValidator {
 	}
 
 	private boolean checkNotNull(EditText editText, String errorMessage) {
-		if (editText.getText().toString().length() == 0) {
+		if (editText.getText() == null || StringUtils.isBlank(editText.getText().toString())) {
 			editText.requestFocus();
 			editText.setError(errorMessage);
 			return false;

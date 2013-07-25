@@ -50,8 +50,6 @@
         android:layout_below="@+id/amount_field"
         android:ems="10"
         android:hint="@string/currency_label" >
-
-        <requestFocus />
     </EditText>
 
     <EditText
