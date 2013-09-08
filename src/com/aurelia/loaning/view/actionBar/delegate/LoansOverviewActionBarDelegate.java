@@ -15,6 +15,7 @@ public class LoansOverviewActionBarDelegate extends AbstractActionBarDelegate {
 	public Menu setupActionBar(Menu menu) {
 
 		actionBarDefinition = new HashMap<String, ActionBarItem>();
+
 		actionBarDefinition.put("ADD",
 				new ActionBarItem("ADD", "ADD", R.drawable.icon_add, false, new AddLoanCommand()));
 		actionBarDefinition.put("FILTER", new ActionBarItem("FILTER", "FILTER", R.drawable.icon_filter, false,

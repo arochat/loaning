@@ -42,22 +42,30 @@
         android:ems="10"
         android:hint="@string/amount_label" />
 
-    <EditText
-        android:id="@+id/currency_field"
+    <Button
+        android:id="@+id/addLoanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/reason_field"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:onClick="saveLoan"
+        android:text="@string/add_button" />
+
+    <Spinner
+        android:id="@+id/spinnerCurrencies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/amount_field"
-        android:layout_below="@+id/amount_field"
-        android:ems="10"
-        android:hint="@string/currency_label" >
-    </EditText>
+        android:layout_alignRight="@+id/amount_field"
+        android:layout_below="@+id/amount_field"/>
 
     <EditText
         android:id="@+id/person_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/currency_field"
-        android:layout_below="@+id/currency_field"
+        android:layout_alignLeft="@+id/spinnerCurrencies"
+        android:layout_below="@+id/spinnerCurrencies"
         android:ems="10"
         android:hint="@string/from_label" />
 
@@ -69,15 +77,5 @@
         android:layout_below="@+id/person_field"
         android:ems="10"
         android:hint="@string/for_label" />
-
-    <Button
-        android:id="@+id/addLoanButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/reason_field"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="18dp"
-        android:onClick="saveLoan"
-        android:text="@string/add_button" />
 
 </RelativeLayout>

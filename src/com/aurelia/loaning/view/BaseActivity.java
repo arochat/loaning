@@ -1,8 +1,6 @@
 package com.aurelia.loaning.view;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -82,9 +80,11 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements O
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayUseLogoEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#5C93F0")));
 		// actionBar.setBackgroundDrawable(new
-		// ColorDrawable(Color.parseColor("#3258A3")));
+		// ColorDrawable(Color.parseColor("#5C93F0")));
+
+		actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_colors));
+
 		return actionBar;
 	}
 

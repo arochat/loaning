@@ -15,8 +15,8 @@ public class LoanFormValidator {
 		return instance;
 	}
 
-	public boolean moneyLoanIsValid(Activity callinActivity) {
-		EditText amount = (EditText) callinActivity.findViewById(R.id.amount_field);
+	public boolean moneyLoanIsValid(Activity callingActivity) {
+		EditText amount = (EditText) callingActivity.findViewById(R.id.amount_field);
 		if (!checkNotNull(amount, "Amount is required!")) {
 			return false;
 		}
@@ -28,12 +28,7 @@ public class LoanFormValidator {
 			return false;
 		}
 
-		EditText currency = (EditText) callinActivity.findViewById(R.id.currency_field);
-		if (!checkNotNull(currency, "Currency is required!")) {
-			return false;
-		}
-
-		EditText person = (EditText) callinActivity.findViewById(R.id.person_field);
+		EditText person = (EditText) callingActivity.findViewById(R.id.person_field);
 		if (!checkNotNull(person, "Person is required!")) {
 			return false;
 		}
@@ -41,13 +36,13 @@ public class LoanFormValidator {
 		return true;
 	}
 
-	public boolean objectLoanIsValid(Activity callinActivity) {
-		EditText description = (EditText) callinActivity.findViewById(R.id.description_field);
+	public boolean objectLoanIsValid(Activity callingActivity) {
+		EditText description = (EditText) callingActivity.findViewById(R.id.description_field);
 		if (!checkNotNull(description, "Description is required!")) {
 			return false;
 		}
 
-		EditText person = (EditText) callinActivity.findViewById(R.id.person_field);
+		EditText person = (EditText) callingActivity.findViewById(R.id.person_field);
 		if (!checkNotNull(person, "Person is required!")) {
 			return false;
 		}

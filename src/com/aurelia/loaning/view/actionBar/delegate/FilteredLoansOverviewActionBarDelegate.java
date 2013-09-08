@@ -19,6 +19,7 @@ public class FilteredLoansOverviewActionBarDelegate extends AbstractActionBarDel
 		// actionBarDefinition.put("DELETE_ALL", new ActionBarItem("DELETE_ALL",
 		// "DELETE_ALL", R.drawable.icon_delete,
 		// false, new DeleteAllCommand()));
+
 		actionBarDefinition.put("BALANCE", new ActionBarItem("COMPUTE_BALANCE", "BALANCE", R.drawable.icon_balance,
 				false, new ComputeBalanceCommand()));
 		actionBarDefinition.put("SETTLE_ALL", new ActionBarItem("SETTLE_ALL", "SETTLE_ALL", R.drawable.icon_settle,

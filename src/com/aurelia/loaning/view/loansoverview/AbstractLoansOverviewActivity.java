@@ -23,6 +23,7 @@ import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.AddLoanActivity;
 import com.aurelia.loaning.view.BaseActivity;
 import com.aurelia.loaning.view.DisplayDetailActivity;
+import com.aurelia.loaning.view.actionBar.delegate.NoActionsActionBarDelegate;
 
 /**
  * @author aurelia
@@ -67,7 +68,7 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 	}
 
 	protected void setUpDisplay() {
-		if (loans != null & !Collections.EMPTY_LIST.equals(loans)) {
+		if (loansFound()) {
 			String[] loanString = new String[loans.size()];
 
 			for (int i = 0; i < loans.size(); i++) {
@@ -76,7 +77,10 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 			loansListView = (ListView) findViewById(android.R.id.list);
 			loansListView.setAdapter(new LoansArrayAdapter(this, loans));
 		} else {
-			CharSequence text = "No loans found";
+			// override the previously set actionBarDelegate
+			this.setActionBarDelegate(new NoActionsActionBarDelegate());
+
+			CharSequence text = "No loans to display";
 			int duration = Toast.LENGTH_LONG;
 
 			Toast toast = Toast.makeText(this, text, duration);
@@ -119,6 +123,12 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 		intent.setAction(action);
 		intent.putExtras(bundle);
 		startService(intent);
+	}
+
+	// -----------------------------
+
+	protected boolean loansFound() {
+		return loans != null && !Collections.EMPTY_LIST.equals(loans);
 	}
 
 }

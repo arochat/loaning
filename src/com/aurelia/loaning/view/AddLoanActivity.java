@@ -38,9 +38,9 @@ public class AddLoanActivity extends LoanFormActivity {
 			break;
 		default:
 		}
+		prepareCurrenciesSpinner();
 	}
 
-	// TODO : validate that form is completely filled
 	public void saveLoan(View view) {
 
 		LoanType loanType = getLoanFromUI().getLoanType();

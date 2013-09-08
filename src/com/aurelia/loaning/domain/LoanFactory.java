@@ -36,7 +36,7 @@ public class LoanFactory {
 			MoneyLoanFromUI moneyLoanFromUI = (MoneyLoanFromUI) loanFromUI;
 			moneyLoan = new MoneyLoan(person, startDate, notificationDate, isContact, loanType, LoanStatus.ACTIVE);
 			moneyLoan.setAmount(Double.valueOf(moneyLoanFromUI.getAmountFromUI().getText().toString()));
-			moneyLoan.setCurrency(moneyLoanFromUI.getCurrencyFromUI().getText().toString());
+			moneyLoan.setCurrency(moneyLoanFromUI.getCurrencyFromUI().getSelectedItem().toString());
 			moneyLoan.setReason(moneyLoanFromUI.getReasonFromUI().getText().toString());
 			return moneyLoan;
 

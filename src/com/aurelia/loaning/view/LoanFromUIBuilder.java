@@ -1,6 +1,7 @@
 package com.aurelia.loaning.view;
 
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.aurelia.loaning.R;
 
@@ -16,7 +17,11 @@ public class LoanFromUIBuilder {
 		case MONEY_BORROWING:
 			MoneyLoanFromUI moneyLoanFromUI = new MoneyLoanFromUI();
 			moneyLoanFromUI.setAmountFromUI((EditText) activity.findViewById(R.id.amount_field));
-			moneyLoanFromUI.setCurrencyFromUI((EditText) activity.findViewById(R.id.currency_field));
+			// moneyLoanFromUI.setCurrencyFromUI((EditText)
+			// activity.findViewById(R.id.currency_field));
+
+			moneyLoanFromUI.setCurrencyFromUI((Spinner) activity.findViewById(R.id.spinnerCurrencies));
+
 			moneyLoanFromUI.setReasonFromUI((EditText) activity.findViewById(R.id.reason_field));
 			// moneyLoanFromUI.setEndDateFromUI(endDateFromUI);
 			moneyLoanFromUI.setPersonFromUI((EditText) activity.findViewById(R.id.person_field));

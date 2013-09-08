@@ -43,6 +43,7 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 		} else {
 			this.setActionBarDelegate(new FilteredLoansOverviewActionBarDelegate());
 		}
+
 		super.onCreate(bundle);
 	}
 
@@ -59,12 +60,14 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 		registerReceiver(dbFeedbackReceiver, intentFilterForHistory);
 
 		setUpDisplay();
+
 		handleClickEvent(callingActivity);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		unregisterReceiver(dbFeedbackReceiver);
 	}
 
 	// loans handling ----------------------------------------------------------
