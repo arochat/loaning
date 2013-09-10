@@ -1,5 +1,6 @@
 package com.aurelia.loaning.view.dialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -10,30 +11,36 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 import com.aurelia.loaning.domain.AbstractLoan;
+import com.aurelia.loaning.domain.MoneyLoan;
 import com.aurelia.loaning.util.BalanceComputer;
 import com.aurelia.loaning.view.loansoverview.FilteredLoansOverviewActivity;
 
-public class BalanceResultDialogFragment extends DialogFragment {
+public class MulticurrencyBalanceResultDialogFragment extends DialogFragment {
 
 	public static final String LOAN_TYPE = "type";
 
-	private Activity callingActivity;
+	private final Activity callingActivity;
+	private final String selectedCurrency;
 
-	public BalanceResultDialogFragment(Activity callingActivity) {
+	String message = "Balance is computed using today's exchange rates between the different currencies";
+
+	public MulticurrencyBalanceResultDialogFragment(Activity callingActivity, String selectedCurrency) {
 		this.callingActivity = callingActivity;
+		this.selectedCurrency = selectedCurrency;
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-		String message = "";
 
 		if (callingActivity instanceof FilteredLoansOverviewActivity) {
 			FilteredLoansOverviewActivity filteredLoansOverviewActivity = (FilteredLoansOverviewActivity) callingActivity;
 			List<AbstractLoan> loansToBalance = filteredLoansOverviewActivity.getLoans();
 			String filter = filteredLoansOverviewActivity.getFilterString();
 			if (loansToBalance != null && !loansToBalance.isEmpty()) {
-				message = displayBalance(computeBalance(loansToBalance), "CHF", filter);
+				message = message
+						+ "\n\n "
+						+ displayBalance(computeBalance(convertLoansIntoCurrency(loansToBalance, selectedCurrency)),
+								selectedCurrency, filter);
 			}
 		}
 
@@ -45,6 +52,26 @@ public class BalanceResultDialogFragment extends DialogFragment {
 					}
 				}).create();
 
+	}
+
+	private List<AbstractLoan> convertLoansIntoCurrency(List<AbstractLoan> loans, String currency) {
+		List<AbstractLoan> convertedLoans = new ArrayList<AbstractLoan>();
+		for (AbstractLoan loan : loans) {
+			if (loan instanceof MoneyLoan) {
+				try {
+					MoneyLoan copiedLoan = (MoneyLoan) ((MoneyLoan) loan).clone();
+					// TODO : fetch exchange rate here!!!
+					copiedLoan.setAmount(20d);
+					convertedLoans.add(copiedLoan);
+				} catch (CloneNotSupportedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+		return convertedLoans;
 	}
 
 	private Double computeBalance(List<AbstractLoan> loans) {

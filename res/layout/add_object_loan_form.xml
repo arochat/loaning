@@ -1,63 +1,66 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddLoanActivity" >
-
-<!--     <DatePicker -->
-<!--         android:id="@+id/chooseWhen" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_above="@+id/addLoanButton" -->
-<!--         android:layout_alignLeft="@+id/whenLabel" -->
-<!--         android:layout_below="@+id/whenLabel" /> -->
-
-<!--     <CheckedTextView -->
-<!--         android:id="@+id/whenLabel" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_alignLeft="@+id/destination" -->
-<!--         android:layout_below="@+id/destination" -->
-<!--         android:text="@string/when_label" /> -->
-
-    <EditText
-        android:id="@+id/description_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/I_loaned_label"
-        android:layout_below="@+id/I_loaned_label"
-        android:ems="10"
-        android:hint="@string/loan_object_label" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
 
     <TextView
         android:id="@+id/I_loaned_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="10dp"
-        android:textStyle="bold"
-        android:text="@string/I_loaned_label" />
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/loan_label"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/person_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/description_field"
-        android:layout_below="@+id/description_field"
-        android:ems="10"
-        android:hint="@string/to_label" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/text_box"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp" >
 
-    <Button
-        android:id="@+id/addLoanButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/person_field"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="24dp"
-        android:onClick="saveLoan"
-        android:text="@string/add_button" />
+        <!-- <DatePicker -->
+        <!-- android:id="@+id/chooseWhen" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_above="@+id/addLoanButton" -->
+        <!-- android:layout_alignLeft="@+id/whenLabel" -->
+        <!-- android:layout_below="@+id/whenLabel" /> -->
 
-</RelativeLayout>
+
+        <!-- <CheckedTextView -->
+        <!-- android:id="@+id/whenLabel" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignLeft="@+id/destination" -->
+        <!-- android:layout_below="@+id/destination" -->
+        <!-- android:text="@string/when_label" /> -->
+
+        <EditText
+            android:id="@+id/description_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/loan_object_label" />
+
+        <EditText
+            android:id="@+id/person_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/to_label" />
+
+        <Button
+            android:id="@+id/addLoanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="190dp"
+            android:onClick="saveLoan"
+            android:text="@string/add_button" />
+    </LinearLayout>
+
+</LinearLayout>

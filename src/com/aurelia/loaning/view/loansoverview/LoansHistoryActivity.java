@@ -11,7 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.widget.TextView;
 
+import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.domain.LoansContainer;
@@ -83,6 +85,9 @@ public class LoansHistoryActivity extends AbstractLoansOverviewActivity {
 					startActivity(displayLoansIntent);
 				}
 			}
+			TextView title = (TextView) findViewById(R.id.loan_list_titlee);
+			title.setText("History of my loans");
+
 			setUpDisplay();
 			handleClickEvent(LoansHistoryActivity.this.getClass().getName());
 		}

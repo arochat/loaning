@@ -26,9 +26,11 @@ public class AddLoanActivity extends LoanFormActivity {
 		switch (loanType) {
 		case MONEY_LOAN:
 			setContentView(R.layout.add_money_loan_form);
+			prepareCurrenciesSpinner();
 			break;
 		case MONEY_BORROWING:
 			setContentView(R.layout.add_money_borrowing_form);
+			prepareCurrenciesSpinner();
 			break;
 		case OBJECT_LOAN:
 			setContentView(R.layout.add_object_loan_form);
@@ -38,7 +40,7 @@ public class AddLoanActivity extends LoanFormActivity {
 			break;
 		default:
 		}
-		prepareCurrenciesSpinner();
+
 	}
 
 	public void saveLoan(View view) {

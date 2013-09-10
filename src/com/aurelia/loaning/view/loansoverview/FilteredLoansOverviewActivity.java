@@ -10,7 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.widget.TextView;
 
+import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.LoansContainer;
 import com.aurelia.loaning.event.Event;
@@ -80,6 +82,16 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 		char[] filter = (char[]) getIntent().getExtras().getSerializable("filter");
 		filterString = new String(filter);
 		loans = filterLoans(filterString);
+
+		TextView title = (TextView) findViewById(R.id.loan_list_titlee);
+
+		if (LoansHistoryActivity.class.getName().equals(callingActivity)) {
+
+			title.setText("History of my loans with " + filterString);
+		} else {
+			title.setText(title.getText() + " with " + filterString);
+		}
+
 	}
 
 	private List<AbstractLoan> filterLoans(final String filter) {

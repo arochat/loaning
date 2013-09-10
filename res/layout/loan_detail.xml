@@ -1,57 +1,68 @@
-<!-- loan detail. Will be editable in further version -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DisplayDetailActivity" >
-
-<TextView
-    android:id="@+id/item_object"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_below="@+id/loan_creation_date"
-    android:textStyle="bold" />
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
 
-<!-- <TextView -->
-<!--     android:id="@+id/loan_reminder_date" -->
-<!--     android:layout_width="wrap_content" -->
-<!--     android:layout_height="wrap_content" -->
-<!--     android:layout_alignParentLeft="true" -->
-<!--     android:layout_below="@+id/loan_creation_date" -->
-<!--     android:layout_marginLeft="23dp" -->
-<!--     android:text="@string/reminder_label" -->
-<!--     android:textAppearance="?android:attr/textAppearanceMedium" /> -->
+    <!-- <TextView -->
+    <!-- xmlns:android="http://schemas.android.com/apk/res/android" -->
+    <!-- android:id="@+id/item_object" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_marginBottom="5dp" -->
+    <!-- android:layout_marginTop="15dp" -->
+    <!-- android:textStyle="bold"/> -->
 
-<TextView
-    android:id="@+id/loan_source"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/object_of_loan"
-    android:layout_alignParentTop="true"
-    android:layout_marginTop="29dp"
-    android:layout_marginLeft="0dp"
-    android:textStyle="bold"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/loan_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold" />
 
-<TextView
-    android:id="@+id/loan_creation_date"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_below="@+id/object_of_loan"
-    android:layout_marginLeft="20dp"
-    android:text="@string/date_label"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/text_box"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp" >
 
-<TextView
-    android:id="@+id/object_of_loan"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/loan_creation_date"
-    android:layout_below="@+id/loan_source"
-     android:layout_marginTop="15dp"
-    android:text="@string/object_of_loan_label"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
+        <!-- <TextView -->
+        <!-- android:id="@+id/item_object" -->
+        <!-- android:layout_width="fill_parent" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:textStyle="bold" -->
+        <!-- /> -->
 
-</RelativeLayout>
+
+        <!-- <TextView -->
+        <!-- android:id="@+id/loan_reminder_date" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignParentLeft="true" -->
+        <!-- android:layout_below="@+id/loan_creation_date" -->
+        <!-- android:layout_marginLeft="23dp" -->
+        <!-- android:text="@string/reminder_label" -->
+        <!-- android:textAppearance="?android:attr/textAppearanceMedium" /> -->
+
+        <TextView
+            android:id="@+id/object_of_loan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/object_of_loan_label"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/loan_creation_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/date_label"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+</LinearLayout>

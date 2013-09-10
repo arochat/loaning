@@ -1,81 +1,88 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddLoanActivity" >
-
-<!--     <DatePicker -->
-<!--         android:id="@+id/chooseWhen" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_above="@+id/addLoanButton" -->
-<!--         android:layout_alignLeft="@+id/whenLabel" -->
-<!--         android:layout_below="@+id/whenLabel" /> -->
-
-<!--     <CheckedTextView -->
-<!--         android:id="@+id/whenLabel" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_alignLeft="@+id/destination" -->
-<!--         android:layout_below="@+id/destination" -->
-<!--         android:text="@string/when_label" /> -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
 
     <TextView
         android:id="@+id/I_borrowed_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="10dp"
-        android:textStyle="bold"
-        android:text="@string/I_borrowed_label" />
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/borrow_label"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/amount_field"
-        android:inputType="number|numberDecimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/I_borrowed_label"
-        android:layout_below="@+id/I_borrowed_label"
-        android:ems="10"
-        android:hint="@string/amount_label" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/text_box"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp" >
 
-    <Button
-        android:id="@+id/addLoanButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/reason_field"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="18dp"
-        android:onClick="saveLoan"
-        android:text="@string/add_button" />
+        <!-- <DatePicker -->
+        <!-- android:id="@+id/chooseWhen" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_above="@+id/addLoanButton" -->
+        <!-- android:layout_alignLeft="@+id/whenLabel" -->
+        <!-- android:layout_below="@+id/whenLabel" /> -->
 
-    <Spinner
-        android:id="@+id/spinnerCurrencies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/amount_field"
-        android:layout_alignRight="@+id/amount_field"
-        android:layout_below="@+id/amount_field"/>
 
-    <EditText
-        android:id="@+id/person_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinnerCurrencies"
-        android:layout_below="@+id/spinnerCurrencies"
-        android:ems="10"
-        android:hint="@string/from_label" />
+        <!-- <CheckedTextView -->
+        <!-- android:id="@+id/whenLabel" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignLeft="@+id/destination" -->
+        <!-- android:layout_below="@+id/destination" -->
+        <!-- android:text="@string/when_label" /> -->
 
-    <EditText
-        android:id="@+id/reason_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/person_field"
-        android:layout_below="@+id/person_field"
-        android:ems="10"
-        android:hint="@string/for_label" />
 
-</RelativeLayout>
+        <!-- <TextView -->
+        <!-- android:id="@+id/I_borrowed_label" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:text="@string/I_borrowed_label" -->
+        <!-- android:layout_marginBottom="20dp" -->
+        <!-- android:textStyle="bold" /> -->
+
+        <EditText
+            android:id="@+id/amount_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/amount_label"
+            android:inputType="number|numberDecimal" />
+
+        <Spinner
+            android:id="@+id/spinnerCurrencies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/person_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/from_label" />
+
+        <EditText
+            android:id="@+id/reason_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/for_label" />
+
+        <Button
+            android:id="@+id/addLoanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="69dp"
+            android:onClick="saveLoan"
+            android:text="@string/add_button" />
+    </LinearLayout>
+
+</LinearLayout>

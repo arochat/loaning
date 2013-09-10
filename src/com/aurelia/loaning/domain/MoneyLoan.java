@@ -2,7 +2,9 @@ package com.aurelia.loaning.domain;
 
 import org.joda.time.DateTime;
 
-public class MoneyLoan extends AbstractLoan {
+public class MoneyLoan extends AbstractLoan implements Cloneable {
+
+	private static final long serialVersionUID = 187223114061410368L;
 
 	private double amount;
 	private String currency;
@@ -17,6 +19,12 @@ public class MoneyLoan extends AbstractLoan {
 	public MoneyLoan(String person, DateTime startDate, DateTime notificationDate, boolean isContact, LoanType type,
 			LoanStatus status) {
 		super(person, startDate, notificationDate, isContact, type, status);
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		MoneyLoan cloned = (MoneyLoan) super.clone();
+		return cloned;
 	}
 
 	public double getAmount() {
