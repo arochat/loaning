@@ -10,6 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.LoanType;
 import com.aurelia.loaning.domain.MoneyLoan;
@@ -35,7 +37,9 @@ public class BalanceComputer {
 				}
 			}
 		}
-		return Double.valueOf(new DecimalFormat("0.00").format(balance));
+		String formattedBalance = new DecimalFormat("#0.00").format(balance);
+		formattedBalance = StringUtils.replace(formattedBalance, ",", ".");
+		return Double.valueOf(formattedBalance);
 	}
 
 	public static Double computeBalanceInCurrency(List<AbstractLoan> loans, String currency) throws ExecutionException,
