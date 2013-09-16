@@ -69,11 +69,8 @@ public class DisplayDetailActivity extends BaseActivity {
 				displayedLoan = loan;
 
 				if (loan != null) {
-					viewHolder.sourceAndDestination.setText(viewHolder.sourceAndDestination.getText() /*
-																									 * +
-																									 * " "
-																									 */
-							+ loan.displayPerson());
+					viewHolder.sourceAndDestination.setText(viewHolder.sourceAndDestination.getText()
+							+ loan.displayPerson() + " : ");
 					// viewHolder.notificationDate.setText(viewHolder.notificationDate.getText()
 					// + " "
 					// + format.print(loan.getNotificationDate()));

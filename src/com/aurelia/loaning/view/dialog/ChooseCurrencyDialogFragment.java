@@ -37,22 +37,19 @@ public class ChooseCurrencyDialogFragment extends DialogFragment {
 
 			return new AlertDialog.Builder(callingActivity)
 			//
-					.setTitle("Choose the computation's currency")
+					.setTitle("Choose the balance currency")
 					//
-					.setSingleChoiceItems(loansCurrencies(filteredLoansOverviewActivity.getLoans()), 1,
+					.setSingleChoiceItems(loansCurrencies(filteredLoansOverviewActivity.getLoans()), 0,
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialogInterface, int item) {
 									// no special event when selecting an item
 
 								}
-
 							})
 					//
 					.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
 							int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
-							// TODO : dismiss current displayed dialog
-							// dialog.dismiss();
 							displayBalanceComputationFragment((SherlockFragmentActivity) callingActivity,
 									loansCurrencies[selectedPosition]);
 						}
@@ -74,7 +71,7 @@ public class ChooseCurrencyDialogFragment extends DialogFragment {
 		ft.addToBackStack(null);
 
 		MulticurrencyBalanceResultDialogFragment balanceResultDialogFragment = new MulticurrencyBalanceResultDialogFragment(
-				callingActivity, selectedCurrency);
+				callingActivity, selectedCurrency, this);
 		balanceResultDialogFragment.show(ft, "dialog");
 	}
 

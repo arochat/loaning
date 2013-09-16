@@ -89,7 +89,7 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 
 			title.setText("History of my loans with " + filterString);
 		} else {
-			title.setText(title.getText() + " with " + filterString);
+			title.setText("My loans with " + filterString);
 		}
 
 	}

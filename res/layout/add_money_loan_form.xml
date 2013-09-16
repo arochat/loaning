@@ -46,13 +46,6 @@
             android:hint="@string/amount_label"
             android:inputType="number|numberDecimal" />
 
-        <EditText
-            android:id="@+id/currency_field"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/currency_label" />
-
         <Spinner
             android:id="@+id/spinnerCurrencies"
             android:layout_width="wrap_content"
