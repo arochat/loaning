@@ -1,6 +1,6 @@
 package com.aurelia.loaning.domain;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateMidnight;
 
 public class MoneyLoan extends AbstractLoan implements Cloneable {
 
@@ -16,8 +16,8 @@ public class MoneyLoan extends AbstractLoan implements Cloneable {
 				.append(this.reason).toString();
 	}
 
-	public MoneyLoan(String person, DateTime startDate, DateTime notificationDate, boolean isContact, LoanType type,
-			LoanStatus status) {
+	public MoneyLoan(String person, DateMidnight startDate, DateMidnight notificationDate, boolean isContact,
+			LoanType type, LoanStatus status) {
 		super(person, startDate, notificationDate, isContact, type, status);
 	}
 

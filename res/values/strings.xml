@@ -20,6 +20,7 @@
     <string name="to_label">To</string>
     <string name="for_label">For</string>
     <string name="from_label">From</string>
+    <string name="reminder_label">Reminder on :</string>
     
 
     <!-- View loan list -->

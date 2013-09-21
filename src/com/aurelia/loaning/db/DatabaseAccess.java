@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -232,7 +233,9 @@ public class DatabaseAccess {
 						method.invoke(myObject, c.getString(c.getColumnIndex(columnName)));
 
 					} else if (field.getType().equals(DateTime.class)) {
-						method.invoke(myObject, formatter.parseDateTime(c.getString(c.getColumnIndex(columnName))));
+						if (!StringUtils.isBlank(c.getString(c.getColumnIndex(columnName)))) {
+							method.invoke(myObject, formatter.parseDateTime(c.getString(c.getColumnIndex(columnName))));
+						}
 
 					} else if (field.getType().equals(Long.class)) {
 						method.invoke(myObject, c.getLong(c.getColumnIndex(columnName)));

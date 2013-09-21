@@ -58,8 +58,7 @@ public class DisplayDetailActivity extends BaseActivity {
 		if (intent != null && Event.DISPLAY_LOAN_DETAIL.name().equals(intent.getAction())) {
 			ViewHolder viewHolder = new ViewHolder();
 			viewHolder.sourceAndDestination = (TextView) findViewById(R.id.loan_source);
-			// viewHolder.notificationDate = (TextView)
-			// findViewById(R.id.loan_reminder_date);
+			viewHolder.notificationDate = (TextView) findViewById(R.id.loan_reminder_date);
 			viewHolder.creationDate = (TextView) findViewById(R.id.loan_creation_date);
 			viewHolder.object = (TextView) findViewById(R.id.object_of_loan);
 
@@ -71,9 +70,12 @@ public class DisplayDetailActivity extends BaseActivity {
 				if (loan != null) {
 					viewHolder.sourceAndDestination.setText(viewHolder.sourceAndDestination.getText()
 							+ loan.displayPerson() + " : ");
-					// viewHolder.notificationDate.setText(viewHolder.notificationDate.getText()
-					// + " "
-					// + format.print(loan.getNotificationDate()));
+					if (loan.getNotificationDate() != null) {
+						viewHolder.notificationDate.setText(viewHolder.notificationDate.getText() + " "
+								+ format.print(loan.getNotificationDate()));
+					} else {
+						viewHolder.notificationDate.setText("");
+					}
 					viewHolder.creationDate.setText(viewHolder.creationDate.getText() + " "
 							+ format.print(loan.getStartDate()));
 					viewHolder.object.setText(viewHolder.object.getText() + " " + loan.displayDescription());

@@ -48,7 +48,8 @@ public class DomainToEntityConverter {
 			// TODO : ERROR
 		}
 
-		Loan loanEntity = new Loan(source, destination, loan.getStartDate(), loan.getNotificationDate(),
+		Loan loanEntity = new Loan(source, destination, loan.getStartDate() != null ? loan.getStartDate().toDateTime()
+				: null, loan.getNotificationDate() != null ? loan.getNotificationDate().toDateTime() : null,
 				loan.isContact(), loan.getType().name(), description, loan.getStatus().getValue());
 
 		loanEntity.setId(loan.getId());

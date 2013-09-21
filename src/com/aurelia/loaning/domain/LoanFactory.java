@@ -1,5 +1,10 @@
 package com.aurelia.loaning.domain;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 
 import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
@@ -9,21 +14,25 @@ import com.aurelia.loaning.view.ObjectLoanFromUI;
 
 public class LoanFactory {
 
+	private final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+
 	public static AbstractLoan createLoan(AbstractLoanFromUI loanFromUI, boolean newLoan) {
 
 		LoanType loanType = loanFromUI.getLoanType();
 
 		MoneyLoan moneyLoan = null;
 		ObjectLoan objectLoan = null;
-		DateTime startDate = null;
-		DateTime notificationDate = null;
+		DateMidnight startDate = null;
+		DateMidnight notificationDate = null;
 
-		// TODO : bad design, risk of NPE!!
 		if (newLoan) {
-			startDate = DateTime.now();
-			// TODO : when implementing notification, notificationDate could be
-			// modified in the UI
-			notificationDate = DateTime.now();
+			startDate = DateMidnight.now();
+		}
+		try {
+			notificationDate = setNotificationDate(loanFromUI);
+		} catch (ParseException e) {
+			// TODO : what to do here ?
+			notificationDate = null;
 		}
 
 		boolean isContact = false;
@@ -38,6 +47,8 @@ public class LoanFactory {
 			moneyLoan.setAmount(Double.valueOf(moneyLoanFromUI.getAmountFromUI().getText().toString()));
 			moneyLoan.setCurrency(moneyLoanFromUI.getCurrencyFromUI().getSelectedItem().toString());
 			moneyLoan.setReason(moneyLoanFromUI.getReasonFromUI().getText().toString());
+			moneyLoan.setNotificationDate(notificationDate);
+
 			return moneyLoan;
 
 		case OBJECT_LOAN:
@@ -46,6 +57,7 @@ public class LoanFactory {
 			ObjectLoanFromUI objectLoanFromUI = (ObjectLoanFromUI) loanFromUI;
 			objectLoan = new ObjectLoan(person, startDate, notificationDate, isContact, loanType, LoanStatus.ACTIVE);
 			objectLoan.setObjectDefinition(objectLoanFromUI.getObjectDefinitionFromUI().getText().toString());
+			objectLoan.setNotificationDate(notificationDate);
 			return objectLoan;
 
 		default:
@@ -53,13 +65,13 @@ public class LoanFactory {
 		}
 		return null;
 
-		// needs to add 1 to the month got from the UI. DatePicker months range
-		// from 0 to 11 whereas JodaTime months range from 1 to 12.
-		// DateTime endDate = new
-		// DateTime(loanFromUI.getEndDateFromUI().getYear(),
-		// loanFromUI.getEndDateFromUI()
-		// .getMonth() + 1, loanFromUI.getEndDateFromUI().getDayOfMonth(), 0, 0,
-		// 0);
-		// transaction.setEndDate(endDate);
+	}
+
+	private static DateMidnight setNotificationDate(AbstractLoanFromUI loanFromUI) throws ParseException {
+
+		DateTime notificationDate = new DateTime(dateFormat.parse(loanFromUI.getNotificationDateFromUI().getText()
+				.toString()));
+
+		return notificationDate.toDateMidnight();
 	}
 }

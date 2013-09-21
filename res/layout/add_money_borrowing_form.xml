@@ -11,7 +11,8 @@
         android:layout_marginBottom="5dp"
         android:layout_marginTop="15dp"
         android:text="@string/borrow_label"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -21,44 +22,27 @@
         android:paddingLeft="10dp"
         android:paddingTop="20dp" >
 
-        <!-- <DatePicker -->
-        <!-- android:id="@+id/chooseWhen" -->
-        <!-- android:layout_width="wrap_content" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:layout_above="@+id/addLoanButton" -->
-        <!-- android:layout_alignLeft="@+id/whenLabel" -->
-        <!-- android:layout_below="@+id/whenLabel" /> -->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp" >
 
+            <EditText
+                android:id="@+id/amount_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/amount_label"
+                android:inputType="number|numberDecimal"
+                android:width="110dp" />
 
-        <!-- <CheckedTextView -->
-        <!-- android:id="@+id/whenLabel" -->
-        <!-- android:layout_width="wrap_content" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:layout_alignLeft="@+id/destination" -->
-        <!-- android:layout_below="@+id/destination" -->
-        <!-- android:text="@string/when_label" /> -->
-
-
-        <!-- <TextView -->
-        <!-- android:id="@+id/I_borrowed_label" -->
-        <!-- android:layout_width="wrap_content" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:text="@string/I_borrowed_label" -->
-        <!-- android:layout_marginBottom="20dp" -->
-        <!-- android:textStyle="bold" /> -->
-
-        <EditText
-            android:id="@+id/amount_field"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/amount_label"
-            android:inputType="number|numberDecimal" />
-
-        <Spinner
-            android:id="@+id/spinnerCurrencies"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/spinnerCurrencies"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/amount_field" />
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/person_field"
@@ -73,6 +57,14 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/for_label" />
+
+        <TextView
+            android:id="@+id/reminder_label"
+            style="?android:attr/spinnerStyle"
+            android:layout_width="211dp"
+            android:layout_height="46dp"
+            android:text="@string/reminder_label"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button
             android:id="@+id/addLoanButton"

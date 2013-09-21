@@ -1,5 +1,7 @@
 package com.aurelia.loaning.domain;
 
+import org.joda.time.DateMidnight;
+
 import com.aurelia.loaning.db.entity.Loan;
 import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 
@@ -16,29 +18,29 @@ public class EntityToDomainConverter {
 
 		switch (loanType) {
 		case MONEY_LOAN:
-			moneyLoan = new MoneyLoan(loanEntity.getDestination(), loanEntity.getStartDate(), loanEntity.getEndDate(),
-					false, loanType, status);
+			moneyLoan = new MoneyLoan(loanEntity.getDestination(), loanEntity.getStartDate().toDateMidnight(),
+					getNotificationDateFromEntity(loanEntity), false, loanType, status);
 			moneyLoan.setId(loanEntity.getId());
 			setSpecificMoneyLoanData(moneyLoan, loanEntity);
 			return moneyLoan;
 
 		case MONEY_BORROWING:
-			moneyLoan = new MoneyLoan(loanEntity.getSource(), loanEntity.getStartDate(), loanEntity.getEndDate(),
-					false, loanType, status);
+			moneyLoan = new MoneyLoan(loanEntity.getSource(), loanEntity.getStartDate().toDateMidnight(),
+					getNotificationDateFromEntity(loanEntity), false, loanType, status);
 			moneyLoan.setId(loanEntity.getId());
 			setSpecificMoneyLoanData(moneyLoan, loanEntity);
 			return moneyLoan;
 
 		case OBJECT_LOAN:
-			objectLoan = new ObjectLoan(loanEntity.getDestination(), loanEntity.getStartDate(),
-					loanEntity.getEndDate(), false, loanType, status);
+			objectLoan = new ObjectLoan(loanEntity.getDestination(), loanEntity.getStartDate().toDateMidnight(),
+					getNotificationDateFromEntity(loanEntity), false, loanType, status);
 			objectLoan.setId(loanEntity.getId());
 			setSpecificObjectLoanData(objectLoan, loanEntity);
 			return objectLoan;
 
 		case OBJECT_BORROWING:
-			objectLoan = new ObjectLoan(loanEntity.getSource(), loanEntity.getStartDate(), loanEntity.getEndDate(),
-					false, loanType, status);
+			objectLoan = new ObjectLoan(loanEntity.getSource(), loanEntity.getStartDate().toDateMidnight(),
+					getNotificationDateFromEntity(loanEntity), false, loanType, status);
 			objectLoan.setId(loanEntity.getId());
 			setSpecificObjectLoanData(objectLoan, loanEntity);
 			return objectLoan;
@@ -57,6 +59,10 @@ public class EntityToDomainConverter {
 	private ObjectLoan setSpecificObjectLoanData(ObjectLoan objectLoan, Loan loanEntity) {
 		objectLoan.setObjectDefinition(loanEntity.getDescription());
 		return objectLoan;
+	}
+
+	private DateMidnight getNotificationDateFromEntity(Loan loan) {
+		return loan.getEndDate() != null ? loan.getEndDate().toDateMidnight() : null;
 	}
 
 	private double computeAmountFromDescription(Loan loan) {
