@@ -37,6 +37,8 @@ public abstract class AbstractLoan implements Serializable {
 
 	public abstract String displayDescription();
 
+	public abstract String displayNotification();
+
 	public boolean isMoneyLoan() {
 		return LoanType.MONEY_LOAN.equals(this.getType()) || LoanType.MONEY_BORROWING.equals(this.getType());
 	}

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.aurelia.loaning.db.entity.Loan;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.view.BaseActivity;
+import com.google.common.primitives.Ints;
 
 public class LoanUtil {
 
@@ -30,6 +31,10 @@ public class LoanUtil {
 		bundle.putSerializable("loan", loan);
 		intent.putExtras(bundle);
 		return intent;
+	}
+
+	public static int safeLongToInt(long l) {
+		return Ints.checkedCast(l);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.aurelia.loaning.db;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -52,6 +53,10 @@ public class LoanDatabaseAccess {
 
 	public List<Object> selectLoansWithStatus(int status) {
 		return databaseAccess.select(Loan.class, "status=" + status);
+	}
+
+	public List<Object> getLoansWithNotificationDateInThePast() {
+		return databaseAccess.select(Loan.class, "end_date < " + new DateTime().toString());
 	}
 
 	public void removeAll() {

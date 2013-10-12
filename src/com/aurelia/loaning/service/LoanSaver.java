@@ -12,11 +12,13 @@ import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 import com.aurelia.loaning.domain.DomainToEntityConverter;
 import com.aurelia.loaning.event.Event;
+import com.aurelia.loaning.service.notification.NotificationManager;
 
 public class LoanSaver extends IntentService {
 
 	private LoanDatabaseAccess databaseAccess;
 	private DomainToEntityConverter converter;
+	private NotificationManager notificationManager;
 
 	public LoanSaver() {
 		super(LoanSaver.class.getSimpleName());
@@ -35,20 +37,32 @@ public class LoanSaver extends IntentService {
 		if (converter == null) {
 			converter = new DomainToEntityConverter();
 		}
+		if (notificationManager == null) {
+			notificationManager = new NotificationManager(this);
+		}
 
 		long dbResult = -1l;
 		boolean skipBroadcast = false;
 
 		if (Event.SAVE_LOANING.name().equals(intent.getAction())) {
 			dbResult = saveLoan(bundle);
+			notificationManager.addNotification(bundle);
+
 		} else if (Event.DELETE_LOAN.name().equals(intent.getAction())) {
 			dbResult = deleteLoan(bundle);
+
 		} else if (Event.SETTLE_LOAN.name().equals(intent.getAction())) {
 			dbResult = settleLoan(bundle);
+			notificationManager.cancelNotification(bundle);
+
 		} else if (Event.UPDATE_LOAN.name().equals(intent.getAction())) {
 			dbResult = updateLoan(bundle);
+			notificationManager.updateNotification(bundle);
+
 		} else if (Event.SETTLE_ALL_FILTERED_LOANS.name().equals(intent.getAction())) {
 			dbResult = settleAllLoans(bundle);
+			notificationManager.cancelAllNotifications(bundle);
+
 		} else if (Event.DELETE_ALL_FILTERED_LOANS.name().equals(intent.getAction())) {
 			dbResult = deleteAllLoans(bundle);
 		}

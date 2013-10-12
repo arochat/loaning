@@ -2,7 +2,10 @@
 <manifest android:versionCode="1" android:versionName="1.0"
     package="com.aurelia.loaning" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17"/>
-   
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
     <application android:allowBackup="true"
         android:icon="@drawable/icon_overview_list"
         android:theme="@style/Sherlock.__Theme.DarkActionBar"
@@ -47,7 +50,17 @@
         <service android:name=".service.LoanSaver"/>
         
         <service android:name=".service.LoanRemover"/>
+        
+        <service android:name=".service.notification.NotificationService"/>
+        
+        <receiver android:name="service.notification.NotificationChecker" 
+			 android:enabled="true" 
+			 android:exported="false"
+			 android:label="NotificationChecker">
+			    <intent-filter>
+			        <action android:name="android.intent.action.BOOT_COMPLETED" />
+			    </intent-filter>
+		</receiver>
     </application>
     
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

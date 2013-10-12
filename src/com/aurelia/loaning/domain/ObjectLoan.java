@@ -18,6 +18,14 @@ public class ObjectLoan extends AbstractLoan {
 		return this.objectDefinition;
 	}
 
+	@Override
+	public String displayNotification() {
+		if (isBorrowing()) {
+			return super.getPerson() + " loaned you " + objectDefinition;
+		}
+		return "You loaned " + objectDefinition + " to " + super.getPerson();
+	}
+
 	public String getObjectDefinition() {
 		return objectDefinition;
 	}

@@ -58,6 +58,20 @@ public class LoanFetcher extends IntentService {
 		// TODO : what do we need to return here?
 	}
 
+	public List<AbstractLoan> getLoansWithNotificationDateInThePast() {
+		List<AbstractLoan> loans;
+		List<Loan> loansFromDB = LoanUtil.convert(databaseAccess.getLoansWithNotificationDateInThePast());
+		if (loansFromDB != null && !Collections.EMPTY_LIST.equals(loansFromDB)) {
+			loans = new ArrayList<AbstractLoan>(loansFromDB.size());
+			for (Loan loanFromDB : loansFromDB) {
+				loans.add(converter.convert(loanFromDB));
+			}
+			return loans;
+		}
+		return Collections.EMPTY_LIST;
+
+	}
+
 	private Intent fetchLoans(LoanStatus loanStatus, Event event) {
 		databaseAccess.open();
 		List<Loan> loansFromDB = LoanUtil.convert(databaseAccess.selectLoansWithStatus(loanStatus.getValue()));

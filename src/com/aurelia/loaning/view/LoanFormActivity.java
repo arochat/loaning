@@ -30,8 +30,7 @@ import com.aurelia.loaning.util.Currency;
 import com.aurelia.loaning.view.loansoverview.StandardLoansOverviewActivity;
 
 public abstract class LoanFormActivity extends BaseActivity /*
-															 * implements
-															 * OnDateSetListener
+															 * implements OnDateSetListener
 															 */{
 
 	public final static String ME = "ME";
@@ -166,9 +165,12 @@ public abstract class LoanFormActivity extends BaseActivity /*
 
 		DateMidnight notificationDate = loan.getNotificationDate();
 
-		TextView notificationTextView = (TextView) LoanFormActivity.super.findViewById(R.id.reminder_label);
-		notificationTextView.setText(new StringBuilder().append(notificationDate.getDayOfMonth()).append("/")
-				.append(notificationDate.getMonthOfYear()).append("/").append(notificationDate.getYear()).append(" "));
+		if (notificationDate != null) {
+			TextView notificationTextView = (TextView) LoanFormActivity.super.findViewById(R.id.reminder_label);
+			notificationTextView.setText(new StringBuilder().append(notificationDate.getDayOfMonth()).append("/")
+					.append(notificationDate.getMonthOfYear()).append("/").append(notificationDate.getYear())
+					.append(" "));
+		}
 	}
 
 	// --------------------------------------------

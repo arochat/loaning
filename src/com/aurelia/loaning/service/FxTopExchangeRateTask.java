@@ -3,8 +3,6 @@ package com.aurelia.loaning.service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
@@ -22,7 +20,6 @@ import com.google.gson.Gson;
 public class FxTopExchangeRateTask implements Callable<Double> {
 
 	private final String baseURL = "http://rate-exchange.appspot.com/currency?";// from=EUR&to=CHF"
-	private final NumberFormat formatter = new DecimalFormat("0.00");
 	private final String currencyFrom;
 	private final String currencyTo;
 	private final MoneyLoan loan;

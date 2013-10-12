@@ -14,6 +14,8 @@ import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
+import com.aurelia.loaning.service.notification.INotificationManager;
+import com.aurelia.loaning.service.notification.NotificationManager;
 import com.aurelia.loaning.view.actionBar.delegate.DisplayDetailActionBarDelegate;
 import com.aurelia.loaning.view.actionBar.delegate.DisplayHistoryDetailActionBarDelegate;
 import com.aurelia.loaning.view.loansoverview.LoansHistoryActivity;
@@ -27,6 +29,7 @@ public class DisplayDetailActivity extends BaseActivity {
 	private BroadcastReceiver dbFeedbackReceiver;
 	private IntentFilter intentFilter;
 	private IntentFilter intentFilterForHistory;
+	private INotificationManager notificationManager;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -54,6 +57,7 @@ public class DisplayDetailActivity extends BaseActivity {
 		// activity before it is restarted, this is the place where the stored
 		// data is.
 		Intent intent = getIntent();
+		AbstractLoan loan = null;
 
 		if (intent != null && Event.DISPLAY_LOAN_DETAIL.name().equals(intent.getAction())) {
 			ViewHolder viewHolder = new ViewHolder();
@@ -62,7 +66,7 @@ public class DisplayDetailActivity extends BaseActivity {
 			viewHolder.creationDate = (TextView) findViewById(R.id.loan_creation_date);
 			viewHolder.object = (TextView) findViewById(R.id.object_of_loan);
 
-			AbstractLoan loan = (AbstractLoan) intent.getExtras().getSerializable(Event.DISPLAY_LOAN_DETAIL.name());
+			loan = (AbstractLoan) intent.getExtras().getSerializable(Event.DISPLAY_LOAN_DETAIL.name());
 
 			if (displayedLoan == null) {
 				displayedLoan = loan;
@@ -86,6 +90,19 @@ public class DisplayDetailActivity extends BaseActivity {
 		if (LoansHistoryActivity.class.getName().equals(intent.getExtras().getSerializable("CALLING_ACTIVITY"))) {
 			this.setActionBarDelegate(new DisplayHistoryDetailActionBarDelegate());
 		}
+
+		if (Boolean.TRUE.equals(intent.getExtras().get(Event.REMOVE_NOTIFICATION.name()))) {
+			if (notificationManager == null) {
+				// trick to passe an IntenteService to the NotificationManager
+				notificationManager = new NotificationManager(new LoanSaver());
+			}
+			notificationManager.cancelNotification(intent.getExtras());
+
+			// remove notification from notification bar
+			android.app.NotificationManager mNotificationManager = (android.app.NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			mNotificationManager.cancel((int) loan.getId());
+		}
+
 	}
 
 	@Override
