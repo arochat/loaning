@@ -53,13 +53,10 @@
         
         <service android:name=".service.notification.NotificationService"/>
         
-        <receiver android:name="service.notification.NotificationChecker" 
-			 android:enabled="true" 
-			 android:exported="false"
-			 android:label="NotificationChecker">
-			    <intent-filter>
-			        <action android:name="android.intent.action.BOOT_COMPLETED" />
-			    </intent-filter>
+        <receiver android:name=".service.notification.NotificationChecker"> 
+		    <intent-filter>
+		        <action android:name="android.intent.action.BOOT_COMPLETED" />
+		    </intent-filter>
 		</receiver>
     </application>
     

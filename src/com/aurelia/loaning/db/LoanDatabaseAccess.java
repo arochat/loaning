@@ -2,7 +2,7 @@ package com.aurelia.loaning.db;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -20,13 +20,14 @@ public class LoanDatabaseAccess {
 	private static final int DB_VERSION = 1;
 	private static final String DB_NAME = "loan.db";
 
-	private final DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD HH:MM:SS.SSS");
+	private DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD HH:MM:SS.SSS");
+	private DateTimeFormatter customFormatter = DateTimeFormat.forPattern("YYYYMMdd");
 
 	private LoanDatabaseSQLite loanDb;
 
 	private DatabaseAccess databaseAccess;
 
-	public LoanDatabaseAccess(Context context) {
+	public LoanDatabaseAccess(Context context, DateTimeFormatter customFormatter) {
 		loanDb = new LoanDatabaseSQLite(context, DB_NAME, null, DB_VERSION);
 		databaseAccess = new DatabaseAccess(new TableDeclarationPreparator(new ClasspathScanner()), loanDb, formatter);
 	}
@@ -56,7 +57,8 @@ public class LoanDatabaseAccess {
 	}
 
 	public List<Object> getLoansWithNotificationDateInThePast() {
-		return databaseAccess.select(Loan.class, "end_date < " + new DateTime().toString());
+		return databaseAccess.select(Loan.class, "status = " + LoanStatus.ACTIVE.getValue() + " AND end_date < '"
+				+ new DateMidnight().toString(formatter) + "'");
 	}
 
 	public void removeAll() {

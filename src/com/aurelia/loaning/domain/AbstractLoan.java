@@ -49,7 +49,7 @@ public abstract class AbstractLoan implements Serializable {
 
 	public enum LoanStatus {
 
-		ACTIVE(1), SETTLED(2), UNKNOWN(99);
+		ACTIVE(1), SETTLED(2), ELAPSED(3), UNKNOWN(99);
 
 		private int status;
 

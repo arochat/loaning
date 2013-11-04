@@ -3,6 +3,7 @@ package com.aurelia.loaning.event;
 public enum Event {
 
 	SHOW_LOANINGS, //
+	LIST_ELAPSED_LOANS, //
 	SHOW_LOANINGS_HISTORY, //
 	SAVE_LOANING, //
 	DELETE_LOAN, //
@@ -11,6 +12,8 @@ public enum Event {
 	SETTLE_ALL_FILTERED_LOANS, //
 	LOAN_MODIFIED, //
 	DISPLAY_LOAN_DETAIL, //
-	UPDATE_LOAN, REMOVE_NOTIFICATION;
+	UPDATE_LOAN, //
+	SEND_ELAPSED_LOANS, //
+	REMOVE_NOTIFICATION;
 
 }

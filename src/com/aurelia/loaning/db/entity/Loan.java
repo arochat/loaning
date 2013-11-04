@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 
 import com.aurelia.loaning.db.annotation.Column;
 import com.aurelia.loaning.db.annotation.Table;
+import com.aurelia.loaning.domain.AbstractLoan.LoanStatus;
 
 @Table(name = "LOAN")
 public class Loan implements Serializable {
@@ -136,8 +137,8 @@ public class Loan implements Serializable {
 	@Override
 	public String toString() {
 		return "Loan [source=" + source + ", destination=" + destination + ", starteDate=" + startDate + ", endDate="
-				+ endDate + ", status" + status + ", isContact=" + isContact + ", type=" + type + ", description="
-				+ description + "]";
+				+ endDate + ", status=" + LoanStatus.getLoanStatus(status).name() + ", isContact=" + isContact
+				+ ", type=" + type + ", description=" + description + "]";
 	}
 
 }

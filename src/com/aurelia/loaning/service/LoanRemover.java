@@ -17,7 +17,7 @@ public class LoanRemover extends IntentService {
 	@Override
 	protected void onHandleIntent(final Intent intent) {
 		if (databaseAccess == null) {
-			databaseAccess = new LoanDatabaseAccess(this);
+			databaseAccess = new LoanDatabaseAccess(this, null);
 			databaseAccess.open();
 		}
 		databaseAccess.removeAll();

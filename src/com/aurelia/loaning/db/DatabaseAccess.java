@@ -157,7 +157,7 @@ public class DatabaseAccess {
 		} finally {
 			cursor.close();
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	public List<Object> select(Class entity, String whereClause) {
@@ -175,15 +175,16 @@ public class DatabaseAccess {
 		} finally {
 			cursor.close();
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	private List<Object> cursorToObjects(Cursor c, Class entity) throws IllegalArgumentException,
 			InstantiationException, IllegalAccessException, InvocationTargetException, SecurityException,
 			NoSuchFieldException {
 
-		if (c.getCount() == 0)
-			return new ArrayList<Object>();
+		if (c.getCount() == 0) {
+			return Collections.emptyList();
+		}
 
 		c.moveToFirst();
 

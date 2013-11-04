@@ -31,7 +31,7 @@ public class LoanSaver extends IntentService {
 		Bundle bundle = intent.getExtras();
 
 		if (databaseAccess == null) {
-			databaseAccess = new LoanDatabaseAccess(this);
+			databaseAccess = new LoanDatabaseAccess(this, null);
 			databaseAccess.open();
 		}
 		if (converter == null) {
