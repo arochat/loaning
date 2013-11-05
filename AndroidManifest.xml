@@ -35,6 +35,9 @@
         
         <activity android:name=".view.DisplayDetailActivity"
                   android:icon="@drawable/icon_filter"/>
+
+        <activity android:name=".view.loansoverview.ElapsedLoansOverviewActivity"
+                  android:icon="@drawable/icon_filter"/>
         
         <activity android:name=".view.loansoverview.FilteredLoansOverviewActivity"
                   android:icon="@drawable/icon_filter"/>
