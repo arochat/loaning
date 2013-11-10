@@ -3,14 +3,15 @@ package com.aurelia.loaning.service.notification;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.event.Event;
-import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.util.LoanUtil;
 
+// NOT USED ANYMORE
 public class NotificationManager implements INotificationManager {
 
 	private final IntentService callingService;
@@ -59,12 +60,12 @@ public class NotificationManager implements INotificationManager {
 	}
 
 	private void cancelNotification(AbstractLoan loan) {
-		AlarmManager alarmManager = (AlarmManager) callingService.getSystemService(LoanSaver.ALARM_SERVICE);
+		AlarmManager alarmManager = (AlarmManager) callingService.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(createPendingIntent(loan));
 	}
 
 	private void scheduleNotification(AbstractLoan loan) {
-		AlarmManager alarmManager = (AlarmManager) callingService.getSystemService(LoanSaver.ALARM_SERVICE);
+		AlarmManager alarmManager = (AlarmManager) callingService.getSystemService(Context.ALARM_SERVICE);
 		long notificationTime = loan.getNotificationDate().getMillis();
 		alarmManager.set(AlarmManager.RTC, notificationTime, createPendingIntent(loan));
 	}

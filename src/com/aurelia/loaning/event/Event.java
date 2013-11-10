@@ -2,6 +2,7 @@ package com.aurelia.loaning.event;
 
 public enum Event {
 
+	APPLICATION_LAUNCHED, //
 	SHOW_LOANINGS, //
 	LIST_ELAPSED_LOANS, //
 	SHOW_LOANINGS_HISTORY, //

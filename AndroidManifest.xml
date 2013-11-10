@@ -56,6 +56,8 @@
         
         <service android:name=".service.notification.NotificationService"/>
         
+        <service android:name=".service.notification.NotificationCheckerService"/>
+        
         <receiver android:name=".service.notification.NotificationChecker"> 
 		    <intent-filter>
 		        <action android:name="android.intent.action.BOOT_COMPLETED" />

@@ -1,8 +1,5 @@
 package com.aurelia.loaning.service.notification;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -19,8 +16,6 @@ import com.aurelia.loaning.view.DisplayDetailActivity;
 import com.aurelia.loaning.view.loansoverview.ElapsedLoansOverviewActivity;
 
 public class NotificationService extends IntentService {
-
-	private DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYYMMDDHHMMSSSSS");
 
 	public NotificationService() {
 		super(NotificationService.class.getSimpleName());
@@ -49,7 +44,7 @@ public class NotificationService extends IntentService {
 			resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
 
-			sendNotification(resultIntent, mBuilder);
+			sendNotification(resultIntent, mBuilder, loan.getId());
 
 		} else {
 			LoansContainer loansContainer = (LoansContainer) intent.getExtras().getSerializable(
@@ -73,13 +68,13 @@ public class NotificationService extends IntentService {
 			resultIntent.putExtra(Event.REMOVE_NOTIFICATION.name(), Boolean.TRUE);
 			resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			sendNotification(resultIntent, mBuilder);
+			sendNotification(resultIntent, mBuilder, 0);
 
 		}
 		return START_NOT_STICKY;
 	}
 
-	private void sendNotification(Intent resultIntent, NotificationCompat.Builder mBuilder) {
+	private void sendNotification(Intent resultIntent, NotificationCompat.Builder mBuilder, long notificationId) {
 		// The stack builder object will contain an artificial back stack for the started Activity.
 		// This ensures that navigating backward from the Activity leads out of your application to the Home screen.
 		TaskStackBuilder stackBuilder = TaskStackBuilder.from(this);
@@ -92,7 +87,7 @@ public class NotificationService extends IntentService {
 		mBuilder.setContentIntent(resultPendingIntent);
 		android.app.NotificationManager mNotificationManager = (android.app.NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		// in this case, no need for unique ID for the notification
-		mNotificationManager.notify(0, mBuilder.getNotification());
+		mNotificationManager.notify((int) notificationId, mBuilder.getNotification());
 
 	}
 }

@@ -14,8 +14,6 @@ import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.AbstractLoan;
 import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.service.LoanSaver;
-import com.aurelia.loaning.service.notification.INotificationManager;
-import com.aurelia.loaning.service.notification.NotificationManager;
 import com.aurelia.loaning.view.actionBar.delegate.DisplayDetailActionBarDelegate;
 import com.aurelia.loaning.view.actionBar.delegate.DisplayHistoryDetailActionBarDelegate;
 import com.aurelia.loaning.view.loansoverview.LoansHistoryActivity;
@@ -29,7 +27,6 @@ public class DisplayDetailActivity extends BaseActivity {
 	private BroadcastReceiver dbFeedbackReceiver;
 	private IntentFilter intentFilter;
 	private IntentFilter intentFilterForHistory;
-	private INotificationManager notificationManager;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -92,11 +89,6 @@ public class DisplayDetailActivity extends BaseActivity {
 		}
 
 		if (Boolean.TRUE.equals(intent.getExtras().get(Event.REMOVE_NOTIFICATION.name()))) {
-			if (notificationManager == null) {
-				// trick to passe an IntenteService to the NotificationManager
-				notificationManager = new NotificationManager(new LoanSaver());
-			}
-			notificationManager.cancelNotification(intent.getExtras());
 
 			// remove notification from notification bar
 			android.app.NotificationManager mNotificationManager = (android.app.NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
