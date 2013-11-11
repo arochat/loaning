@@ -1,10 +1,13 @@
 package com.aurelia.loaning.service.notification;
 
-import android.app.IntentService;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
@@ -15,19 +18,50 @@ import com.aurelia.loaning.event.Event;
 import com.aurelia.loaning.view.DisplayDetailActivity;
 import com.aurelia.loaning.view.loansoverview.ElapsedLoansOverviewActivity;
 
-public class NotificationService extends IntentService {
+public class NotificationService extends Service {
 
-	public NotificationService() {
-		super(NotificationService.class.getSimpleName());
-	}
+	private volatile boolean alreadyInitialized = false;
+	private int interval = 1000 * 60 * 60 * 24;
+
+	private NotificationChecker notificationChecker;
+	private Handler handler;
+
+	IBinder mBinder = new LocalBinder();
 
 	@Override
-	protected void onHandleIntent(Intent intent) {
-		//
+	public IBinder onBind(Intent intent) {
+		return mBinder;
+	}
+
+	public class LocalBinder extends Binder {
+		public NotificationService getServerInstance() {
+			return NotificationService.this;
+		}
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		super.onStartCommand(intent, flags, startId);
+		String reason = (String) intent.getExtras().getSerializable("reason");
+
+		synchronized (this) {
+			if (!alreadyInitialized) {
+				notificationChecker = new NotificationChecker();
+				handler = new Handler();
+				startRepeatingTask();
+				alreadyInitialized = true;
+			} else {
+				if (Event.PERIODIC_NOTIFICATION_CHECK_RESULT.name().equals(reason)) {
+					prepareAndSendNotification(intent);
+				}
+			}
+
+		}
+
+		return START_STICKY;
+	}
+
+	private void prepareAndSendNotification(Intent intent) {
 		AbstractLoan loan = (AbstractLoan) intent.getExtras().getSerializable(Event.DISPLAY_LOAN_DETAIL.name());
 		if (loan != null) {
 			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)//
@@ -69,9 +103,7 @@ public class NotificationService extends IntentService {
 			resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
 			sendNotification(resultIntent, mBuilder, 0);
-
 		}
-		return START_NOT_STICKY;
 	}
 
 	private void sendNotification(Intent resultIntent, NotificationCompat.Builder mBuilder, long notificationId) {
@@ -90,4 +122,21 @@ public class NotificationService extends IntentService {
 		mNotificationManager.notify((int) notificationId, mBuilder.getNotification());
 
 	}
+
+	Runnable mStatusChecker = new Runnable() {
+		@Override
+		public void run() {
+			notificationChecker.fireNotification(getApplicationContext(), Event.PERIODIC_NOTIFICATION_CHECK.name());
+			handler.postDelayed(mStatusChecker, interval);
+		}
+	};
+
+	void startRepeatingTask() {
+		mStatusChecker.run();
+	}
+
+	void stopRepeatingTask() {
+		handler.removeCallbacks(mStatusChecker);
+	}
+
 }
