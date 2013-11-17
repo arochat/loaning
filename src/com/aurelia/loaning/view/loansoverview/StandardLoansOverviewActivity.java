@@ -20,6 +20,7 @@ import com.aurelia.loaning.service.LoanFetcher;
 import com.aurelia.loaning.service.notification.NotificationService;
 import com.aurelia.loaning.view.AddLoanActivity;
 import com.aurelia.loaning.view.actionBar.delegate.LoansOverviewActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.delegate.NoActionsActionBarDelegate;
 
 /**
  * @author aurelia
@@ -33,7 +34,6 @@ public class StandardLoansOverviewActivity extends AbstractLoansOverviewActivity
 
 	@Override
 	protected void onCreate(Bundle bundle) {
-		this.setActionBarDelegate(new LoansOverviewActionBarDelegate());
 		super.onCreate(bundle);
 
 		if (handler == null) {
@@ -93,8 +93,10 @@ public class StandardLoansOverviewActivity extends AbstractLoansOverviewActivity
 						loans = loansContainer.getLoans();
 						StandardLoansOverviewActivity.super.loans = loans;
 
-						setUpDisplay();
+						setUpDisplay(new LoansOverviewActionBarDelegate());
 						handleClickEvent(StandardLoansOverviewActivity.this.getClass().getName());
+					} else {
+						setUpDisplay(new NoActionsActionBarDelegate());
 					}
 				}
 			}

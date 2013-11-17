@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.aurelia.loaning.R;
 import com.aurelia.loaning.domain.LoansContainer;
 import com.aurelia.loaning.event.Event;
-import com.aurelia.loaning.view.actionBar.delegate.FilteredLoansOverviewActionBarDelegate;
+import com.aurelia.loaning.view.actionBar.delegate.NoActionsActionBarDelegate;
 
 /**
  * @author aurelia
@@ -19,15 +19,13 @@ public class ElapsedLoansOverviewActivity extends AbstractLoansOverviewActivity 
 
 	@Override
 	protected void onCreate(Bundle bundle) {
-
-		this.setActionBarDelegate(new FilteredLoansOverviewActionBarDelegate());
 		super.onCreate(bundle);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		setUpDisplay();
+		setUpDisplay(new NoActionsActionBarDelegate());
 		handleClickEvent("elapsedLoansNotification");
 	}
 

@@ -32,8 +32,7 @@ public class ComputeBalanceCommand implements ActionBarCommand {
 				BalanceResultDialogFragment balanceResultDialogFragment = new BalanceResultDialogFragment(activity);
 				balanceResultDialogFragment.show(ft, "dialog");
 			} else {
-				ChooseCurrencyDialogFragment balanceResultDialogFragment = new ChooseCurrencyDialogFragment(
-						activity);
+				ChooseCurrencyDialogFragment balanceResultDialogFragment = new ChooseCurrencyDialogFragment(activity);
 				balanceResultDialogFragment.show(ft, "dialog");
 			}
 		}
@@ -51,6 +50,6 @@ public class ComputeBalanceCommand implements ActionBarCommand {
 				}
 			}
 		}
-		return currencies.size() != 1;
+		return currencies.size() > 1;
 	}
 }

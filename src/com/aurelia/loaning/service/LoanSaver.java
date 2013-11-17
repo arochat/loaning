@@ -58,8 +58,11 @@ public class LoanSaver extends IntentService {
 			dbResult = deleteAllLoans(bundle);
 		}
 
-		if (bundle.getBoolean("delete_from_history")) {
-			sendBroadcast(new Intent(Event.DELETE_LOAN.name()));// ???
+		if (bundle.getBoolean("delete_from_history") && !Event.DELETE_LOAN.name().equals(intent.getAction())) {
+			sendBroadcast(new Intent(Event.SHOW_LOANINGS_HISTORY.name()));
+			skipBroadcast = true;
+		} else if (bundle.getBoolean("delete_from_history")) {
+			sendBroadcast(new Intent(Event.DELETE_LOAN.name()));
 			skipBroadcast = true;
 		}
 

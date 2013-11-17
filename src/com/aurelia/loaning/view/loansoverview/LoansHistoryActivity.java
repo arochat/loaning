@@ -32,7 +32,6 @@ public class LoansHistoryActivity extends AbstractLoansOverviewActivity {
 
 	@Override
 	protected void onCreate(Bundle bundle) {
-		this.setActionBarDelegate(new LoansHistoryActionBarDelegate());
 		super.onCreate(bundle);
 	}
 
@@ -87,8 +86,7 @@ public class LoansHistoryActivity extends AbstractLoansOverviewActivity {
 			}
 			TextView title = (TextView) findViewById(R.id.loan_list_titlee);
 			title.setText("History of my loans");
-
-			setUpDisplay();
+			setUpDisplay(new LoansHistoryActionBarDelegate());
 			handleClickEvent(LoansHistoryActivity.this.getClass().getName());
 		}
 	}

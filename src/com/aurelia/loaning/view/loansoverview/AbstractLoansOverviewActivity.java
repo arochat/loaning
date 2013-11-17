@@ -23,6 +23,7 @@ import com.aurelia.loaning.service.LoanSaver;
 import com.aurelia.loaning.view.AddLoanActivity;
 import com.aurelia.loaning.view.BaseActivity;
 import com.aurelia.loaning.view.DisplayDetailActivity;
+import com.aurelia.loaning.view.actionBar.delegate.AbstractActionBarDelegate;
 import com.aurelia.loaning.view.actionBar.delegate.NoActionsActionBarDelegate;
 
 /**
@@ -67,7 +68,7 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 		updateAllLoans(Event.SETTLE_ALL_FILTERED_LOANS.name(), false);
 	}
 
-	protected void setUpDisplay() {
+	protected void setUpDisplay(AbstractActionBarDelegate actionBarDelegate) {
 		if (loansFound()) {
 			String[] loanString = new String[loans.size()];
 
@@ -76,17 +77,19 @@ public abstract class AbstractLoansOverviewActivity extends BaseActivity {
 			}
 			loansListView = (ListView) findViewById(android.R.id.list);
 			loansListView.setAdapter(new LoansArrayAdapter(this, loans));
+			if (actionBarDelegate != null) {
+				this.setActionBarDelegate(actionBarDelegate);
+			}
 		} else {
-			// override the previously set actionBarDelegate
-			this.setActionBarDelegate(new NoActionsActionBarDelegate());
 
 			CharSequence text = "No loans to display";
 			int duration = Toast.LENGTH_LONG;
-
+			this.setActionBarDelegate(new NoActionsActionBarDelegate());
 			Toast toast = Toast.makeText(this, text, duration);
 			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.show();
 		}
+
 	}
 
 	protected void handleClickEvent(final String callingActivity) {

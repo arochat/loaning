@@ -57,8 +57,8 @@ public class LoanDatabaseAccess {
 	}
 
 	public List<Object> getLoansWithNotificationDateInThePast() {
-		return databaseAccess.select(Loan.class, "status = " + LoanStatus.ACTIVE.getValue() + " AND end_date <= '"
-				+ new DateMidnight().toString(formatter) + "'");
+		return databaseAccess.select(Loan.class, "status = " + LoanStatus.ACTIVE.getValue()
+				+ " AND end_date NOT NULL AND end_date <= '" + new DateMidnight().toString(formatter) + "'");
 	}
 
 	public void removeAll() {

@@ -34,33 +34,37 @@ public class NotificationChecker extends BroadcastReceiver {
 			loanFetcher = new LoanFetcher();
 		}
 
-		Intent notificationIntent = new Intent(context, NotificationService.class);
 		// look for loans with notification date in the past
 		List<AbstractLoan> elapsedLoans = loanFetcher.getLoansWithNotificationDateInThePast(context);
-		if (elapsedLoans.size() == 1) {
+		if (elapsedLoans.size() > 0) {
 
-			notificationIntent.putExtra(Event.DISPLAY_LOAN_DETAIL.name(), elapsedLoans.get(0));
+			Intent notificationIntent = new Intent(context, NotificationService.class);
 
-		} else if (elapsedLoans.size() > 1) {
-			Bundle bundle = new Bundle();
-			LoansContainer loansContainer = new LoansContainer();
-			loansContainer.setLoans(elapsedLoans);
-			bundle.putSerializable(Event.LIST_ELAPSED_LOANS.name(), loansContainer);
-			notificationIntent.putExtras(bundle);
+			if (elapsedLoans.size() == 1) {
 
+				notificationIntent.putExtra(Event.DISPLAY_LOAN_DETAIL.name(), elapsedLoans.get(0));
+
+			} else if (elapsedLoans.size() > 1) {
+				Bundle bundle = new Bundle();
+				LoansContainer loansContainer = new LoansContainer();
+				loansContainer.setLoans(elapsedLoans);
+				bundle.putSerializable(Event.LIST_ELAPSED_LOANS.name(), loansContainer);
+				notificationIntent.putExtras(bundle);
+
+			}
+			String newReason;
+
+			if (Event.APPLICATION_STARTUP.name().equals(reason)) {
+				newReason = Event.APPLICATION_STARTUP_RESULT.name();
+			} else if (Event.PERIODIC_NOTIFICATION_CHECK.name().equals(reason)) {
+				newReason = Event.PERIODIC_NOTIFICATION_CHECK_RESULT.name();
+			} else {
+				newReason = reason;
+			}
+
+			notificationIntent.putExtra("reason", newReason);
+			context.startService(notificationIntent);
 		}
-		String newReason;
-
-		if (Event.APPLICATION_STARTUP.name().equals(reason)) {
-			newReason = Event.APPLICATION_STARTUP_RESULT.name();
-		} else if (Event.PERIODIC_NOTIFICATION_CHECK.name().equals(reason)) {
-			newReason = Event.PERIODIC_NOTIFICATION_CHECK_RESULT.name();
-		} else {
-			newReason = reason;
-		}
-
-		notificationIntent.putExtra("reason", newReason);
-		context.startService(notificationIntent);
 	}
 
 }

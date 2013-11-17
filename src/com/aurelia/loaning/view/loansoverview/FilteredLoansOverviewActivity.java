@@ -61,7 +61,11 @@ public class FilteredLoansOverviewActivity extends AbstractLoansOverviewActivity
 		registerReceiver(dbFeedbackReceiver, intentFilter);
 		registerReceiver(dbFeedbackReceiver, intentFilterForHistory);
 
-		setUpDisplay();
+		if (LoansHistoryActivity.class.getName().equals(callingActivity)) {
+			this.setActionBarDelegate(new FilteredLoansHistoryActionBarDelegate());
+		} else {
+			setUpDisplay(new FilteredLoansOverviewActionBarDelegate());
+		}
 
 		handleClickEvent(callingActivity);
 	}

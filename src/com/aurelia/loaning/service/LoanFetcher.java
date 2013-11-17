@@ -84,7 +84,9 @@ public class LoanFetcher extends IntentService {
 		if (loansFromDB != null && !Collections.EMPTY_LIST.equals(loansFromDB)) {
 			loans = new ArrayList<AbstractLoan>(loansFromDB.size());
 			for (Loan loanFromDB : loansFromDB) {
-				loans.add(converter.convert(loanFromDB));
+				if (loanFromDB.getEndDate() != null) {
+					loans.add(converter.convert(loanFromDB));
+				}
 			}
 		}
 		return loans;
